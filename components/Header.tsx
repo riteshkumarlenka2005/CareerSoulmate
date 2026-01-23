@@ -49,10 +49,10 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
   const [showUserMenu, setShowUserMenu] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
-  
+
   const { user, isAuthenticated, logout } = useAuth();
   const { t } = useI18n();
-  
+
   // Close user menu on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -312,13 +312,13 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
           {
             label: 'Models',
             children: [
-              { label: 'AI Versions', action: () => {} },
-              { label: 'Retraining', action: () => {} }
+              { label: 'AI Versions', action: () => { } },
+              { label: 'Retraining', action: () => { } }
             ]
           },
-          { label: 'Data & Logs', action: () => {} },
-          { label: 'System Health', action: () => {} },
-          { label: 'Settings', action: () => {} },
+          { label: 'Data & Logs', action: () => { } },
+          { label: 'System Health', action: () => { } },
+          { label: 'Settings', action: () => { } },
           aboutItem
         ];
 
@@ -385,9 +385,8 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-        isScrolled ? 'bg-black/95 border-b border-white/10 shadow-2xl' : 'bg-black'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${isScrolled ? 'bg-black/95 border-b border-white/10 shadow-2xl' : 'bg-black'
+        }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
         {/* LOGO */}
@@ -430,7 +429,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
         </div>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden xl:flex items-center gap-6">
+        <nav className="hidden xl:flex items-center gap-8">
           {navItems.map((item, idx) => {
             const isResources = item.label === 'Resources';
             const isDiscover = item.label === 'Discover Careers';
@@ -438,7 +437,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
             const isExams = item.label === 'Exams & Outcomes';
             const isSkills = item.label === 'Skills & Vocational';
             const hasDropdown = Boolean(item.children || item.megaMenu);
-            
+
             return (
               <div
                 key={idx}
@@ -446,7 +445,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
                 onMouseEnter={() => hasDropdown && setActiveDropdown(item.label)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button 
+                <button
                   onClick={() => !hasDropdown && item.action?.()}
                   className={`flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase py-4 transition-colors ${activeDropdown === item.label ? 'text-white' : 'text-[#9ca3af] hover:text-white'}`}
                 >
@@ -475,10 +474,9 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
 
                 {/* Mega Menu Logic */}
                 {item.megaMenu && activeDropdown === item.label && (
-                  <div 
-                    className={`absolute top-full w-[680px] bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] animate-in fade-in slide-in-from-top-2 duration-200 border-white/5 ${
-                      isResources ? 'right-[-140px]' : (isCourses || isExams || isSkills) ? 'right-[-280px]' : 'left-0'
-                    }`}
+                  <div
+                    className={`absolute top-full w-[680px] bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] animate-in fade-in slide-in-from-top-2 duration-200 border-white/5 ${isResources ? 'right-[-140px]' : (isCourses || isExams || isSkills) ? 'right-[-280px]' : 'left-0'
+                      }`}
                   >
                     <div className={`grid ${item.megaMenu.length > 1 ? 'grid-cols-2 gap-x-12' : 'grid-cols-1'} gap-y-10`}>
                       {item.megaMenu.map((section, sIdx) => (
@@ -531,12 +529,12 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
         </nav>
 
         {/* RIGHT ACTIONS */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           {/* Language Selector */}
-          <div className="hidden sm:block">
+          <div className="hidden lg:block">
             <LanguageSelector />
           </div>
-          
+
           {/* Auth Buttons or User Menu */}
           {isAuthenticated && user ? (
             <div className="relative" ref={userMenuRef}>
@@ -555,7 +553,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              
+
               {/* User Dropdown Menu */}
               {showUserMenu && (
                 <div className="absolute right-0 top-full mt-2 w-64 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2">
@@ -588,16 +586,16 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
               )}
             </div>
           ) : (
-            <div className="hidden sm:flex items-center gap-4">
-              <button 
+            <div className="hidden lg:flex items-center gap-6">
+              <button
                 onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}
-                className="text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase transition-colors"
+                className="text-[11px] font-bold tracking-[0.15em] text-[#9ca3af] hover:text-white uppercase transition-colors px-2"
               >
                 {t('nav.login')}
               </button>
-              <button 
+              <button
                 onClick={() => { setAuthMode('signup'); setShowAuthModal(true); }}
-                className="text-[11px] font-bold tracking-[0.2em] px-6 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white uppercase transition-all rounded-lg shadow-lg shadow-blue-500/25"
+                className="text-[11px] font-bold tracking-[0.15em] px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white uppercase transition-all rounded-lg shadow-lg shadow-blue-500/25 whitespace-nowrap"
               >
                 {t('nav.signup')}
               </button>
@@ -628,7 +626,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
               <div className="text-[10px] font-black tracking-[0.2em] text-blue-500 uppercase mb-4 px-2 border-l-2 border-blue-500/50">
                 {item.label}
               </div>
-              
+
               {item.children && (
                 <div className="grid grid-cols-1 gap-2">
                   {item.children.map((child, i) => (
@@ -692,7 +690,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
               )}
             </div>
           ))}
-          
+
           <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
             <button className="w-full py-4 text-[11px] font-bold text-center text-white uppercase tracking-widest bg-blue-600 rounded-xl">
               Get Started
@@ -703,11 +701,11 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
           </div>
         </div>
       )}
-      
+
       {/* Auth Modal */}
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
         initialMode={authMode}
       />
     </header>
@@ -721,477 +719,4 @@ export default Header;
 
 
 
-// OLD code..........
 
-// import React, { useState, useEffect } from 'react';
-
-// export type UserRole =
-//   | 'public'
-//   | 'student'
-//   | 'college'
-//   | 'counselor'
-//   | 'institution_admin'
-//   | 'gov'
-//   | 'super_admin';
-
-// interface NavItem {
-//   label: string;
-//   children?: { label: string; path?: string; action?: () => void }[];
-//   path?: string;
-//   action?: () => void;
-// }
-
-// interface HeaderProps {
-//   role?: UserRole;
-//   onNavigate?: (page: any) => void;
-// }
-
-// const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
-//   const [isScrolled, setIsScrolled] = useState(false);
-//   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-//   useEffect(() => {
-//     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-//     window.addEventListener('scroll', handleScroll);
-//     return () => window.removeEventListener('scroll', handleScroll);
-//   }, []);
-
-//   const getNavItems = (): NavItem[] => {
-//     const aboutItem = { label: 'About', action: () => onNavigate?.('about') };
-
-//     const aiItem: NavItem = {
-//       label: 'AI',
-//       children: [
-//         { label: 'AI Web Scraper', action: () => onNavigate?.('ai-recs') },
-//         { label: 'Timetable Generator', action: () => onNavigate?.('admin-timetable-generate') },
-//         { label: 'Career Advice', action: () => onNavigate?.('ai-recs') },
-//         { label: 'AskMe', action: () => onNavigate?.('ai-recs') },
-//       ],
-//     };
-
-//     return [
-//       {
-//         label: 'Discover Careers',
-//         children: [
-//           { label: 'Explorer', action: () => onNavigate?.('explorer') },
-//           { label: 'Tree', action: () => onNavigate?.('tree') },
-//           { label: 'Comparison', action: () => onNavigate?.('comparison') },
-//         ],
-//       },
-//       {
-//         label: 'Courses & Degrees',
-//         children: [
-//           { label: 'Mapping', action: () => onNavigate?.('mapping') },
-//           { label: 'NEP Pathways', action: () => onNavigate?.('nep') },
-//         ],
-//       },
-//       {
-//         label: 'Exams & Outcomes',
-//         children: [
-//           { label: 'Colleges', action: () => onNavigate?.('colleges') },
-//           { label: 'Scholarships', action: () => onNavigate?.('scholarships') },
-//           { label: 'Admissions', action: () => onNavigate?.('admissions') },
-//         ],
-//       },
-//       {
-//         label: 'Skills & Vocational',
-//         children: [
-//           { label: 'Pathways', action: () => onNavigate?.('pathways') },
-//           { label: 'NSQF Levels', action: () => onNavigate?.('nsqf') },
-//           { label: 'Apprenticeships', action: () => onNavigate?.('apprenticeships') },
-//         ],
-//       },
-//       aiItem,
-//       aboutItem,
-//     ];
-//   };
-
-//   const navItems = getNavItems();
-
-//   return (
-//     <header
-//       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-//         isScrolled ? 'bg-black/95 border-b border-white/10' : 'bg-black'
-//       }`}
-//     >
-//       <div className="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
-//         {/* LOGO — RESTORED FULLY */}
-//         <div
-//           onClick={() => onNavigate?.('home')}
-//           className="flex items-center gap-4 cursor-pointer group"
-//         >
-//           <div className="relative w-11 h-11 flex items-center justify-center">
-//             <div className="absolute inset-0 bg-gradient-to-br from-[#020617] to-[#1e293b] rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
-//             <div className="absolute inset-0 bg-blue-500/5 blur-md"></div>
-
-//             <svg
-//               viewBox="0 0 24 24"
-//               className="relative z-10 w-6 h-6 text-cyan-400"
-//               fill="none"
-//               stroke="currentColor"
-//               strokeWidth="2.5"
-//               strokeLinecap="round"
-//               strokeLinejoin="round"
-//             >
-//               <path d="M12 21v-7" />
-//               <path d="M12 14c0-2.5 3-4 6-6" />
-//               <path d="M12 14c0-2.5-3-4-6-6" />
-//               <path d="M12 14v7" />
-//               <circle cx="18" cy="8" r="1" fill="currentColor" />
-//               <circle cx="6" cy="8" r="1" fill="currentColor" />
-//               <circle cx="12" cy="7" r="1" fill="currentColor" />
-//               <circle cx="12" cy="14" r="1" fill="currentColor" />
-//             </svg>
-//           </div>
-
-//           <div className="flex flex-col -space-y-1">
-//             <span className="text-xl font-bold tracking-tight text-[#f8fafc]">
-//               CareerSoulmate
-//             </span>
-//             <span className="text-[10px] tracking-[0.2em] text-[#94a3b8] uppercase">
-//               Mapping Destiny
-//             </span>
-//           </div>
-//         </div>
-
-//         {/* DESKTOP NAV */}
-//         <nav className="hidden xl:flex items-center gap-8">
-//           {navItems.map((item, idx) => (
-//             <div
-//               key={idx}
-//               className="relative"
-//               onMouseEnter={() => item.children && setActiveDropdown(item.label)}
-//               onMouseLeave={() => setActiveDropdown(null)}
-//             >
-//               <button className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-[#9ca3af] hover:text-white uppercase py-4">
-//                 {item.label}
-//                 {item.children && (
-//                   <svg className="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-//                   </svg>
-//                 )}
-//               </button>
-
-//               {item.children && activeDropdown === item.label && (
-//                 <div className="absolute top-full left-0 w-56 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 backdrop-blur-xl">
-//                   {item.children.map((child, i) => (
-//                     <button
-//                       key={i}
-//                       onClick={child.action}
-//                       className="block w-full text-left px-6 py-3 text-[10px] font-bold text-[#9ca3af] hover:text-white hover:bg-white/5 uppercase tracking-widest"
-//                     >
-//                       {child.label}
-//                     </button>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-//           ))}
-//         </nav>
-
-//         {/* RIGHT ACTIONS */}
-//         <div className="flex items-center gap-6">
-//           <div className="hidden sm:flex items-center gap-4">
-//             <button className="text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase">
-//               Login
-//             </button>
-//             <button className="text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase">
-//               Sign Up
-//             </button>
-//           </div>
-
-//           <button
-//             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-//             className="xl:hidden text-[#9ca3af] hover:text-white"
-//           >
-//             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth={2}
-//                 d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
-//               />
-//             </svg>
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* MOBILE MENU */}
-//       {isMobileMenuOpen && (
-//         <div className="xl:hidden fixed inset-0 top-20 bg-black p-6 overflow-y-auto">
-//           {navItems.map((item, idx) => (
-//             <div key={idx} className="mb-6">
-//               <div className="text-[10px] font-black tracking-widest text-blue-500 uppercase mb-2">
-//                 {item.label}
-//               </div>
-//               {item.children?.map((child, i) => (
-//                 <button
-//                   key={i}
-//                   onClick={() => {
-//                     child.action?.();
-//                     setIsMobileMenuOpen(false);
-//                   }}
-//                   className="block w-full text-left py-2 text-sm font-bold text-gray-400 hover:text-white uppercase"
-//                 >
-//                   {child.label}
-//                 </button>
-//               ))}
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </header>
-//   );
-// };
-
-// export default Header;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-
-// export type UserRole = 'public' | 'student' | 'college' | 'counselor' | 'institution_admin' | 'gov' | 'super_admin';
-
-// interface NavItem {
-//   label: string;
-//   children?: { label: string; path?: string; action?: () => void }[];
-//   path?: string;
-//   action?: () => void;
-// }
-
-// interface HeaderProps {
-//   role?: UserRole;
-//   onNavigate?: (page: 'home' | 'about' | 'explorer' | 'comparison' | 'tree' | 'mapping' | 'add-ons' | 'gaps' | 'readiness' | 'internships' | 'programs' | 'transfers' | 'nep-flexibility' | 'assessments' | 'college-exams' | 'college-jobs' | 'college-fellowships' | 'student-list' | 'counselor-profiles' | 'counselor-progress' | 'counselor-skill-gaps' | 'risk-flags' | 'counselor-recs' | 'counselor-report' | 'counselor-export' | 'admin-dashboard' | 'admin-timetable-generate' | 'admin-timetable-scenarios' | 'admin-timetable-conflicts' | 'admin-academics-courses' | 'admin-academics-credits' | 'admin-academics-electives' | 'admin-academics-faculty' | 'admin-infra-rooms' | 'admin-infra-labs' | 'admin-infra-capacity' | 'admin-reports' | 'super-admin-users-roles' | 'super-admin-institutions' | 'gov-analytics-enrollment' | 'gov-analytics-regional' | 'gov-skills-demand-supply' | 'gov-skills-nsqf-adoption' | 'gov-inst-performance' | 'gov-inst-capacity' | 'gov-reports' | 'nep' | 'colleges' | 'scholarships' | 'admissions' | 'pathways' | 'nsqf' | 'apprenticeships' | 'roadmap' | 'ai-recs' | 'why-this' | 'explore-careers' | 'explore-degrees' | 'explore-skills' | 'aptitude' | 'interest' | 'personality' | 'skills-assessment' | 'certs' | 'exams') => void;
-// }
-
-// const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
-//   const [isScrolled, setIsScrolled] = useState(false);
-//   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-//   useEffect(() => {
-//     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-//     window.addEventListener('scroll', handleScroll);
-//     return () => window.removeEventListener('scroll', handleScroll);
-//   }, []);
-
-//   const getNavItems = (role: UserRole): NavItem[] => {
-//     const aboutItem = { label: 'About', action: () => onNavigate?.('about') };
-    
-//     switch (role) {
-//       case 'student':
-//         return [
-//           { label: 'My Career', children: [{ label: 'Roadmap', action: () => onNavigate?.('roadmap') }, { label: 'AI Recs', action: () => onNavigate?.('ai-recs') }, { label: 'Why This?', action: () => onNavigate?.('why-this') }] },
-//           { label: 'Explore', children: [{ label: 'Careers', action: () => onNavigate?.('explore-careers') }, { label: 'Degrees', action: () => onNavigate?.('explore-degrees') }, { label: 'Colleges', action: () => onNavigate?.('colleges') }, { label: 'Skills', action: () => onNavigate?.('explore-skills') }] },
-//           { label: 'Assessments', children: [{ label: 'Aptitude', action: () => onNavigate?.('aptitude') }, { label: 'Interest', action: () => onNavigate?.('interest') }, { label: 'Personality', action: () => onNavigate?.('personality') }, { label: 'Skills', action: () => onNavigate?.('skills-assessment') }] },
-//           { label: 'My Skill Path', children: [{ label: 'Certs', action: () => onNavigate?.('certs') }, { label: 'Apprenticeships', action: () => onNavigate?.('apprenticeships') }] },
-//           { label: 'Deadlines', children: [{ label: 'Admissions', action: () => onNavigate?.('admissions') }, { label: 'Exams', action: () => onNavigate?.('exams') }, { label: 'Scholarships', action: () => onNavigate?.('scholarships') }] },
-//           aboutItem
-//         ];
-//       case 'college':
-//         return [
-//           { label: 'My Path', children: [{ label: 'Mapping', action: () => onNavigate?.('mapping') }, { label: 'Add-ons', action: () => onNavigate?.('add-ons') }] },
-//           { label: 'Skills & Jobs', children: [{ label: 'Gaps', action: () => onNavigate?.('gaps') }, { label: 'Readiness', action: () => onNavigate?.('readiness') }, { label: 'Internships', action: () => onNavigate?.('internships') }] },
-//           { label: 'Institutions', children: [{ label: 'Programs', action: () => onNavigate?.('programs') }, { label: 'Transfers', action: () => onNavigate?.('transfers') }, { label: 'NEP Flexibility', action: () => onNavigate?.('nep-flexibility') }] },
-//           { label: 'Assessments', action: () => onNavigate?.('assessments') },
-//           { label: 'Opportunities', children: [{ label: 'Exams', action: () => onNavigate?.('college-exams') }, { label: 'Jobs', action: () => onNavigate?.('college-jobs') }, { label: 'Fellowships', action: () => onNavigate?.('college-fellowships') }] },
-//           aboutItem
-//         ];
-//       case 'counselor':
-//         return [
-//           { label: 'Learners', children: [{ label: 'Student List', action: () => onNavigate?.('student-list') }, { label: 'Profiles', action: () => onNavigate?.('counselor-profiles') }, { label: 'Progress', action: () => onNavigate?.('counselor-progress') }] },
-//           { label: 'Insights', children: [{ label: 'Skill Gaps', action: () => onNavigate?.('counselor-skill-gaps') }, { label: 'Risk Flags', action: () => onNavigate?.('risk-flags') }, { label: 'Recommendations', action: () => onNavigate?.('counselor-recs') }] },
-//           { label: 'Career Tools', children: [{ label: 'Trees', action: () => onNavigate?.('tree') }, { label: 'Comparisons', action: () => onNavigate?.('comparison') }] },
-//           { label: 'Reports', children: [{ label: 'Progress Reports', action: () => onNavigate?.('counselor-report') }, { label: 'Export', action: () => onNavigate?.('counselor-export') }] },
-//           aboutItem
-//         ];
-//       case 'institution_admin':
-//         return [
-//           { label: 'Dashboard', action: () => onNavigate?.('admin-dashboard') },
-//           { label: 'Timetable AI', children: [{ label: 'Generate', action: () => onNavigate?.('admin-timetable-generate') }, { label: 'Scenarios', action: () => onNavigate?.('admin-timetable-scenarios') }, { label: 'Conflicts', action: () => onNavigate?.('admin-timetable-conflicts') }] },
-//           { label: 'Academics', children: [{ label: 'Courses', action: () => onNavigate?.('admin-academics-courses') }, { label: 'Credits', action: () => onNavigate?.('admin-academics-credits') }, { label: 'Electives', action: () => onNavigate?.('admin-academics-electives') }, { label: 'Faculty', action: () => onNavigate?.('admin-academics-faculty') }] },
-//           { label: 'Infrastructure', children: [{ label: 'Rooms', action: () => onNavigate?.('admin-infra-rooms') }, { label: 'Labs', action: () => onNavigate?.('admin-infra-labs') }, { label: 'Capacity', action: () => onNavigate?.('admin-infra-capacity') }] },
-//           { label: 'Reports', action: () => onNavigate?.('admin-reports') },
-//           aboutItem
-//         ];
-//       case 'gov':
-//         return [
-//           { label: 'Analytics', children: [{ label: 'Enrollment', action: () => onNavigate?.('gov-analytics-enrollment') }, { label: 'Regional', action: () => onNavigate?.('gov-analytics-regional') }] },
-//           { label: 'Skills Intel', children: [{ label: 'Demand vs Supply', action: () => onNavigate?.('gov-skills-demand-supply') }, { label: 'NSQF Adoption', action: () => onNavigate?.('gov-skills-nsqf-adoption') }] },
-//           { label: 'Institutions', children: [{ label: 'Performance', action: () => onNavigate?.('gov-inst-performance') }, { label: 'Capacity', action: () => onNavigate?.('gov-inst-capacity') }] },
-//           { label: 'Reports', action: () => onNavigate?.('gov-reports') },
-//           aboutItem
-//         ];
-//       case 'super_admin':
-//         return [
-//           { label: 'Users & Roles', action: () => onNavigate?.('super-admin-users-roles') },
-//           { label: 'Institutions', action: () => onNavigate?.('super-admin-institutions') },
-//           { label: 'Models', children: [{ label: 'AI Versions', path: '#' }, { label: 'Retraining', path: '#' }] },
-//           { label: 'Data & Logs' },
-//           { label: 'System Health' },
-//           { label: 'Settings' },
-//           aboutItem
-//         ];
-//       default: // public
-//         return [
-//           { label: 'Discover Careers', children: [{ label: 'Explorer', action: () => onNavigate?.('explorer') }, { label: 'Tree', action: () => onNavigate?.('tree') }, { label: 'Comparison', action: () => onNavigate?.('comparison') }] },
-//           { label: 'Courses & Degrees', children: [{ label: 'Mapping', action: () => onNavigate?.('mapping') }, { label: 'NEP Pathways', action: () => onNavigate?.('nep') }] },
-//           { label: 'Exams & Outcomes', children: [{ label: 'Colleges', action: () => onNavigate?.('colleges') }, { label: 'Scholarships', action: () => onNavigate?.('scholarships') }, { label: 'Admissions', action: () => onNavigate?.('admissions') }] },
-//           { label: 'Skills & Vocational', children: [{ label: 'Pathways', action: () => onNavigate?.('pathways') }, { label: 'NSQF Levels', action: () => onNavigate?.('nsqf') }, { label: 'Apprenticeships', action: () => onNavigate?.('apprenticeships') }] },
-//           aboutItem
-//         ];
-//     }
-//   };
-
-//   const navItems = getNavItems(role as UserRole);
-
-//   const getCTA = (role: UserRole) => {
-//     switch (role) {
-//       case 'student': return 'View My Roadmap';
-//       case 'institution_admin': return 'Generate Timetable';
-//       default: return 'Get Career Guidance';
-//     }
-//   };
-
-//   return (
-//     <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${isScrolled ? 'bg-black/95 border-b border-white/10' : 'bg-black'}`}>
-//       <div className="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
-//         {/* Logo Section */}
-//         <div onClick={() => onNavigate?.('home')} className="flex items-center gap-4 cursor-pointer group">
-//           <div className="relative w-11 h-11 flex items-center justify-center">
-//             <div className="absolute inset-0 bg-gradient-to-br from-[#020617] to-[#1e293b] rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
-//             <div className="absolute inset-0 bg-blue-500/5 blur-md"></div>
-            
-//             <svg viewBox="0 0 24 24" className="relative z-10 w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-//               <path d="M12 21v-7" />
-//               <path d="M12 14c0-2.5 3-4 6-6" />
-//               <path d="M12 14c0-2.5-3-4-6-6" />
-//               <path d="M12 14v7" />
-//               <circle cx="18" cy="8" r="1" fill="currentColor" stroke="none" />
-//               <circle cx="6" cy="8" r="1" fill="currentColor" stroke="none" />
-//               <circle cx="12" cy="7" r="1" fill="currentColor" stroke="none" />
-//               <circle cx="12" cy="14" r="1" fill="currentColor" stroke="none" />
-//             </svg>
-//           </div>
-          
-//           <div className="flex flex-col -space-y-1">
-//             <span className="text-xl font-bold tracking-tight text-[#f8fafc] leading-none">CareerSoulmate</span>
-//             <span className="text-[10px] font-normal tracking-[0.2em] text-[#94a3b8] uppercase">Mapping Destiny</span>
-//           </div>
-//         </div>
-
-//         {/* Desktop Nav Center */}
-//         <nav className="hidden xl:flex items-center gap-8">
-//           {navItems.map((item, idx) => (
-//             <div 
-//               key={idx} 
-//               className="relative group/item"
-//               onMouseEnter={() => item.children && setActiveDropdown(item.label)}
-//               onMouseLeave={() => setActiveDropdown(null)}
-//             >
-//               <button 
-//                 onClick={item.action}
-//                 className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-[#9ca3af] hover:text-white transition-colors uppercase whitespace-nowrap py-4"
-//               >
-//                 {item.label}
-//                 {item.children && (
-//                   <svg className="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-//                   </svg>
-//                 )}
-//               </button>
-//               {item.children && activeDropdown === item.label && (
-//                 <div className="absolute top-full left-0 w-56 bg-[#0a0a0a] border border-white/10 rounded-xl shadow-2xl overflow-hidden py-2 animate-in fade-in slide-in-from-top-2 duration-200 backdrop-blur-xl">
-//                   {item.children.map((child, cIdx) => (
-//                     <button 
-//                       key={cIdx} 
-//                       onClick={() => {
-//                         if (child.action) child.action();
-//                       }}
-//                       className="w-full text-left block px-6 py-3 text-[10px] font-bold text-[#9ca3af] hover:text-white hover:bg-white/5 uppercase tracking-widest transition-all"
-//                     >
-//                       {child.label}
-//                     </button>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-//           ))}
-//         </nav>
-
-//         {/* Right Buttons */}
-//         <div className="flex items-center gap-6">
-//           {role === 'public' && (
-//             <button className="hidden sm:block text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase transition-colors">
-//               Login
-//             </button>
-//           )}
-//           <button className="bg-white text-black px-7 py-3 text-[11px] font-bold tracking-[0.2em] rounded-xl hover:bg-blue-600 hover:text-white transition-all active:scale-95 shadow-lg uppercase whitespace-nowrap">
-//             {getCTA(role as UserRole)}
-//           </button>
-          
-//           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="xl:hidden text-[#9ca3af] hover:text-white">
-//             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} /></svg>
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Mobile Menu */}
-//       {isMobileMenuOpen && (
-//         <div className="xl:hidden fixed inset-0 top-20 bg-black z-50 overflow-y-auto p-6 animate-in slide-in-from-right duration-300">
-//           <div className="flex flex-col gap-6">
-//             {navItems.map((item, idx) => (
-//               <div key={idx} className="space-y-4">
-//                 <div className="text-[10px] font-black tracking-widest text-blue-500 uppercase border-b border-white/10 pb-2">{item.label}</div>
-//                 <div className="flex flex-col gap-4 pl-4">
-//                   {item.children?.map((child, cIdx) => (
-//                     <button 
-//                       key={cIdx} 
-//                       onClick={() => {
-//                         if (child.action) child.action();
-//                         setIsMobileMenuOpen(false);
-//                       }}
-//                       className="text-left text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider"
-//                     >
-//                       {child.label}
-//                     </button>
-//                   ))}
-//                   {!item.children && (
-//                     <button 
-//                       onClick={() => {
-//                         if (item.action) item.action();
-//                         setIsMobileMenuOpen(false);
-//                       }}
-//                       className="text-left text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider"
-//                     >
-//                       Explore {item.label}
-//                     </button>
-//                   )}
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       )}
-//     </header>
-//   );
-// };
-
-// export default Header;
