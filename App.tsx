@@ -77,8 +77,10 @@ import PersonalityPage from './pages/PersonalityPage';
 import SkillsAssessmentPage from './pages/SkillsAssessmentPage';
 import CertsPage from './pages/CertsPage';
 import ExamsPage from './pages/ExamsPage';
+import CommunityPage from './pages/CommunityPage';
+import ProfilePage from './pages/ProfilePage';
 
-type Page = 'home' | 'about' | 'explorer' | 'comparison' | 'tree' | 'mapping' | 'add-ons' | 'gaps' | 'readiness' | 'internships' | 'programs' | 'transfers' | 'nep-flexibility' | 'assessments' | 'college-exams' | 'college-jobs' | 'college-fellowships' | 'student-list' | 'counselor-profiles' | 'counselor-progress' | 'counselor-skill-gaps' | 'risk-flags' | 'counselor-recs' | 'counselor-report' | 'counselor-export' | 'admin-dashboard' | 'admin-timetable-generate' | 'admin-timetable-scenarios' | 'admin-timetable-conflicts' | 'admin-academics-courses' | 'admin-academics-credits' | 'admin-academics-electives' | 'admin-academics-faculty' | 'admin-infra-rooms' | 'admin-infra-labs' | 'admin-infra-capacity' | 'admin-reports' | 'super-admin-users-roles' | 'super-admin-institutions' | 'gov-analytics-enrollment' | 'gov-analytics-regional' | 'gov-skills-demand-supply' | 'gov-skills-nsqf-adoption' | 'gov-inst-performance' | 'gov-inst-capacity' | 'gov-reports' | 'nep' | 'colleges' | 'scholarships' | 'admissions' | 'pathways' | 'nsqf' | 'apprenticeships' | 'roadmap' | 'ai-recs' | 'why-this' | 'explore-careers' | 'explore-degrees' | 'explore-skills' | 'aptitude' | 'interest' | 'personality' | 'skills-assessment' | 'certs' | 'exams';
+type Page = 'home' | 'about' | 'explorer' | 'comparison' | 'tree' | 'mapping' | 'add-ons' | 'gaps' | 'readiness' | 'internships' | 'programs' | 'transfers' | 'nep-flexibility' | 'assessments' | 'college-exams' | 'college-jobs' | 'college-fellowships' | 'student-list' | 'counselor-profiles' | 'counselor-progress' | 'counselor-skill-gaps' | 'risk-flags' | 'counselor-recs' | 'counselor-report' | 'counselor-export' | 'admin-dashboard' | 'admin-timetable-generate' | 'admin-timetable-scenarios' | 'admin-timetable-conflicts' | 'admin-academics-courses' | 'admin-academics-credits' | 'admin-academics-electives' | 'admin-academics-faculty' | 'admin-infra-rooms' | 'admin-infra-labs' | 'admin-infra-capacity' | 'admin-reports' | 'super-admin-users-roles' | 'super-admin-institutions' | 'gov-analytics-enrollment' | 'gov-analytics-regional' | 'gov-skills-demand-supply' | 'gov-skills-nsqf-adoption' | 'gov-inst-performance' | 'gov-inst-capacity' | 'gov-reports' | 'nep' | 'colleges' | 'scholarships' | 'admissions' | 'pathways' | 'nsqf' | 'apprenticeships' | 'roadmap' | 'ai-recs' | 'why-this' | 'explore-careers' | 'explore-degrees' | 'explore-skills' | 'aptitude' | 'interest' | 'personality' | 'skills-assessment' | 'certs' | 'exams' | 'community' | 'profile';
 
 const App: React.FC = () => {
   const [role, setRole] = useState<UserRole>('public');
@@ -219,6 +221,10 @@ const App: React.FC = () => {
         return <CertsPage onNavigate={handleNavigate} />;
       case 'exams':
         return <ExamsPage onNavigate={handleNavigate} />;
+      case 'community':
+        return <CommunityPage onNavigate={handleNavigate} />;
+      case 'profile':
+        return <ProfilePage onNavigate={handleNavigate} />;
       default:
         return (
           <>
@@ -232,7 +238,7 @@ const App: React.FC = () => {
             <CollegeMap />
             <VocationalNavigator />
             <Segmentation />
-            
+
             <section id="ai-advisor" className="py-24 px-4 bg-[#080808]">
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12">
@@ -278,7 +284,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col selection:bg-blue-500/30 bg-[#050505]">
       <Header role={role} onNavigate={handleNavigate} />
-      
+
       <main className="flex-grow pt-20">
         {renderContent()}
       </main>

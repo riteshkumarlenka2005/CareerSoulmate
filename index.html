@@ -1,32 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Career Soulmate - Your Professional Matchmaker</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: #050505;
-        color: #ffffff;
-      }
-      .gradient-text {
-        background: linear-gradient(to right, #3b82f6, #06b6d4, #8b5cf6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerSoulmate - AI-Powered Career Guidance</title>
+
+  <!-- PWA Meta Tags -->
+  <meta name="description"
+    content="AI-powered career guidance platform for students and learners. Find your perfect career path with personalized recommendations." />
+  <meta name="theme-color" content="#3b82f6" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CareerSoulmate" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233b82f6'/%3E%3Cstop offset='100%25' style='stop-color:%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g)' rx='20' width='100' height='100'/%3E%3Ctext x='50' y='65' font-size='50' fill='white' text-anchor='middle' font-family='Arial'%3ECS%3C/text%3E%3C/svg%3E" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="CareerSoulmate - AI-Powered Career Guidance" />
+  <meta property="og:description"
+    content="Find your perfect career path with AI-powered personalized recommendations" />
+  <meta property="og:type" content="website" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #050505;
+      color: #ffffff;
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, #3b82f6, #06b6d4, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-gradient-overlay {
+      background: linear-gradient(to right, #050505 0%, #050505 40%, transparent 100%);
+    }
+
+    @media (max-width: 768px) {
       .hero-gradient-overlay {
-        background: linear-gradient(to right, #050505 0%, #050505 40%, transparent 100%);
+        background: linear-gradient(to bottom, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.7) 100%);
       }
-      @media (max-width: 768px) {
-        .hero-gradient-overlay {
-          background: linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0.7) 100%);
-        }
+    }
+
+    /* PWA Install Banner */
+    .pwa-install-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateX(-50%) translateY(100px);
       }
-    </style>
+
+      to {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -37,10 +82,27 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body>
-    <div id="root"></div>
+
+<body>
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
+
+  <!-- Register Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered:', registration.scope);
+          })
+          .catch((error) => {
+            console.log('SW registration failed:', error);
+          });
+      });
+    }
+  </script>
 </body>
+
 </html>

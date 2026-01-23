@@ -1,7 +1,12 @@
 // NEW code..........
 
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import LanguageSelector from './LanguageSelector';
+import AuthModal from './AuthModal';
+import UserProgress from './UserProgress';
+import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../contexts/I18nContext';
 
 export type UserRole =
   | 'public'
@@ -40,6 +45,24 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  
+  const { user, isAuthenticated, logout } = useAuth();
+  const { t } = useI18n();
+  
+  // Close user menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setShowUserMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -508,15 +531,78 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
         </nav>
 
         {/* RIGHT ACTIONS */}
-        <div className="flex items-center gap-6">
-          <div className="hidden sm:flex items-center gap-6">
-            <button className="text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase transition-colors">
-              Login
-            </button>
-            <button className="text-[11px] font-bold tracking-[0.2em] px-6 py-2.5 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 uppercase transition-all rounded-lg shadow-sm">
-              Sign Up
-            </button>
+        <div className="flex items-center gap-4">
+          {/* Language Selector */}
+          <div className="hidden sm:block">
+            <LanguageSelector />
           </div>
+          
+          {/* Auth Buttons or User Menu */}
+          {isAuthenticated && user ? (
+            <div className="relative" ref={userMenuRef}>
+              <button
+                onClick={() => setShowUserMenu(!showUserMenu)}
+                className="flex items-center gap-3 px-3 py-2 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all"
+              >
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">
+                  {user.fullName.charAt(0).toUpperCase()}
+                </div>
+                <div className="hidden md:flex flex-col items-start">
+                  <span className="text-xs font-semibold text-white">{user.fullName.split(' ')[0]}</span>
+                  <span className="text-[10px] text-gray-500">{user.points || 0} pts</span>
+                </div>
+                <svg className={`w-3 h-3 text-gray-400 transition-transform ${showUserMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {/* User Dropdown Menu */}
+              {showUserMenu && (
+                <div className="absolute right-0 top-full mt-2 w-64 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2">
+                  <div className="px-4 py-3 border-b border-white/10">
+                    <p className="text-sm font-semibold text-white">{user.fullName}</p>
+                    <p className="text-xs text-gray-500">{user.email}</p>
+                  </div>
+                  <div className="px-4 py-3 border-b border-white/10">
+                    <UserProgress compact />
+                  </div>
+                  <button
+                    onClick={() => { onNavigate?.('profile'); setShowUserMenu(false); }}
+                    className="w-full text-left px-4 py-3 text-sm text-gray-300 hover:bg-white/5 flex items-center gap-3"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    {t('auth.profile')}
+                  </button>
+                  <button
+                    onClick={() => { logout(); setShowUserMenu(false); }}
+                    className="w-full text-left px-4 py-3 text-sm text-red-400 hover:bg-white/5 flex items-center gap-3"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    {t('auth.logout')}
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="hidden sm:flex items-center gap-4">
+              <button 
+                onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}
+                className="text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase transition-colors"
+              >
+                {t('nav.login')}
+              </button>
+              <button 
+                onClick={() => { setAuthMode('signup'); setShowAuthModal(true); }}
+                className="text-[11px] font-bold tracking-[0.2em] px-6 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white uppercase transition-all rounded-lg shadow-lg shadow-blue-500/25"
+              >
+                {t('nav.signup')}
+              </button>
+            </div>
+          )}
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -617,6 +703,13 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
           </div>
         </div>
       )}
+      
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={() => setShowAuthModal(false)} 
+        initialMode={authMode}
+      />
     </header>
   );
 };
