@@ -1,0 +1,384 @@
+
+import React, { useState, useMemo } from 'react';
+
+interface Recommendation {
+  id: string;
+  studentName: string;
+  studentId: string;
+  category: 'Career Adjustment' | 'Skill Addition' | 'Exam Suggestion' | 'Pathway Change';
+  title: string;
+  logic: string;
+  outcome: string;
+  riskOfInaction: string;
+  confidence: number;
+  urgency: 'Immediate' | 'Upcoming' | 'Standard';
+  impact: 'High' | 'Medium' | 'Low';
+  status: 'pending' | 'approved' | 'modified' | 'rejected';
+  dateGenerated: string;
+}
+
+const RECOMMENDATIONS_DB: Recommendation[] = [
+  {
+    id: 'rec_01',
+    studentName: 'Alex Johnson',
+    studentId: 'L-9821',
+    category: 'Pathway Change',
+    title: 'Pivot to B.Sc Math (Honours) + AI Minor',
+    logic: 'Student shows top 1% logical aptitude but reports high anxiety in Engineering environments. Academic focus remains high.',
+    outcome: '12% higher placement probability in Research-focused AI roles.',
+    riskOfInaction: 'Likely burnout in B.Tech Year 2 due to misaligned environment focus.',
+    confidence: 96,
+    urgency: 'Immediate',
+    impact: 'High',
+    status: 'pending',
+    dateGenerated: '2 hours ago'
+  },
+  {
+    id: 'rec_02',
+    studentName: 'Maria Garcia',
+    studentId: 'L-4412',
+    category: 'Skill Addition',
+    title: 'Enroll in "Python Neural Foundations" Bridge',
+    logic: 'Cohort gap analysis shows student is 40% behind in applied syntax despite high theoretical scores.',
+    outcome: 'Eligible for Summer Internship cycle in April.',
+    riskOfInaction: 'Automatic rejection from NVIDIA/Google technical rounds.',
+    confidence: 88,
+    urgency: 'Immediate',
+    impact: 'High',
+    status: 'pending',
+    dateGenerated: '5 hours ago'
+  },
+  {
+    id: 'rec_03',
+    studentName: 'Sam Chen',
+    studentId: 'L-2210',
+    category: 'Exam Suggestion',
+    title: 'Register for CUET PG (Statistics)',
+    logic: 'Interest clusters show transition towards Data Science. Strong verbal/numerical symmetry observed.',
+    outcome: 'Secure a Tier-1 PG entry path if recruitment cycle is missed.',
+    riskOfInaction: 'Missing registration window (Deadline: 14 days).',
+    confidence: 74,
+    urgency: 'Upcoming',
+    impact: 'Medium',
+    status: 'pending',
+    dateGenerated: 'Yesterday'
+  },
+  {
+    id: 'rec_04',
+    studentName: 'Rohan Gupta',
+    studentId: 'L-3341',
+    category: 'Career Adjustment',
+    title: 'Switch Target: FinTech Product Management',
+    logic: 'Mismatch between core Engineering skills and high "Enterprising" interest scores.',
+    outcome: '95% match with personal archetype "The Innovator".',
+    riskOfInaction: 'Career dissatisfaction post-placement in technical-only roles.',
+    confidence: 91,
+    urgency: 'Standard',
+    impact: 'High',
+    status: 'pending',
+    dateGenerated: '2 days ago'
+  }
+];
+
+const CounselorRecommendationsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+  const [recs, setRecs] = useState<Recommendation[]>(RECOMMENDATIONS_DB);
+  const [selectedRecId, setSelectedRecId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'pending' | 'history'>('pending');
+  const [customNote, setCustomNote] = useState('');
+
+  const filteredRecs = useMemo(() => {
+    return recs.filter(r => activeTab === 'pending' ? r.status === 'pending' : r.status !== 'pending');
+  }, [recs, activeTab]);
+
+  const selectedRec = useMemo(() => recs.find(r => r.id === selectedRecId), [recs, selectedRecId]);
+
+  const stats = {
+    approvalRate: 84,
+    impactLift: 18,
+    pendingCount: recs.filter(r => r.status === 'pending').length
+  };
+
+  const handleRecAction = (id: string, newStatus: Recommendation['status']) => {
+    setRecs(prev => prev.map(r => r.id === id ? { ...r, status: newStatus } : r));
+    setSelectedRecId(null);
+    setCustomNote('');
+  };
+
+  return (
+    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
+      
+      {/* A. DASHBOARD HEADER */}
+      <section className="relative pt-28 pb-16 px-6 border-b border-white/5 bg-black/40 z-40">
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-indigo-600/5 blur-[180px] rounded-full -z-10" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
+            <div className="space-y-6 flex-grow">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black tracking-widest uppercase">
+                GUIDANCE INTELLIGENCE INTERFACE
+              </div>
+              <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight">
+                AI <span className="gradient-text">Directives.</span>
+              </h1>
+              <p className="text-gray-400 max-w-2xl text-lg font-medium leading-relaxed">
+                Empirical recommendations generated by neural market scraping. 
+                Your oversight converts data into validated career moves.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full lg:w-auto">
+               {[
+                 { l: 'Pending Approval', v: stats.pendingCount, c: 'indigo' },
+                 { l: 'Acceptance Rate', v: `${stats.approvalRate}%`, c: 'blue' },
+                 { l: 'Success Lift', v: `+${stats.impactLift}%`, c: 'emerald' }
+               ].map((stat, i) => (
+                 <div key={i} className="p-8 rounded-[40px] bg-white/[0.02] border border-white/5 text-center group hover:border-indigo-500/30 transition-all">
+                    <p className={`text-3xl font-black mb-1 text-${stat.c}-500`}>{stat.v}</p>
+                    <p className="text-[8px] font-black uppercase tracking-widest text-gray-500">{stat.l}</p>
+                 </div>
+               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* B. RECOMMENDATION FEED */}
+      <section className="py-20 px-6 max-w-7xl mx-auto">
+         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div className="flex gap-2 bg-white/[0.03] p-1.5 rounded-2xl border border-white/10 backdrop-blur-xl">
+               <button 
+                  onClick={() => setActiveTab('pending')}
+                  className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'pending' ? 'bg-indigo-600 text-white shadow-xl' : 'text-gray-500 hover:text-white'}`}
+               >
+                  Pending Review ({stats.pendingCount})
+               </button>
+               <button 
+                  onClick={() => setActiveTab('history')}
+                  className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'history' ? 'bg-indigo-600 text-white shadow-xl' : 'text-gray-500 hover:text-white'}`}
+               >
+                  Action Log
+               </button>
+            </div>
+            
+            <div className="flex gap-4">
+               <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Sorted by Impact</span>
+            </div>
+         </div>
+
+         <div className="grid lg:grid-cols-3 gap-12">
+            {/* Feed List */}
+            <div className="lg:col-span-2 space-y-4">
+               {filteredRecs.length === 0 ? (
+                  <div className="py-32 text-center border-2 border-dashed border-white/5 rounded-[56px] opacity-30">
+                     <p className="text-xl font-black uppercase text-gray-500 tracking-widest">Feed Exhausted</p>
+                  </div>
+               ) : (
+                  filteredRecs.map(rec => (
+                    <div 
+                      key={rec.id} 
+                      onClick={() => setSelectedRecId(rec.id)}
+                      className={`p-8 rounded-[40px] border transition-all duration-500 cursor-pointer group flex flex-col md:flex-row items-center gap-10 ${selectedRecId === rec.id ? 'bg-indigo-600/10 border-indigo-500/50 shadow-2xl' : 'bg-[#0a0a0a] border-white/5 hover:border-indigo-500/30 shadow-xl'}`}
+                    >
+                       <div className="flex items-center gap-6 flex-grow">
+                          <div className={`w-12 h-12 rounded-[18px] flex items-center justify-center font-black text-xs ${
+                            rec.impact === 'High' ? 'bg-indigo-600/20 text-indigo-500' : 'bg-white/5 text-gray-500'
+                          }`}>
+                             {rec.studentName.charAt(0)}
+                          </div>
+                          <div>
+                             <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">{rec.category}</p>
+                             <h4 className="text-lg font-black uppercase text-white group-hover:text-blue-400 transition-colors leading-tight">{rec.title}</h4>
+                             <p className="text-[9px] font-bold text-gray-600 uppercase tracking-widest mt-1">{rec.studentName} • {rec.studentId}</p>
+                          </div>
+                       </div>
+                       
+                       <div className="flex items-center gap-8 text-center md:text-right shrink-0">
+                          <div>
+                             <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Confidence</p>
+                             <p className="text-xl font-black text-white tabular-nums">{rec.confidence}%</p>
+                          </div>
+                          <div className="min-w-[100px]">
+                             <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Priority</p>
+                             <span className={`px-4 py-1.5 rounded-full text-[8px] font-black uppercase tracking-widest ${
+                               rec.urgency === 'Immediate' ? 'bg-red-500/10 text-red-500 animate-pulse' : 'bg-white/5 text-gray-400'
+                             }`}>
+                               {rec.urgency}
+                             </span>
+                          </div>
+                          <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-indigo-600 transition-all border border-white/10 group-hover:border-indigo-500">
+                             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7-7" /></svg>
+                          </div>
+                       </div>
+                    </div>
+                  ))
+               )}
+            </div>
+
+            {/* C. RECOMMENDATION DETAIL & CONTROL LAYER */}
+            <div className="lg:col-span-1">
+               <div className="sticky top-32 h-fit">
+                  {selectedRec ? (
+                    <div className="p-12 rounded-[56px] border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl relative overflow-hidden animate-in slide-in-from-right duration-500">
+                       <div className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500/5 blur-[80px] rounded-full" />
+                       
+                       <div className="relative z-10 space-y-10">
+                          <div>
+                             <span className="text-[9px] font-black text-indigo-500 uppercase tracking-[0.4em] mb-3 block">Neural Directive Detail</span>
+                             <h2 className="text-3xl font-black uppercase text-white tracking-tighter leading-tight">{selectedRec.title}</h2>
+                             <p className="text-gray-500 text-xs font-bold uppercase mt-2">Prepared for {selectedRec.studentName}</p>
+                          </div>
+
+                          <div className="space-y-6">
+                             <section className="space-y-3">
+                                <h5 className="text-[10px] font-black text-blue-500 uppercase tracking-widest border-l-4 border-blue-600 pl-4">The Logic</h5>
+                                <p className="text-sm text-gray-400 font-medium leading-relaxed italic">"{selectedRec.logic}"</p>
+                             </section>
+
+                             <section className="space-y-3">
+                                <h5 className="text-[10px] font-black text-emerald-500 uppercase tracking-widest border-l-4 border-emerald-600 pl-4">Expected Outcome</h5>
+                                <p className="text-sm text-gray-300 font-medium leading-relaxed">{selectedRec.outcome}</p>
+                             </section>
+
+                             <section className="space-y-3">
+                                <h5 className="text-[10px] font-black text-red-500 uppercase tracking-widest border-l-4 border-red-600 pl-4">Risk of Inaction</h5>
+                                <p className="text-xs text-gray-500 font-bold uppercase leading-relaxed">{selectedRec.riskOfInaction}</p>
+                             </section>
+                          </div>
+
+                          <div className="pt-8 border-t border-white/5 space-y-6">
+                             <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Counselor Override Notes</p>
+                             <textarea 
+                                value={customNote}
+                                onChange={(e) => setCustomNote(e.target.value)}
+                                placeholder="Add custom context or modification requirements..."
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl p-6 text-xs font-medium outline-none focus:border-indigo-500 transition-all min-h-[100px] placeholder:text-gray-800"
+                             />
+                             <div className="grid grid-cols-2 gap-4">
+                                <button 
+                                   onClick={() => handleRecAction(selectedRec.id, 'rejected')}
+                                   className="py-4 bg-white/5 hover:bg-red-600 text-white rounded-2xl font-black uppercase tracking-widest text-[9px] transition-all border border-white/10"
+                                >
+                                   Reject
+                                </button>
+                                <button 
+                                   onClick={() => handleRecAction(selectedRec.id, customNote ? 'modified' : 'approved')}
+                                   className="py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black uppercase tracking-widest text-[9px] transition-all shadow-xl shadow-indigo-600/30"
+                                >
+                                   {customNote ? 'Approve with Notes' : 'Approve Directive'}
+                                </button>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                  ) : (
+                    <div className="p-16 rounded-[56px] border-2 border-dashed border-white/5 text-center flex flex-col items-center justify-center opacity-40">
+                       <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center text-4xl mb-8">💡</div>
+                       <h3 className="text-xl font-black uppercase text-gray-600">Analyze Directives</h3>
+                       <p className="text-[10px] font-bold text-gray-700 uppercase tracking-widest mt-4 max-w-xs">Select a recommendation from the feed to review neural logic and expected outcomes.</p>
+                    </div>
+                  )}
+               </div>
+            </div>
+         </div>
+      </section>
+
+      {/* D. OUTCOME TRACKING & HISTORY */}
+      {activeTab === 'history' && (
+        <section className="py-24 px-6 bg-[#080808] border-y border-white/5 relative overflow-hidden">
+           <div className="absolute inset-0 grid-pattern opacity-[0.03] pointer-events-none" />
+           <div className="max-w-7xl mx-auto relative z-10">
+              <div className="mb-20 text-center">
+                 <h2 className="text-3xl font-black uppercase tracking-tight">Outcome <span className="text-emerald-500">Validation.</span></h2>
+                 <p className="text-gray-500 text-[10px] font-black uppercase tracking-[0.4em] mt-2">Measuring the efficacy of your guidance</p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8 mb-20">
+                 {[
+                    { l: 'Adoption Rate', v: '94%', d: 'Students who acted on approved directives.', c: 'blue' },
+                    { l: 'Success conversion', v: '82%', d: 'Directives that led to target achievement.', c: 'emerald' },
+                    { l: 'Counselor Overrides', v: '15%', d: 'Manual modifications to AI logic.', c: 'purple' }
+                 ].map((metric, i) => (
+                    <div key={i} className="p-10 rounded-[56px] bg-black/40 border border-white/10 text-center space-y-6 group hover:border-white/20 transition-all">
+                       <p className="text-[10px] font-black text-gray-600 uppercase tracking-[0.4em] mb-4">{metric.l}</p>
+                       <h3 className={`text-5xl font-black text-${metric.c}-500 leading-none`}>{metric.v}</h3>
+                       <p className="text-[10px] text-gray-500 font-bold uppercase leading-relaxed px-6">{metric.d}</p>
+                    </div>
+                 ))}
+              </div>
+
+              <div className="p-12 rounded-[64px] border border-white/5 bg-black/60 shadow-2xl relative overflow-hidden">
+                 <div className="flex justify-between items-end mb-12">
+                    <h4 className="text-xl font-black uppercase text-white">Guidance <span className="text-blue-500">Archieve.</span></h4>
+                    <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Last 30 Days</span>
+                 </div>
+                 <div className="space-y-4">
+                    {recs.filter(r => r.status !== 'pending').map(r => (
+                      <div key={r.id} className="p-6 rounded-[32px] bg-white/[0.01] border border-white/5 flex items-center justify-between group hover:border-white/10 transition-all">
+                         <div className="flex items-center gap-8">
+                            <div className={`w-1.5 h-1.5 rounded-full ${r.status === 'rejected' ? 'bg-red-500' : 'bg-emerald-500'}`} />
+                            <div className="space-y-0.5">
+                               <h5 className="text-sm font-black uppercase text-white">{r.studentName}</h5>
+                               <p className="text-[9px] font-bold text-gray-600 uppercase">{r.title}</p>
+                            </div>
+                         </div>
+                         <div className="flex items-center gap-12">
+                            <div className="text-right">
+                               <p className="text-[8px] font-black text-gray-700 uppercase">Outcome</p>
+                               <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Achieved</p>
+                            </div>
+                            <span className={`px-4 py-1.5 rounded-full text-[8px] font-black uppercase tracking-widest ${
+                               r.status === 'approved' ? 'bg-emerald-500/10 text-emerald-500' : 
+                               r.status === 'modified' ? 'bg-blue-600/10 text-blue-500' : 
+                               'bg-red-500/10 text-red-500'
+                            }`}>{r.status}</span>
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+           </div>
+        </section>
+      )}
+
+      {/* FINAL CALL-TO-ACTION */}
+      <section className="py-40 px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+           <h2 className="text-4xl md:text-7xl font-black uppercase mb-12 leading-[0.9] tracking-tighter">
+             Humanity in <br/><span className="gradient-text">Automation.</span>
+           </h2>
+           <p className="text-gray-400 text-lg mb-12 max-w-xl mx-auto font-medium leading-relaxed">
+              AI suggests the path, but you understand the person. Career Soulmate 
+              empowers you to deliver advice that is both data-backed and deeply human.
+           </p>
+           <div className="flex flex-col sm:flex-row gap-6 justify-center">
+             <button onClick={() => alert('Exporting Institutional Guidance Audit...')} className="px-12 py-6 bg-indigo-600 hover:bg-indigo-500 text-white rounded-[24px] font-black transition-all shadow-2xl shadow-indigo-600/40 uppercase tracking-[0.2em] text-[10px]">
+               Export Placement Audit
+             </button>
+             <button onClick={() => onNavigate('student-list')} className="px-12 py-6 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-[24px] font-black transition-all backdrop-blur-md uppercase tracking-[0.2em] text-[10px]">
+               Back to Student Directory
+             </button>
+           </div>
+        </div>
+      </section>
+
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.2); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.4); }
+        .grid-pattern {
+          background-image: linear-gradient(to right, #6366f1 1px, transparent 1px),
+                            linear-gradient(to bottom, #6366f1 1px, transparent 1px);
+          background-size: 40px 40px;
+        }
+        .text-emerald-500 { color: #10b981; }
+        .text-blue-500 { color: #3b82f6; }
+        .text-red-500 { color: #ef4444; }
+        .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
+        .bg-red-500\/10 { background-color: rgba(239, 68, 68, 0.1); }
+        .bg-blue-600\/10 { background-color: rgba(37, 99, 235, 0.1); }
+      `}</style>
+    </div>
+  );
+};
+
+export default CounselorRecommendationsPage;

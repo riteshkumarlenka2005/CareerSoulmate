@@ -1,0 +1,1104 @@
+// NEW code..........
+
+
+import React, { useState, useEffect, useMemo } from 'react';
+
+export type UserRole =
+  | 'public'
+  | 'student'
+  | 'college'
+  | 'counselor'
+  | 'institution_admin'
+  | 'gov'
+  | 'super_admin';
+
+interface MegaMenuChild {
+  label: string;
+  description: string;
+  icon: React.ReactNode;
+  action: () => void;
+}
+
+interface MegaMenuSection {
+  title: string;
+  items: MegaMenuChild[];
+}
+
+interface NavItem {
+  label: string;
+  children?: { label: string; action?: () => void }[];
+  megaMenu?: MegaMenuSection[];
+  action?: () => void;
+}
+
+interface HeaderProps {
+  role?: UserRole;
+  onNavigate?: (page: any) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const getNavItems = (currentRole: UserRole): NavItem[] => {
+    const aboutItem: NavItem = { label: 'About', action: () => onNavigate?.('about') };
+
+    // Common Icons
+    const Icons = {
+      AI: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      Career: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+        </svg>
+      ),
+      Academic: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+        </svg>
+      ),
+      Tools: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 11-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+        </svg>
+      ),
+      Reports: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 2v-6m-8 13h10a2 2 0 002-2V9a2 2 0 00-2-2h-3l-1-1H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      )
+    };
+
+    // Shared "Resources" MegaMenu definition
+    const resourcesItem: NavItem = {
+      label: 'Resources',
+      megaMenu: [
+        {
+          title: 'AI Tools',
+          items: [
+            { label: 'AI Web Scraper', description: 'Extract career data smartly.', icon: Icons.AI, action: () => onNavigate?.('ai-recs') },
+            { label: 'Timetable Generator', description: 'Optimize your learning schedule.', icon: Icons.Academic, action: () => onNavigate?.('admin-timetable-generate') },
+            { label: 'Career Advice', description: 'Personalized growth strategies.', icon: Icons.Career, action: () => onNavigate?.('ai-recs') },
+            { label: 'AskMe', description: 'Instant answers to your queries.', icon: Icons.Tools, action: () => onNavigate?.('ai-recs') },
+          ],
+        },
+        {
+          title: 'Learning & Community',
+          items: [
+            { label: 'Motivation', description: 'Daily sparks for your journey.', icon: Icons.AI, action: () => onNavigate?.('motivation') },
+            { label: 'Blog', description: 'Latest insights & career trends.', icon: Icons.Reports, action: () => onNavigate?.('blog') },
+            { label: 'Community', description: 'Connect with fellow learners.', icon: Icons.Tools, action: () => onNavigate?.('community') },
+          ],
+        },
+      ],
+    };
+
+    switch (currentRole) {
+      case 'student':
+        return [
+          {
+            label: 'My Career',
+            children: [
+              { label: 'Roadmap', action: () => onNavigate?.('roadmap') },
+              { label: 'AI Recs', action: () => onNavigate?.('ai-recs') },
+              { label: 'Why This?', action: () => onNavigate?.('why-this') }
+            ]
+          },
+          {
+            label: 'Explore',
+            children: [
+              { label: 'Careers', action: () => onNavigate?.('explore-careers') },
+              { label: 'Degrees', action: () => onNavigate?.('explore-degrees') },
+              { label: 'Colleges', action: () => onNavigate?.('colleges') },
+              { label: 'Skills', action: () => onNavigate?.('explore-skills') }
+            ]
+          },
+          {
+            label: 'Assessments',
+            children: [
+              { label: 'Aptitude', action: () => onNavigate?.('aptitude') },
+              { label: 'Interest', action: () => onNavigate?.('interest') },
+              { label: 'Personality', action: () => onNavigate?.('personality') },
+              { label: 'Skills', action: () => onNavigate?.('skills-assessment') }
+            ]
+          },
+          {
+            label: 'My Skill Path',
+            children: [
+              { label: 'Certs', action: () => onNavigate?.('certs') },
+              { label: 'Apprenticeships', action: () => onNavigate?.('apprenticeships') }
+            ]
+          },
+          {
+            label: 'Deadlines',
+            children: [
+              { label: 'Admissions', action: () => onNavigate?.('admissions') },
+              { label: 'Exams', action: () => onNavigate?.('exams') },
+              { label: 'Scholarships', action: () => onNavigate?.('scholarships') }
+            ]
+          },
+          aboutItem
+        ];
+
+      case 'college':
+        return [
+          {
+            label: 'My Path',
+            children: [
+              { label: 'Mapping', action: () => onNavigate?.('mapping') },
+              { label: 'Add-ons', action: () => onNavigate?.('add-ons') }
+            ]
+          },
+          {
+            label: 'Skills & Jobs',
+            children: [
+              { label: 'Gaps', action: () => onNavigate?.('gaps') },
+              { label: 'Readiness', action: () => onNavigate?.('readiness') },
+              { label: 'Internships', action: () => onNavigate?.('internships') }
+            ]
+          },
+          {
+            label: 'Institutions',
+            children: [
+              { label: 'Programs', action: () => onNavigate?.('programs') },
+              { label: 'Transfers', action: () => onNavigate?.('transfers') },
+              { label: 'NEP Flexibility', action: () => onNavigate?.('nep-flexibility') }
+            ]
+          },
+          { label: 'Assessments', action: () => onNavigate?.('assessments') },
+          {
+            label: 'Opportunities',
+            children: [
+              { label: 'Exams', action: () => onNavigate?.('college-exams') },
+              { label: 'Jobs', action: () => onNavigate?.('college-jobs') },
+              { label: 'Fellowships', action: () => onNavigate?.('college-fellowships') }
+            ]
+          },
+          aboutItem
+        ];
+
+      case 'counselor':
+        return [
+          {
+            label: 'Learners',
+            children: [
+              { label: 'Student List', action: () => onNavigate?.('student-list') },
+              { label: 'Profiles', action: () => onNavigate?.('counselor-profiles') },
+              { label: 'Progress', action: () => onNavigate?.('counselor-progress') }
+            ]
+          },
+          {
+            label: 'Insights',
+            children: [
+              { label: 'Skill Gaps', action: () => onNavigate?.('counselor-skill-gaps') },
+              { label: 'Risk Flags', action: () => onNavigate?.('risk-flags') },
+              { label: 'Recommendations', action: () => onNavigate?.('counselor-recs') }
+            ]
+          },
+          {
+            label: 'Career Tools',
+            children: [
+              { label: 'Trees', action: () => onNavigate?.('tree') },
+              { label: 'Comparisons', action: () => onNavigate?.('comparison') }
+            ]
+          },
+          {
+            label: 'Reports',
+            children: [
+              { label: 'Progress Reports', action: () => onNavigate?.('counselor-report') },
+              { label: 'Export', action: () => onNavigate?.('counselor-export') }
+            ]
+          },
+          aboutItem
+        ];
+
+      case 'institution_admin':
+        return [
+          { label: 'Dashboard', action: () => onNavigate?.('admin-dashboard') },
+          {
+            label: 'Timetable AI',
+            children: [
+              { label: 'Generate', action: () => onNavigate?.('admin-timetable-generate') },
+              { label: 'Scenarios', action: () => onNavigate?.('admin-timetable-scenarios') },
+              { label: 'Conflicts', action: () => onNavigate?.('admin-timetable-conflicts') }
+            ]
+          },
+          {
+            label: 'Academics',
+            children: [
+              { label: 'Courses', action: () => onNavigate?.('admin-academics-courses') },
+              { label: 'Credits', action: () => onNavigate?.('admin-academics-credits') },
+              { label: 'Electives', action: () => onNavigate?.('admin-academics-electives') },
+              { label: 'Faculty', action: () => onNavigate?.('admin-academics-faculty') }
+            ]
+          },
+          {
+            label: 'Infrastructure',
+            children: [
+              { label: 'Rooms', action: () => onNavigate?.('admin-infra-rooms') },
+              { label: 'Labs', action: () => onNavigate?.('admin-infra-labs') },
+              { label: 'Capacity', action: () => onNavigate?.('admin-infra-capacity') }
+            ]
+          },
+          { label: 'Reports', action: () => onNavigate?.('admin-reports') },
+          aboutItem
+        ];
+
+      case 'gov':
+        return [
+          {
+            label: 'Analytics',
+            children: [
+              { label: 'Enrollment', action: () => onNavigate?.('gov-analytics-enrollment') },
+              { label: 'Regional', action: () => onNavigate?.('gov-analytics-regional') }
+            ]
+          },
+          {
+            label: 'Skills Intel',
+            children: [
+              { label: 'Demand vs Supply', action: () => onNavigate?.('gov-skills-demand-supply') },
+              { label: 'NSQF Adoption', action: () => onNavigate?.('gov-skills-nsqf-adoption') }
+            ]
+          },
+          {
+            label: 'Institutions',
+            children: [
+              { label: 'Performance', action: () => onNavigate?.('gov-inst-performance') },
+              { label: 'Capacity', action: () => onNavigate?.('gov-inst-capacity') }
+            ]
+          },
+          { label: 'Reports', action: () => onNavigate?.('gov-reports') },
+          aboutItem
+        ];
+
+      case 'super_admin':
+        return [
+          { label: 'Users & Roles', action: () => onNavigate?.('super-admin-users-roles') },
+          { label: 'Institutions', action: () => onNavigate?.('super-admin-institutions') },
+          {
+            label: 'Models',
+            children: [
+              { label: 'AI Versions', action: () => {} },
+              { label: 'Retraining', action: () => {} }
+            ]
+          },
+          { label: 'Data & Logs', action: () => {} },
+          { label: 'System Health', action: () => {} },
+          { label: 'Settings', action: () => {} },
+          aboutItem
+        ];
+
+      default: // public
+        return [
+          {
+            label: 'Discover Careers',
+            megaMenu: [
+              {
+                title: 'Career Discovery Tools',
+                items: [
+                  { label: 'Explorer', description: 'Guided discovery through filters.', icon: Icons.Tools, action: () => onNavigate?.('explorer') },
+                  { label: 'Career Tree', description: 'Visualize progression paths.', icon: Icons.Career, action: () => onNavigate?.('tree') },
+                  { label: 'Comparison', description: 'Evaluate salary and growth.', icon: Icons.Reports, action: () => onNavigate?.('comparison') },
+                ],
+              },
+            ],
+          },
+          {
+            label: 'Courses & Degrees',
+            megaMenu: [
+              {
+                title: 'Academic Pathways',
+                items: [
+                  { label: 'Mapping', description: 'Align choices with outcomes.', icon: Icons.Academic, action: () => onNavigate?.('mapping') },
+                  { label: 'NEP Pathways', description: 'Modular education routes.', icon: Icons.Academic, action: () => onNavigate?.('nep') },
+                ],
+              },
+            ],
+          },
+          {
+            label: 'Exams & Outcomes',
+            megaMenu: [
+              {
+                title: 'From Exams to Careers',
+                items: [
+                  { label: 'Colleges', description: 'Rankings and cut-offs.', icon: Icons.Career, action: () => onNavigate?.('colleges') },
+                  { label: 'Scholarships', description: 'Surface financial aid.', icon: Icons.Academic, action: () => onNavigate?.('scholarships') },
+                  { label: 'Admissions', description: 'Guided application process.', icon: Icons.Academic, action: () => onNavigate?.('admissions') },
+                ],
+              },
+            ],
+          },
+          {
+            label: 'Skills & Vocational',
+            megaMenu: [
+              {
+                title: 'Practical Growth Paths',
+                items: [
+                  { label: 'Skill Pathways', description: 'Connect learning to roles.', icon: Icons.Tools, action: () => onNavigate?.('pathways') },
+                  { label: 'NSQF Levels', description: 'Competency classifications.', icon: Icons.Reports, action: () => onNavigate?.('nsqf') },
+                  { label: 'Apprenticeships', description: 'Hands-on training.', icon: Icons.Career, action: () => onNavigate?.('apprenticeships') },
+                ],
+              },
+            ],
+          },
+          resourcesItem,
+          aboutItem,
+        ];
+    }
+  };
+
+  const navItems = useMemo(() => getNavItems(role), [role, onNavigate]);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+        isScrolled ? 'bg-black/95 border-b border-white/10 shadow-2xl' : 'bg-black'
+      }`}
+    >
+      <div className="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
+        {/* LOGO */}
+        <div
+          onClick={() => onNavigate?.('home')}
+          className="flex items-center gap-4 cursor-pointer group shrink-0"
+        >
+          <div className="relative w-11 h-11 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#020617] to-[#1e293b] rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
+            <div className="absolute inset-0 bg-blue-500/5 blur-md"></div>
+
+            <svg
+              viewBox="0 0 24 24"
+              className="relative z-10 w-6 h-6 text-cyan-400"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 21v-7" />
+              <path d="M12 14c0-2.5 3-4 6-6" />
+              <path d="M12 14c0-2.5-3-4-6-6" />
+              <path d="M12 14v7" />
+              <circle cx="18" cy="8" r="1" fill="currentColor" />
+              <circle cx="6" cy="8" r="1" fill="currentColor" />
+              <circle cx="12" cy="7" r="1" fill="currentColor" />
+              <circle cx="12" cy="14" r="1" fill="currentColor" />
+            </svg>
+          </div>
+
+          <div className="flex flex-col -space-y-1">
+            <span className="text-xl font-bold tracking-tight text-[#f8fafc]">
+              CareerSoulmate
+            </span>
+            <span className="text-[10px] tracking-[0.2em] text-[#94a3b8] uppercase">
+              Mapping Destiny
+            </span>
+          </div>
+        </div>
+
+        {/* DESKTOP NAV */}
+        <nav className="hidden xl:flex items-center gap-6">
+          {navItems.map((item, idx) => {
+            const isResources = item.label === 'Resources';
+            const isDiscover = item.label === 'Discover Careers';
+            const isCourses = item.label === 'Courses & Degrees';
+            const isExams = item.label === 'Exams & Outcomes';
+            const isSkills = item.label === 'Skills & Vocational';
+            const hasDropdown = Boolean(item.children || item.megaMenu);
+            
+            return (
+              <div
+                key={idx}
+                className="relative"
+                onMouseEnter={() => hasDropdown && setActiveDropdown(item.label)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button 
+                  onClick={() => !hasDropdown && item.action?.()}
+                  className={`flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase py-4 transition-colors ${activeDropdown === item.label ? 'text-white' : 'text-[#9ca3af] hover:text-white'}`}
+                >
+                  {item.label}
+                  {hasDropdown && (
+                    <svg className={`w-3 h-3 opacity-60 transition-transform duration-200 ${activeDropdown === item.label ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  )}
+                </button>
+
+                {/* Standard Dropdown */}
+                {item.children && activeDropdown === item.label && (
+                  <div className="absolute top-full left-0 w-56 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 backdrop-blur-xl shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
+                    {item.children.map((child, i) => (
+                      <button
+                        key={i}
+                        onClick={child.action}
+                        className="block w-full text-left px-6 py-3 text-[10px] font-bold text-[#9ca3af] hover:text-white hover:bg-white/5 uppercase tracking-widest transition-all"
+                      >
+                        {child.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Mega Menu Logic */}
+                {item.megaMenu && activeDropdown === item.label && (
+                  <div 
+                    className={`absolute top-full w-[680px] bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] animate-in fade-in slide-in-from-top-2 duration-200 border-white/5 ${
+                      isResources ? 'right-[-140px]' : (isCourses || isExams || isSkills) ? 'right-[-280px]' : 'left-0'
+                    }`}
+                  >
+                    <div className={`grid ${item.megaMenu.length > 1 ? 'grid-cols-2 gap-x-12' : 'grid-cols-1'} gap-y-10`}>
+                      {item.megaMenu.map((section, sIdx) => (
+                        <div key={sIdx} className="space-y-6">
+                          <h4 className="text-[11px] font-black tracking-[0.2em] text-[#4285f4] uppercase px-2 border-l-2 border-[#4285f4]/30">
+                            {section.title}
+                          </h4>
+                          <div className="space-y-2">
+                            {section.items.map((subItem, iIdx) => (
+                              <button
+                                key={iIdx}
+                                onClick={subItem.action}
+                                className="w-full flex items-start gap-5 p-4 rounded-2xl hover:bg-white/[0.03] transition-all group"
+                              >
+                                <div className="mt-1 p-3 rounded-xl bg-white/[0.04] text-[#4285f4] group-hover:bg-[#4285f4]/10 group-hover:text-cyan-400 transition-all shadow-sm">
+                                  {subItem.icon}
+                                </div>
+                                <div className="flex flex-col items-start text-left">
+                                  <span className="text-[12px] font-extrabold text-[#f8fafc] group-hover:text-white tracking-wide uppercase mb-1">
+                                    {subItem.label}
+                                  </span>
+                                  <span className="text-[11px] text-[#94a3b8] font-medium leading-relaxed group-hover:text-[#cbd5e1]">
+                                    {subItem.description}
+                                  </span>
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Bottom Highlight/Callout restored from previous version */}
+                    <div className="mt-10 pt-8 border-t border-white/5 flex items-center justify-between px-2">
+                      <p className="text-[11px] text-[#475569] font-medium italic">
+                        {isDiscover ? 'Empowering informed decisions.' : isCourses ? 'Academic excellence meets career clarity.' : isExams ? 'Navigating your route from exams to real results.' : isSkills ? 'Skill-driven development for the modern workforce.' : 'Empowering 100k+ learners across the globe.'}
+                      </p>
+                      <button className="text-[11px] font-black text-[#4285f4] hover:text-cyan-400 uppercase tracking-widest transition-colors flex items-center gap-2">
+                        {isDiscover ? 'GO TO EXPLORER' : isCourses ? 'VIEW PATHWAYS' : isExams ? 'VIEW ADMISSIONS' : isSkills ? 'EXPLORE SKILLS' : 'VIEW ALL RESOURCES'}
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </nav>
+
+        {/* RIGHT ACTIONS */}
+        <div className="flex items-center gap-6">
+          <div className="hidden sm:flex items-center gap-6">
+            <button className="text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase transition-colors">
+              Login
+            </button>
+            <button className="text-[11px] font-bold tracking-[0.2em] px-6 py-2.5 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 uppercase transition-all rounded-lg shadow-sm">
+              Sign Up
+            </button>
+          </div>
+
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="xl:hidden text-[#9ca3af] hover:text-white"
+          >
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* MOBILE MENU */}
+      {isMobileMenuOpen && (
+        <div className="xl:hidden fixed inset-0 top-20 bg-black p-6 overflow-y-auto z-[90] animate-in slide-in-from-bottom-2">
+          {navItems.map((item, idx) => (
+            <div key={idx} className="mb-8">
+              <div className="text-[10px] font-black tracking-[0.2em] text-blue-500 uppercase mb-4 px-2 border-l-2 border-blue-500/50">
+                {item.label}
+              </div>
+              
+              {item.children && (
+                <div className="grid grid-cols-1 gap-2">
+                  {item.children.map((child, i) => (
+                    <button
+                      key={i}
+                      onClick={() => {
+                        child.action?.();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="block w-full text-left py-3 px-2 text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider"
+                    >
+                      {child.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {item.megaMenu && (
+                <div className="space-y-6">
+                  {item.megaMenu.map((section, sIdx) => (
+                    <div key={sIdx} className="space-y-4">
+                      <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest pl-2">
+                        {section.title}
+                      </div>
+                      <div className="space-y-2">
+                        {section.items.map((subItem, iIdx) => (
+                          <button
+                            key={iIdx}
+                            onClick={() => {
+                              subItem.action();
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className="w-full flex items-center gap-4 p-3 rounded-lg bg-white/5"
+                          >
+                            <div className="text-blue-400 shrink-0">
+                              {subItem.icon}
+                            </div>
+                            <div className="flex flex-col text-left">
+                              <span className="text-xs font-bold text-gray-300 uppercase">
+                                {subItem.label}
+                              </span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {!item.children && !item.megaMenu && (
+                <button
+                  onClick={() => {
+                    item.action?.();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left py-3 px-2 text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider"
+                >
+                  {item.label}
+                </button>
+              )}
+            </div>
+          ))}
+          
+          <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
+            <button className="w-full py-4 text-[11px] font-bold text-center text-white uppercase tracking-widest bg-blue-600 rounded-xl">
+              Get Started
+            </button>
+            <button className="w-full py-4 text-[11px] font-bold text-center text-gray-400 uppercase tracking-widest">
+              Login to Account
+            </button>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
+
+
+
+
+
+
+// OLD code..........
+
+// import React, { useState, useEffect } from 'react';
+
+// export type UserRole =
+//   | 'public'
+//   | 'student'
+//   | 'college'
+//   | 'counselor'
+//   | 'institution_admin'
+//   | 'gov'
+//   | 'super_admin';
+
+// interface NavItem {
+//   label: string;
+//   children?: { label: string; path?: string; action?: () => void }[];
+//   path?: string;
+//   action?: () => void;
+// }
+
+// interface HeaderProps {
+//   role?: UserRole;
+//   onNavigate?: (page: any) => void;
+// }
+
+// const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+//   useEffect(() => {
+//     const handleScroll = () => setIsScrolled(window.scrollY > 20);
+//     window.addEventListener('scroll', handleScroll);
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, []);
+
+//   const getNavItems = (): NavItem[] => {
+//     const aboutItem = { label: 'About', action: () => onNavigate?.('about') };
+
+//     const aiItem: NavItem = {
+//       label: 'AI',
+//       children: [
+//         { label: 'AI Web Scraper', action: () => onNavigate?.('ai-recs') },
+//         { label: 'Timetable Generator', action: () => onNavigate?.('admin-timetable-generate') },
+//         { label: 'Career Advice', action: () => onNavigate?.('ai-recs') },
+//         { label: 'AskMe', action: () => onNavigate?.('ai-recs') },
+//       ],
+//     };
+
+//     return [
+//       {
+//         label: 'Discover Careers',
+//         children: [
+//           { label: 'Explorer', action: () => onNavigate?.('explorer') },
+//           { label: 'Tree', action: () => onNavigate?.('tree') },
+//           { label: 'Comparison', action: () => onNavigate?.('comparison') },
+//         ],
+//       },
+//       {
+//         label: 'Courses & Degrees',
+//         children: [
+//           { label: 'Mapping', action: () => onNavigate?.('mapping') },
+//           { label: 'NEP Pathways', action: () => onNavigate?.('nep') },
+//         ],
+//       },
+//       {
+//         label: 'Exams & Outcomes',
+//         children: [
+//           { label: 'Colleges', action: () => onNavigate?.('colleges') },
+//           { label: 'Scholarships', action: () => onNavigate?.('scholarships') },
+//           { label: 'Admissions', action: () => onNavigate?.('admissions') },
+//         ],
+//       },
+//       {
+//         label: 'Skills & Vocational',
+//         children: [
+//           { label: 'Pathways', action: () => onNavigate?.('pathways') },
+//           { label: 'NSQF Levels', action: () => onNavigate?.('nsqf') },
+//           { label: 'Apprenticeships', action: () => onNavigate?.('apprenticeships') },
+//         ],
+//       },
+//       aiItem,
+//       aboutItem,
+//     ];
+//   };
+
+//   const navItems = getNavItems();
+
+//   return (
+//     <header
+//       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+//         isScrolled ? 'bg-black/95 border-b border-white/10' : 'bg-black'
+//       }`}
+//     >
+//       <div className="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
+//         {/* LOGO — RESTORED FULLY */}
+//         <div
+//           onClick={() => onNavigate?.('home')}
+//           className="flex items-center gap-4 cursor-pointer group"
+//         >
+//           <div className="relative w-11 h-11 flex items-center justify-center">
+//             <div className="absolute inset-0 bg-gradient-to-br from-[#020617] to-[#1e293b] rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
+//             <div className="absolute inset-0 bg-blue-500/5 blur-md"></div>
+
+//             <svg
+//               viewBox="0 0 24 24"
+//               className="relative z-10 w-6 h-6 text-cyan-400"
+//               fill="none"
+//               stroke="currentColor"
+//               strokeWidth="2.5"
+//               strokeLinecap="round"
+//               strokeLinejoin="round"
+//             >
+//               <path d="M12 21v-7" />
+//               <path d="M12 14c0-2.5 3-4 6-6" />
+//               <path d="M12 14c0-2.5-3-4-6-6" />
+//               <path d="M12 14v7" />
+//               <circle cx="18" cy="8" r="1" fill="currentColor" />
+//               <circle cx="6" cy="8" r="1" fill="currentColor" />
+//               <circle cx="12" cy="7" r="1" fill="currentColor" />
+//               <circle cx="12" cy="14" r="1" fill="currentColor" />
+//             </svg>
+//           </div>
+
+//           <div className="flex flex-col -space-y-1">
+//             <span className="text-xl font-bold tracking-tight text-[#f8fafc]">
+//               CareerSoulmate
+//             </span>
+//             <span className="text-[10px] tracking-[0.2em] text-[#94a3b8] uppercase">
+//               Mapping Destiny
+//             </span>
+//           </div>
+//         </div>
+
+//         {/* DESKTOP NAV */}
+//         <nav className="hidden xl:flex items-center gap-8">
+//           {navItems.map((item, idx) => (
+//             <div
+//               key={idx}
+//               className="relative"
+//               onMouseEnter={() => item.children && setActiveDropdown(item.label)}
+//               onMouseLeave={() => setActiveDropdown(null)}
+//             >
+//               <button className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-[#9ca3af] hover:text-white uppercase py-4">
+//                 {item.label}
+//                 {item.children && (
+//                   <svg className="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+//                   </svg>
+//                 )}
+//               </button>
+
+//               {item.children && activeDropdown === item.label && (
+//                 <div className="absolute top-full left-0 w-56 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 backdrop-blur-xl">
+//                   {item.children.map((child, i) => (
+//                     <button
+//                       key={i}
+//                       onClick={child.action}
+//                       className="block w-full text-left px-6 py-3 text-[10px] font-bold text-[#9ca3af] hover:text-white hover:bg-white/5 uppercase tracking-widest"
+//                     >
+//                       {child.label}
+//                     </button>
+//                   ))}
+//                 </div>
+//               )}
+//             </div>
+//           ))}
+//         </nav>
+
+//         {/* RIGHT ACTIONS */}
+//         <div className="flex items-center gap-6">
+//           <div className="hidden sm:flex items-center gap-4">
+//             <button className="text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase">
+//               Login
+//             </button>
+//             <button className="text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase">
+//               Sign Up
+//             </button>
+//           </div>
+
+//           <button
+//             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+//             className="xl:hidden text-[#9ca3af] hover:text-white"
+//           >
+//             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//               <path
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth={2}
+//                 d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+//               />
+//             </svg>
+//           </button>
+//         </div>
+//       </div>
+
+//       {/* MOBILE MENU */}
+//       {isMobileMenuOpen && (
+//         <div className="xl:hidden fixed inset-0 top-20 bg-black p-6 overflow-y-auto">
+//           {navItems.map((item, idx) => (
+//             <div key={idx} className="mb-6">
+//               <div className="text-[10px] font-black tracking-widest text-blue-500 uppercase mb-2">
+//                 {item.label}
+//               </div>
+//               {item.children?.map((child, i) => (
+//                 <button
+//                   key={i}
+//                   onClick={() => {
+//                     child.action?.();
+//                     setIsMobileMenuOpen(false);
+//                   }}
+//                   className="block w-full text-left py-2 text-sm font-bold text-gray-400 hover:text-white uppercase"
+//                 >
+//                   {child.label}
+//                 </button>
+//               ))}
+//             </div>
+//           ))}
+//         </div>
+//       )}
+//     </header>
+//   );
+// };
+
+// export default Header;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+
+// export type UserRole = 'public' | 'student' | 'college' | 'counselor' | 'institution_admin' | 'gov' | 'super_admin';
+
+// interface NavItem {
+//   label: string;
+//   children?: { label: string; path?: string; action?: () => void }[];
+//   path?: string;
+//   action?: () => void;
+// }
+
+// interface HeaderProps {
+//   role?: UserRole;
+//   onNavigate?: (page: 'home' | 'about' | 'explorer' | 'comparison' | 'tree' | 'mapping' | 'add-ons' | 'gaps' | 'readiness' | 'internships' | 'programs' | 'transfers' | 'nep-flexibility' | 'assessments' | 'college-exams' | 'college-jobs' | 'college-fellowships' | 'student-list' | 'counselor-profiles' | 'counselor-progress' | 'counselor-skill-gaps' | 'risk-flags' | 'counselor-recs' | 'counselor-report' | 'counselor-export' | 'admin-dashboard' | 'admin-timetable-generate' | 'admin-timetable-scenarios' | 'admin-timetable-conflicts' | 'admin-academics-courses' | 'admin-academics-credits' | 'admin-academics-electives' | 'admin-academics-faculty' | 'admin-infra-rooms' | 'admin-infra-labs' | 'admin-infra-capacity' | 'admin-reports' | 'super-admin-users-roles' | 'super-admin-institutions' | 'gov-analytics-enrollment' | 'gov-analytics-regional' | 'gov-skills-demand-supply' | 'gov-skills-nsqf-adoption' | 'gov-inst-performance' | 'gov-inst-capacity' | 'gov-reports' | 'nep' | 'colleges' | 'scholarships' | 'admissions' | 'pathways' | 'nsqf' | 'apprenticeships' | 'roadmap' | 'ai-recs' | 'why-this' | 'explore-careers' | 'explore-degrees' | 'explore-skills' | 'aptitude' | 'interest' | 'personality' | 'skills-assessment' | 'certs' | 'exams') => void;
+// }
+
+// const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+//   useEffect(() => {
+//     const handleScroll = () => setIsScrolled(window.scrollY > 20);
+//     window.addEventListener('scroll', handleScroll);
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, []);
+
+//   const getNavItems = (role: UserRole): NavItem[] => {
+//     const aboutItem = { label: 'About', action: () => onNavigate?.('about') };
+    
+//     switch (role) {
+//       case 'student':
+//         return [
+//           { label: 'My Career', children: [{ label: 'Roadmap', action: () => onNavigate?.('roadmap') }, { label: 'AI Recs', action: () => onNavigate?.('ai-recs') }, { label: 'Why This?', action: () => onNavigate?.('why-this') }] },
+//           { label: 'Explore', children: [{ label: 'Careers', action: () => onNavigate?.('explore-careers') }, { label: 'Degrees', action: () => onNavigate?.('explore-degrees') }, { label: 'Colleges', action: () => onNavigate?.('colleges') }, { label: 'Skills', action: () => onNavigate?.('explore-skills') }] },
+//           { label: 'Assessments', children: [{ label: 'Aptitude', action: () => onNavigate?.('aptitude') }, { label: 'Interest', action: () => onNavigate?.('interest') }, { label: 'Personality', action: () => onNavigate?.('personality') }, { label: 'Skills', action: () => onNavigate?.('skills-assessment') }] },
+//           { label: 'My Skill Path', children: [{ label: 'Certs', action: () => onNavigate?.('certs') }, { label: 'Apprenticeships', action: () => onNavigate?.('apprenticeships') }] },
+//           { label: 'Deadlines', children: [{ label: 'Admissions', action: () => onNavigate?.('admissions') }, { label: 'Exams', action: () => onNavigate?.('exams') }, { label: 'Scholarships', action: () => onNavigate?.('scholarships') }] },
+//           aboutItem
+//         ];
+//       case 'college':
+//         return [
+//           { label: 'My Path', children: [{ label: 'Mapping', action: () => onNavigate?.('mapping') }, { label: 'Add-ons', action: () => onNavigate?.('add-ons') }] },
+//           { label: 'Skills & Jobs', children: [{ label: 'Gaps', action: () => onNavigate?.('gaps') }, { label: 'Readiness', action: () => onNavigate?.('readiness') }, { label: 'Internships', action: () => onNavigate?.('internships') }] },
+//           { label: 'Institutions', children: [{ label: 'Programs', action: () => onNavigate?.('programs') }, { label: 'Transfers', action: () => onNavigate?.('transfers') }, { label: 'NEP Flexibility', action: () => onNavigate?.('nep-flexibility') }] },
+//           { label: 'Assessments', action: () => onNavigate?.('assessments') },
+//           { label: 'Opportunities', children: [{ label: 'Exams', action: () => onNavigate?.('college-exams') }, { label: 'Jobs', action: () => onNavigate?.('college-jobs') }, { label: 'Fellowships', action: () => onNavigate?.('college-fellowships') }] },
+//           aboutItem
+//         ];
+//       case 'counselor':
+//         return [
+//           { label: 'Learners', children: [{ label: 'Student List', action: () => onNavigate?.('student-list') }, { label: 'Profiles', action: () => onNavigate?.('counselor-profiles') }, { label: 'Progress', action: () => onNavigate?.('counselor-progress') }] },
+//           { label: 'Insights', children: [{ label: 'Skill Gaps', action: () => onNavigate?.('counselor-skill-gaps') }, { label: 'Risk Flags', action: () => onNavigate?.('risk-flags') }, { label: 'Recommendations', action: () => onNavigate?.('counselor-recs') }] },
+//           { label: 'Career Tools', children: [{ label: 'Trees', action: () => onNavigate?.('tree') }, { label: 'Comparisons', action: () => onNavigate?.('comparison') }] },
+//           { label: 'Reports', children: [{ label: 'Progress Reports', action: () => onNavigate?.('counselor-report') }, { label: 'Export', action: () => onNavigate?.('counselor-export') }] },
+//           aboutItem
+//         ];
+//       case 'institution_admin':
+//         return [
+//           { label: 'Dashboard', action: () => onNavigate?.('admin-dashboard') },
+//           { label: 'Timetable AI', children: [{ label: 'Generate', action: () => onNavigate?.('admin-timetable-generate') }, { label: 'Scenarios', action: () => onNavigate?.('admin-timetable-scenarios') }, { label: 'Conflicts', action: () => onNavigate?.('admin-timetable-conflicts') }] },
+//           { label: 'Academics', children: [{ label: 'Courses', action: () => onNavigate?.('admin-academics-courses') }, { label: 'Credits', action: () => onNavigate?.('admin-academics-credits') }, { label: 'Electives', action: () => onNavigate?.('admin-academics-electives') }, { label: 'Faculty', action: () => onNavigate?.('admin-academics-faculty') }] },
+//           { label: 'Infrastructure', children: [{ label: 'Rooms', action: () => onNavigate?.('admin-infra-rooms') }, { label: 'Labs', action: () => onNavigate?.('admin-infra-labs') }, { label: 'Capacity', action: () => onNavigate?.('admin-infra-capacity') }] },
+//           { label: 'Reports', action: () => onNavigate?.('admin-reports') },
+//           aboutItem
+//         ];
+//       case 'gov':
+//         return [
+//           { label: 'Analytics', children: [{ label: 'Enrollment', action: () => onNavigate?.('gov-analytics-enrollment') }, { label: 'Regional', action: () => onNavigate?.('gov-analytics-regional') }] },
+//           { label: 'Skills Intel', children: [{ label: 'Demand vs Supply', action: () => onNavigate?.('gov-skills-demand-supply') }, { label: 'NSQF Adoption', action: () => onNavigate?.('gov-skills-nsqf-adoption') }] },
+//           { label: 'Institutions', children: [{ label: 'Performance', action: () => onNavigate?.('gov-inst-performance') }, { label: 'Capacity', action: () => onNavigate?.('gov-inst-capacity') }] },
+//           { label: 'Reports', action: () => onNavigate?.('gov-reports') },
+//           aboutItem
+//         ];
+//       case 'super_admin':
+//         return [
+//           { label: 'Users & Roles', action: () => onNavigate?.('super-admin-users-roles') },
+//           { label: 'Institutions', action: () => onNavigate?.('super-admin-institutions') },
+//           { label: 'Models', children: [{ label: 'AI Versions', path: '#' }, { label: 'Retraining', path: '#' }] },
+//           { label: 'Data & Logs' },
+//           { label: 'System Health' },
+//           { label: 'Settings' },
+//           aboutItem
+//         ];
+//       default: // public
+//         return [
+//           { label: 'Discover Careers', children: [{ label: 'Explorer', action: () => onNavigate?.('explorer') }, { label: 'Tree', action: () => onNavigate?.('tree') }, { label: 'Comparison', action: () => onNavigate?.('comparison') }] },
+//           { label: 'Courses & Degrees', children: [{ label: 'Mapping', action: () => onNavigate?.('mapping') }, { label: 'NEP Pathways', action: () => onNavigate?.('nep') }] },
+//           { label: 'Exams & Outcomes', children: [{ label: 'Colleges', action: () => onNavigate?.('colleges') }, { label: 'Scholarships', action: () => onNavigate?.('scholarships') }, { label: 'Admissions', action: () => onNavigate?.('admissions') }] },
+//           { label: 'Skills & Vocational', children: [{ label: 'Pathways', action: () => onNavigate?.('pathways') }, { label: 'NSQF Levels', action: () => onNavigate?.('nsqf') }, { label: 'Apprenticeships', action: () => onNavigate?.('apprenticeships') }] },
+//           aboutItem
+//         ];
+//     }
+//   };
+
+//   const navItems = getNavItems(role as UserRole);
+
+//   const getCTA = (role: UserRole) => {
+//     switch (role) {
+//       case 'student': return 'View My Roadmap';
+//       case 'institution_admin': return 'Generate Timetable';
+//       default: return 'Get Career Guidance';
+//     }
+//   };
+
+//   return (
+//     <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${isScrolled ? 'bg-black/95 border-b border-white/10' : 'bg-black'}`}>
+//       <div className="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
+//         {/* Logo Section */}
+//         <div onClick={() => onNavigate?.('home')} className="flex items-center gap-4 cursor-pointer group">
+//           <div className="relative w-11 h-11 flex items-center justify-center">
+//             <div className="absolute inset-0 bg-gradient-to-br from-[#020617] to-[#1e293b] rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] border border-white/10 group-hover:border-white/20 transition-all duration-300"></div>
+//             <div className="absolute inset-0 bg-blue-500/5 blur-md"></div>
+            
+//             <svg viewBox="0 0 24 24" className="relative z-10 w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+//               <path d="M12 21v-7" />
+//               <path d="M12 14c0-2.5 3-4 6-6" />
+//               <path d="M12 14c0-2.5-3-4-6-6" />
+//               <path d="M12 14v7" />
+//               <circle cx="18" cy="8" r="1" fill="currentColor" stroke="none" />
+//               <circle cx="6" cy="8" r="1" fill="currentColor" stroke="none" />
+//               <circle cx="12" cy="7" r="1" fill="currentColor" stroke="none" />
+//               <circle cx="12" cy="14" r="1" fill="currentColor" stroke="none" />
+//             </svg>
+//           </div>
+          
+//           <div className="flex flex-col -space-y-1">
+//             <span className="text-xl font-bold tracking-tight text-[#f8fafc] leading-none">CareerSoulmate</span>
+//             <span className="text-[10px] font-normal tracking-[0.2em] text-[#94a3b8] uppercase">Mapping Destiny</span>
+//           </div>
+//         </div>
+
+//         {/* Desktop Nav Center */}
+//         <nav className="hidden xl:flex items-center gap-8">
+//           {navItems.map((item, idx) => (
+//             <div 
+//               key={idx} 
+//               className="relative group/item"
+//               onMouseEnter={() => item.children && setActiveDropdown(item.label)}
+//               onMouseLeave={() => setActiveDropdown(null)}
+//             >
+//               <button 
+//                 onClick={item.action}
+//                 className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-[#9ca3af] hover:text-white transition-colors uppercase whitespace-nowrap py-4"
+//               >
+//                 {item.label}
+//                 {item.children && (
+//                   <svg className="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+//                   </svg>
+//                 )}
+//               </button>
+//               {item.children && activeDropdown === item.label && (
+//                 <div className="absolute top-full left-0 w-56 bg-[#0a0a0a] border border-white/10 rounded-xl shadow-2xl overflow-hidden py-2 animate-in fade-in slide-in-from-top-2 duration-200 backdrop-blur-xl">
+//                   {item.children.map((child, cIdx) => (
+//                     <button 
+//                       key={cIdx} 
+//                       onClick={() => {
+//                         if (child.action) child.action();
+//                       }}
+//                       className="w-full text-left block px-6 py-3 text-[10px] font-bold text-[#9ca3af] hover:text-white hover:bg-white/5 uppercase tracking-widest transition-all"
+//                     >
+//                       {child.label}
+//                     </button>
+//                   ))}
+//                 </div>
+//               )}
+//             </div>
+//           ))}
+//         </nav>
+
+//         {/* Right Buttons */}
+//         <div className="flex items-center gap-6">
+//           {role === 'public' && (
+//             <button className="hidden sm:block text-[11px] font-bold tracking-[0.2em] text-[#9ca3af] hover:text-white uppercase transition-colors">
+//               Login
+//             </button>
+//           )}
+//           <button className="bg-white text-black px-7 py-3 text-[11px] font-bold tracking-[0.2em] rounded-xl hover:bg-blue-600 hover:text-white transition-all active:scale-95 shadow-lg uppercase whitespace-nowrap">
+//             {getCTA(role as UserRole)}
+//           </button>
+          
+//           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="xl:hidden text-[#9ca3af] hover:text-white">
+//             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} /></svg>
+//           </button>
+//         </div>
+//       </div>
+
+//       {/* Mobile Menu */}
+//       {isMobileMenuOpen && (
+//         <div className="xl:hidden fixed inset-0 top-20 bg-black z-50 overflow-y-auto p-6 animate-in slide-in-from-right duration-300">
+//           <div className="flex flex-col gap-6">
+//             {navItems.map((item, idx) => (
+//               <div key={idx} className="space-y-4">
+//                 <div className="text-[10px] font-black tracking-widest text-blue-500 uppercase border-b border-white/10 pb-2">{item.label}</div>
+//                 <div className="flex flex-col gap-4 pl-4">
+//                   {item.children?.map((child, cIdx) => (
+//                     <button 
+//                       key={cIdx} 
+//                       onClick={() => {
+//                         if (child.action) child.action();
+//                         setIsMobileMenuOpen(false);
+//                       }}
+//                       className="text-left text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider"
+//                     >
+//                       {child.label}
+//                     </button>
+//                   ))}
+//                   {!item.children && (
+//                     <button 
+//                       onClick={() => {
+//                         if (item.action) item.action();
+//                         setIsMobileMenuOpen(false);
+//                       }}
+//                       className="text-left text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider"
+//                     >
+//                       Explore {item.label}
+//                     </button>
+//                   )}
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       )}
+//     </header>
+//   );
+// };
+
+// export default Header;
