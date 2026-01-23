@@ -529,9 +529,9 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
         </nav>
 
         {/* RIGHT ACTIONS */}
-        <div className="flex items-center gap-6">
-          {/* Language Selector */}
-          <div className="hidden lg:block">
+        <div className="flex items-center gap-5">
+          {/* Language Selector - extra left margin for separation from nav */}
+          <div className="hidden lg:block ml-6">
             <LanguageSelector />
           </div>
 
