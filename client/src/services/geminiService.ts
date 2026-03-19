@@ -3,12 +3,12 @@ import { GoogleGenAI } from "@google/genai";
 // Initialize the GoogleGenAI client lazily to prevent app crashes if env var is missing
 let ai: GoogleGenAI | null = null;
 try {
-  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY || '';
-  if (apiKey) {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+  if (apiKey && apiKey !== 'undefined') {
     ai = new GoogleGenAI({ apiKey });
   }
 } catch (e) {
-  console.warn("Failed to initialize Gemini AI client");
+  console.warn("Failed to initialize Gemini AI client:", e);
 }
 
 export const getCareerAdvice = async (userPrompt: string): Promise<string> => {
