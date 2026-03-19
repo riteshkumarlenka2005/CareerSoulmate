@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { useI18n } from '../contexts/I18nContext';
+import { useAuth } from '../context/AuthContext';
+import { useI18n } from '../context/I18nContext';
 
 interface AuthModalProps {
     isOpen: boolean;
@@ -87,6 +87,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                 {/* Close Button */}
                 <button
                     onClick={onClose}
+                    aria-label="Close modal"
                     className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -190,6 +191,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                                 <select
                                     value={educationLevel}
                                     onChange={(e) => setEducationLevel(e.target.value as any)}
+                                    aria-label="Education Level"
                                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
                                 >
                                     <option value="class10" className="bg-gray-900">Class 10</option>

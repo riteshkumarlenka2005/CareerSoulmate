@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 // Badge definitions
 export const BADGES: Record<string, { name: string; icon: string; description: string; color: string }> = {

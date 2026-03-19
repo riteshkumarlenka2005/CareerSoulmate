@@ -1,0 +1,72 @@
+{
+    "name": "CareerSoulmate",
+    "short_name": "CareerSoulmate",
+    "description": "AI-powered career guidance platform for students and learners",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#3b82f6",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "72x72 96x96 128x128 144x144 152x152 192x192 384x384 512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "education",
+        "productivity"
+    ],
+    "lang": "en-IN",
+    "dir": "ltr",
+    "scope": "/",
+    "prefer_related_applications": false,
+    "screenshots": [
+        {
+            "src": "/og-image.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "label": "Home Page"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Aptitude Test",
+            "short_name": "Aptitude",
+            "description": "Take the aptitude assessment",
+            "url": "/?page=aptitude",
+            "icons": [
+                {
+                    "src": "/icons/icon-512x512.png",
+                    "sizes": "512x512"
+                }
+            ]
+        },
+        {
+            "name": "Career Explorer",
+            "short_name": "Careers",
+            "description": "Explore career options",
+            "url": "/?page=explorer",
+            "icons": [
+                {
+                    "src": "/icons/icon-512x512.png",
+                    "sizes": "512x512"
+                }
+            ]
+        },
+        {
+            "name": "Find Colleges",
+            "short_name": "Colleges",
+            "description": "Search for colleges",
+            "url": "/?page=colleges",
+            "icons": [
+                {
+                    "src": "/icons/icon-512x512.png",
+                    "sizes": "512x512"
+                }
+            ]
+        }
+    ]
+}

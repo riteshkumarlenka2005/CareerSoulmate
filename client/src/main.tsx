@@ -1,9 +1,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './index.css';
 import App from './App';
-import { I18nProvider } from './contexts/I18nContext';
-import { AuthProvider } from './contexts/AuthContext';
+import { I18nProvider } from './context/I18nContext';
+import { AuthProvider } from './context/AuthContext';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

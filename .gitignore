@@ -7,9 +7,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Build outputs
 dist
 dist-ssr
+build
 *.local
 
 # Editor directories and files
@@ -28,3 +38,21 @@ dist-ssr
 .env
 .env.local
 .env.production
+.env.development
+
+# Database
+*.sqlite
+*.db
+
+# ML Models
+*.pkl
+*.h5
+*.pt
+*.pth
+
+# Docker
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { getCurrentLocation, calculateDistance, getCityCoordinates, formatDistance, Coordinates } from '../utils/geolocation';
-import { useI18n } from '../contexts/I18nContext';
+import { useI18n } from '../context/I18nContext';
 
 interface College {
   id: string;
@@ -398,7 +398,7 @@ const CollegesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
                 <div className="mt-auto pt-8 border-t border-white/5 flex items-center justify-between">
                   <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest">Matches Roadmap</span>
-                  <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all">
+                  <button aria-label="View college details" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7-7" /></svg>
                   </button>
                 </div>
@@ -452,7 +452,7 @@ const CollegesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
             {/* Right Col: Academic & Financial Deep-Dive */}
             <div className="flex-grow p-16 overflow-y-auto custom-scrollbar flex flex-col pb-40">
               <div className="flex justify-end mb-10">
-                <button onClick={() => setSelectedCollege(null)} className="w-14 h-14 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all group border border-white/10">
+                <button onClick={() => setSelectedCollege(null)} aria-label="Close college details" className="w-14 h-14 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all group border border-white/10">
                   <svg className="w-7 h-7 text-gray-500 group-hover:text-white transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
               </div>
@@ -527,7 +527,7 @@ const CollegesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
               <div className="flex -space-x-4">
                 {bookmarks.slice(0, 3).map(id => (
                   <div key={id} className="w-14 h-14 rounded-full border-4 border-blue-600 bg-[#050505] overflow-hidden shadow-2xl relative">
-                    <img src={COLLEGES_DB.find(c => c.id === id)?.image} className="w-full h-full object-cover" />
+                    <img src={COLLEGES_DB.find(c => c.id === id)?.image} alt="College thumbnail" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-blue-600/10" />
                   </div>
                 ))}

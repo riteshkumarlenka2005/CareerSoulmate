@@ -15,9 +15,93 @@
 
 ---
 
+## � Project Structure
+
+```
+career-guidance-platform/
+│
+├── client/                 # Frontend (React + TypeScript + Vite)
+│   ├── public/            # Static assets
+│   ├── src/
+│   │   ├── assets/        # Images, icons, logos
+│   │   ├── components/    # Reusable UI components
+│   │   ├── features/      # Page-specific modules (formerly pages/)
+│   │   ├── context/       # React contexts
+│   │   ├── services/      # API calls and external services
+│   │   ├── utils/         # Helper functions
+│   │   └── App.tsx        # Main app component
+│   └── package.json
+│
+├── server/                 # Backend API (Node.js/Express)
+├── ml/                     # AI/ML services (Python)
+├── database/               # Migrations, seeders, schemas
+├── shared/                 # Shared types and constants
+├── docker/                 # Docker configuration
+├── tests/                  # E2E and integration tests
+└── scripts/                # Utility and deployment scripts
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 20+ and npm
+- Python 3.11+ (for ML services)
+- Docker and Docker Compose (optional)
+
+### Development Setup
+
+#### Option 1: Using Docker (Recommended)
+```bash
+# Clone the repository
+git clone https://github.com/riteshkumarlenka2005/CareerSoulmate.git
+cd CareerSoulmate
+
+# Start all services
+docker-compose up -d
+
+# Access the application
+# Frontend: http://localhost:3000
+# Backend API: http://localhost:5000
+# ML Services: http://localhost:8001, http://localhost:8002
+```
+
+#### Option 2: Manual Setup
+
+**Frontend (Client)**
+```bash
+cd client
+npm install
+npm run dev
+# Runs on http://localhost:3000
+```
+
+**Backend (Server)**
+```bash
+cd server
+npm install
+npm run dev
+# Runs on http://localhost:5000
+```
+
+**ML Services**
+```bash
+cd ml
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+# Start services
+python recommender/service.py    # Port 8001
+python dropout_predictor/service.py  # Port 8002
+```
+
+---
+
 ## 📋 Problem Statement
 
-This project addresses **two critical challenges** from Smart India Hackathon 2025:
+This project addresses **two critical challenges** from Smart India Hackathran 2025:
 
 ### 🎓 Problem 1: Digital Career & Education Guidance Platform
 A comprehensive web/mobile career guidance platform for students (especially Class 10 and 12) to make informed choices about streams, degrees, and careers.

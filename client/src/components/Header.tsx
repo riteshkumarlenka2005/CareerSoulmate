@@ -6,8 +6,8 @@ import LanguageSelector from './LanguageSelector';
 import AuthModal from './AuthModal';
 import UserProgress from './UserProgress';
 import NotificationCenter from './NotificationCenter';
-import { useAuth } from '../contexts/AuthContext';
-import { useI18n } from '../contexts/I18nContext';
+import { useAuth } from '../context/AuthContext';
+import { useI18n } from '../context/I18nContext';
 
 export type UserRole =
   | 'public'
@@ -606,6 +606,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
             className="xl:hidden text-[#9ca3af] hover:text-white"
           >
             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { useI18n } from '../contexts/I18nContext';
-import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../context/I18nContext';
+import { useAuth } from '../context/AuthContext';
 
 interface ForumPost {
     id: string;
@@ -198,7 +198,7 @@ const CommunityPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNaviga
                                 {selectedCategory === 'all' ? 'All Discussions' : CATEGORIES.find(c => c.id === selectedCategory)?.label}
                                 <span className="text-gray-500 ml-2 text-sm font-normal">({filteredPosts.length})</span>
                             </h2>
-                            <select className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-gray-300 focus:outline-none focus:border-purple-500">
+                            <select aria-label="Sort discussions" className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-gray-300 focus:outline-none focus:border-purple-500">
                                 <option>Most Recent</option>
                                 <option>Most Liked</option>
                                 <option>Most Discussed</option>

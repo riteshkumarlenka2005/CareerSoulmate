@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNotifications, Notification } from '../contexts/NotificationContext';
+import { useNotifications, Notification } from '../context/NotificationContext';
 
 const NotificationCenter: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -136,6 +136,7 @@ const NotificationCenter: React.FC = () => {
                                                 e.stopPropagation();
                                                 dismissNotification(notification.id);
                                             }}
+                                            aria-label="Dismiss notification"
                                             className="p-1 hover:bg-white/10 rounded-lg transition-colors flex-shrink-0"
                                         >
                                             <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

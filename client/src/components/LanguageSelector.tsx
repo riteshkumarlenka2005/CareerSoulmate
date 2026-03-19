@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useI18n, Language, SUPPORTED_LANGUAGES } from '../contexts/I18nContext';
+import { useI18n, Language, SUPPORTED_LANGUAGES } from '../context/I18nContext';
 
 const LanguageSelector: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);

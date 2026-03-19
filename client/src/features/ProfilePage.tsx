@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { useI18n } from '../contexts/I18nContext';
+import { useAuth } from '../context/AuthContext';
+import { useI18n } from '../context/I18nContext';
 import UserProgress, { BADGES } from '../components/UserProgress';
 
 const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
@@ -123,6 +123,8 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                                         type="text"
                                         value={editForm.fullName}
                                         onChange={(e) => setEditForm(prev => ({ ...prev, fullName: e.target.value }))}
+                                        placeholder="Enter your full name"
+                                        aria-label="Full Name"
                                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                                     />
                                 </div>
@@ -141,6 +143,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                                     <select
                                         value={editForm.educationLevel}
                                         onChange={(e) => setEditForm(prev => ({ ...prev, educationLevel: e.target.value }))}
+                                        aria-label="Education Level"
                                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                                     >
                                         <option value="class10" className="bg-gray-900">Class 10</option>
