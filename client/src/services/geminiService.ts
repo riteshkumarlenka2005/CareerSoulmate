@@ -1,11 +1,22 @@
-
 import { GoogleGenAI } from "@google/genai";
 
-// Initialize the GoogleGenAI client following the required security guidelines
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Initialize the GoogleGenAI client lazily to prevent app crashes if env var is missing
+let ai: GoogleGenAI | null = null;
+try {
+  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY || '';
+  if (apiKey) {
+    ai = new GoogleGenAI({ apiKey });
+  }
+} catch (e) {
+  console.warn("Failed to initialize Gemini AI client");
+}
 
 export const getCareerAdvice = async (userPrompt: string): Promise<string> => {
   try {
+    if (!ai) {
+      return "AI connection is not configured. Please add your GEMINI_API_KEY to the environment variables.";
+    }
+    
     // Call generateContent directly using the initialized 'ai' instance
     // Using gemini-3-flash-preview for a balanced speed and intelligence in career Q&A
     const response = await ai.models.generateContent({
