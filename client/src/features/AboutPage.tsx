@@ -41,7 +41,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     <div className="bg-[#050505] text-white overflow-hidden animate-in fade-in duration-700">
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden">
+      <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center pt-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           {/* New Background Image with higher visibility (30% opacity) */}
           <div 
@@ -56,7 +56,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase backdrop-blur-md animate-pulse">
               National Scale Intelligence
             </div>
-            <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.9] uppercase tracking-tighter">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black mb-8 leading-[0.9] uppercase tracking-tighter">
               About <br /><span className="gradient-text">Career<br/>Soulmate</span>
             </h1>
             <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed max-w-xl">
@@ -101,8 +101,8 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 2. THE VISION & PROBLEM STATEMENT */}
-      <section className="py-32 px-6 border-y border-white/10 relative bg-[#060606]">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24">
+      <section className="py-14 px-4 md:py-24 md:px-6 border-y border-white/10 relative bg-[#060606]">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24">
           <div className="space-y-12">
             <div>
               <h3 className="text-xs font-black tracking-[0.5em] text-blue-500 uppercase mb-4">The Crisis We Solve</h3>
@@ -125,7 +125,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
              </div>
           </div>
           <div className="flex flex-col justify-center">
-             <div className="p-5 md:p-8 lg:p-12 md:p-16 rounded-[60px] bg-gradient-to-br from-blue-600/10 via-transparent to-transparent border border-white/10 relative overflow-hidden shadow-2xl">
+             <div className="p-5 md:p-8 lg:p-12 md:p-16 rounded-3xl md:rounded-[60px] bg-gradient-to-br from-blue-600/10 via-transparent to-transparent border border-white/10 relative overflow-hidden shadow-2xl">
                 <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full" />
                 <h3 className="text-xs font-black tracking-[0.5em] text-blue-500 uppercase mb-4">Our Mission</h3>
                 <h2 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase mb-8 leading-[1.1] tracking-tighter">Connecting <br/><span className="gradient-text">Ambition to Data.</span></h2>
@@ -148,10 +148,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 3. PLATFORM ARCHITECTURE */}
-      <section className="py-32 px-6 bg-[#030303] overflow-hidden">
+      <section className="py-14 px-4 md:py-24 md:px-6 bg-[#030303] overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24">
-            <h2 className="text-5xl font-black uppercase mb-6 tracking-tighter">System <span className="gradient-text">Architecture</span></h2>
+          <div className="text-center mb-6 md:mb-12 lg:mb-20">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase mb-6 tracking-tighter">System <span className="gradient-text">Architecture</span></h2>
             <p className="text-gray-300 text-xs font-black uppercase tracking-[0.5em]">The Engineering Behind the Guidance</p>
           </div>
           
@@ -164,8 +164,8 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 { title: "Layer 04: Data & Compliance API", desc: "Secure integration with National Skill Development and Labor Market APIs.", color: "border-purple-500/20 bg-purple-500/5" }
               ].map((layer, i) => (
                 <div key={i} className={`p-8 rounded-2xl border ${layer.color} backdrop-blur-xl group hover:-translate-y-1 transition-all duration-500`}>
-                  <div className="flex justify-between items-center">
-                    <div className="flex gap-6 items-center">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div className="flex gap-4 md:gap-6 items-center">
                       <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-xs font-black text-white group-hover:bg-blue-600 transition-colors">0{i+1}</div>
                       <div>
                         <h4 className="text-white font-black uppercase tracking-widest text-sm mb-1">{layer.title}</h4>
@@ -183,7 +183,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 4. THE INTELLIGENCE ENGINE (DATA VISUALS) */}
-      <section className="py-32 px-6 border-y border-white/10">
+      <section className="py-14 px-4 md:py-24 md:px-6 border-y border-white/10">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-center">
           <div>
             <h3 className="text-xs font-black tracking-[0.5em] text-blue-500 uppercase mb-4">Intelligence Engine</h3>
@@ -201,7 +201,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </ul>
           </div>
           
-          <div className="relative group p-5 md:p-8 lg:p-10 rounded-[50px] bg-white/[0.01] border border-white/10 overflow-hidden">
+          <div className="relative group p-5 md:p-8 lg:p-10 rounded-3xl md:rounded-[50px] bg-white/[0.01] border border-white/10 overflow-hidden">
              <div className="space-y-8">
                <div className="flex justify-between items-end h-40 gap-4">
                   {[40, 70, 45, 90, 60, 80, 50].map((h, i) => (
@@ -214,7 +214,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                     </div>
                   ))}
                </div>
-               <div className="flex justify-between text-sm font-black uppercase tracking-widest text-gray-400">
+               <div className="flex justify-between text-[10px] sm:text-sm font-black uppercase tracking-widest text-gray-400">
                   <span>AI/ML</span>
                   <span>Health</span>
                   <span>Creative</span>
@@ -232,9 +232,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 5. POLICY & GOVERNANCE ALIGNMENT */}
-      <section className="py-32 px-6">
+      <section className="py-14 px-4 md:py-24 md:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24">
+          <div className="text-center mb-6 md:mb-12 lg:mb-20">
             <h2 className="text-4xl font-black uppercase mb-6 tracking-tighter">Governance <span className="gradient-text">& Alignment</span></h2>
             <p className="text-gray-300 text-xs font-black uppercase tracking-[0.5em]">Built for National Readiness</p>
           </div>
@@ -259,10 +259,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 6. CORE DEVELOPMENT TEAM - UPDATED WITH PHOTOS */}
-      <section className="py-32 px-6 bg-[#030303] border-y border-white/10">
+      <section className="py-14 px-4 md:py-24 md:px-6 bg-[#030303] border-y border-white/10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24">
-            <h2 className="text-5xl font-black uppercase mb-6 tracking-tighter text-white">Engineering <span className="gradient-text">Core</span></h2>
+          <div className="text-center mb-6 md:mb-12 lg:mb-20">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase mb-6 tracking-tighter text-white">Engineering <span className="gradient-text">Core</span></h2>
             <p className="text-gray-300 text-xs font-black uppercase tracking-[0.5em]">The Architects of Professional Destiny</p>
           </div>
 
@@ -299,7 +299,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 7. TECHNOLOGY STACK */}
-      <section className="py-32 px-6">
+      <section className="py-14 px-4 md:py-24 md:px-6">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-black uppercase mb-8 md:mb-12 lg:mb-16 tracking-tighter">Technology <span className="text-blue-500">Infrastructure</span></h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:p-8 lg:p-12">
@@ -319,9 +319,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 8. FUTURE ROADMAP */}
-      <section className="py-32 px-6 relative bg-[#080808] border-y border-white/10">
+      <section className="py-14 px-4 md:py-24 md:px-6 relative bg-[#080808] border-y border-white/10">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-black uppercase mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24 text-center tracking-tighter">Evolution <span className="text-blue-500">Timeline</span></h2>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase mb-6 md:mb-12 lg:mb-20 text-center tracking-tighter">Evolution <span className="text-blue-500">Timeline</span></h2>
           <div className="relative">
              <div className="hidden lg:block absolute top-5 md:p-8 lg:p-12 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 md:p-8 lg:p-12">
@@ -341,7 +341,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 9. FINAL CLOSING STATEMENT */}
-      <section className="py-40 px-6 text-center relative overflow-hidden bg-gradient-to-t from-blue-900/10 to-transparent">
+      <section className="py-16 px-4 md:py-32 md:px-6 text-center relative overflow-hidden bg-gradient-to-t from-blue-900/10 to-transparent">
         <div className="absolute inset-0 bg-blue-600/5 blur-[150px]" />
         <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto relative z-10">
            <h2 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase mb-6 md:mb-10 lg:mb-12 leading-[1.1] tracking-tighter">

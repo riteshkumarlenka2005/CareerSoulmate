@@ -244,7 +244,7 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
           ))}
 
           {filteredRecs.length === 0 && (
-            <div className="py-32 text-center bg-white/[0.01] border border-dashed border-white/10 rounded-3xl">
+            <div className="py-14 md:py-24 lg:py-32 text-center bg-white/[0.01] border border-dashed border-white/10 rounded-3xl">
                <p className="text-gray-300 font-black uppercase tracking-[0.3em]">No {activeTab} recommendations found in this category.</p>
             </div>
           )}
@@ -252,7 +252,7 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
       </section>
 
       {/* D. ADAPTIVE UPDATES VISUAL SECTION */}
-      <section className="py-32 px-6 bg-[#080808] border-y border-white/10 overflow-hidden">
+      <section className="py-14 md:py-24 lg:py-32 px-6 bg-[#080808] border-y border-white/10 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
              <div className="relative">
@@ -297,7 +297,7 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
       </section>
 
       {/* FINAL CALL-TO-ACTION */}
-      <section className="py-40 px-6 text-center">
+      <section className="py-16 md:py-28 lg:py-40 px-6 text-center">
         <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
            <h2 className="text-4xl md:text-7xl font-black uppercase mb-6 md:mb-10 lg:mb-12 leading-[0.9] tracking-tighter">
              Confidence <br/><span className="gradient-text">Through Clarity.</span>

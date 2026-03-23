@@ -14,7 +14,7 @@ const Hero: React.FC<HeroProps> = ({ role, setRole }) => {
   ];
 
   return (
-    <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+    <section className="relative h-screen min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden">
       {/* Role Switcher Vertical Sidebar - Only in Hero */}
       <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-3">
         <div className="h-20 w-px bg-gradient-to-b from-transparent via-blue-500/50 to-transparent mx-auto mb-4" />
@@ -61,48 +61,49 @@ const Hero: React.FC<HeroProps> = ({ role, setRole }) => {
           }}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent" />
+        {/* Mobile: stronger overlay so text is readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/90 via-[#050505]/70 to-[#050505] md:bg-gradient-to-r md:from-[#050505] md:via-[#050505]/80 md:to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-600/5 blur-[120px] pointer-events-none" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 w-full pl-20 lg:pl-40">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8 w-full lg:pl-40">
         <div className="max-w-2xl">
-          <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-widest uppercase backdrop-blur-md">
+          <div className="inline-block px-3 py-1.5 mb-4 md:mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] md:text-xs font-bold tracking-wider md:tracking-widest uppercase backdrop-blur-md">
             The Future of Global Recruitment
           </div>
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6 tracking-tight uppercase">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] mb-4 md:mb-6 tracking-tight uppercase">
             Map Your <br />
             <span className="gradient-text">Destiny</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-6 md:mb-8 lg:mb-10 max-w-lg leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-gray-300 mb-6 md:mb-8 max-w-lg leading-relaxed">
             Harnessing planetary-scale data and neural AI to map your unique talent to the most innovative roles across the globe. Professional, precise, and personally tailored.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 group uppercase tracking-widest text-xs">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+            <button className="px-6 md:px-8 py-3.5 md:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 group uppercase tracking-widest text-xs">
               Start Global Search
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </button>
-            <button className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-bold transition-all backdrop-blur-sm uppercase tracking-widest text-xs">
+            <button className="px-6 md:px-8 py-3.5 md:py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-bold transition-all backdrop-blur-sm uppercase tracking-widest text-xs">
               View Opportunities
             </button>
           </div>
           
-          <div className="mt-6 md:mt-10 lg:mt-12 flex items-center gap-4 text-gray-200 text-sm">
-            <div className="flex -space-x-2">
+          <div className="mt-6 md:mt-10 flex items-center gap-3 md:gap-4 text-gray-200 text-sm">
+            <div className="flex -space-x-2 shrink-0">
               {[10, 11, 12, 13].map(i => (
-                <img key={i} src={`https://picsum.photos/seed/soulmate-${i}/64/64`} className="w-8 h-8 rounded-full border-2 border-[#050505]" alt="Professional User" />
+                <img key={i} src={`https://picsum.photos/seed/soulmate-${i}/64/64`} className="w-7 h-7 md:w-8 md:h-8 rounded-full border-2 border-[#050505]" alt="Professional User" />
               ))}
             </div>
-            <p className="uppercase text-xs font-bold tracking-widest">Trusted by <span className="text-blue-400">50,000+</span> professionals worldwide</p>
+            <p className="uppercase text-[10px] md:text-xs font-bold tracking-wider md:tracking-widest">Trusted by <span className="text-blue-400">50,000+</span> professionals worldwide</p>
           </div>
         </div>
       </div>
       
-      <div className="absolute top-20 right-[15%] w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-40 right-[10%] w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl animate-pulse [animation-delay:1s]" />
+      <div className="absolute top-20 right-[15%] w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse hidden md:block" />
+      <div className="absolute bottom-40 right-[10%] w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl animate-pulse [animation-delay:1s] hidden md:block" />
     </section>
   );
 };

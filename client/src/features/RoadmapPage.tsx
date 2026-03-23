@@ -155,7 +155,7 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       </section>
 
       {/* B. CAREER JOURNEY TIMELINE (MAIN VISUAL) */}
-      <section className="py-32 px-6 max-w-7xl mx-auto">
+      <section className="py-14 md:py-24 lg:py-32 px-6 max-w-7xl mx-auto">
         <div className="mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24 flex items-center gap-6">
           <h2 className="text-3xl font-black uppercase tracking-tight">The <span className="text-blue-500">Pipeline.</span></h2>
           <div className="h-px flex-grow bg-white/10" />
@@ -289,7 +289,7 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       </section>
 
       {/* FINAL CTA */}
-      <section className="py-40 px-6 text-center">
+      <section className="py-16 md:py-28 lg:py-40 px-6 text-center">
         <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
            <h2 className="text-4xl md:text-7xl font-black uppercase mb-6 md:mb-10 lg:mb-12 leading-[0.9] tracking-tighter">
              Your Future <br/><span className="gradient-text">In Resolution.</span>

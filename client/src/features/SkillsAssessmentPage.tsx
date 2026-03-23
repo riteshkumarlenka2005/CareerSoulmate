@@ -87,7 +87,7 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
               <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase mb-6 md:mb-8 lg:mb-10">
                 CAPABILITY BASELINE ENGINE
               </div>
-              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+              <h1 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-8">
                 What Can You <br/><span className="gradient-text">Do Today?</span>
               </h1>
               <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
@@ -170,7 +170,7 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
               <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase">
                 ANALYSIS COMPLETE
               </div>
-              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+              <h1 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">
                 Your Skill <br/><span className="gradient-text">Equilibrium.</span>
               </h1>
               <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">

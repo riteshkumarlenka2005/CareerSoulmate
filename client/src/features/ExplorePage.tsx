@@ -74,7 +74,7 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
           <div className={`inline-block px-4 py-1.5 mb-8 rounded-full bg-${tabColor}-500/10 border border-${tabColor}-500/20 text-${tabColor}-400 text-xs font-black tracking-widest uppercase`}>
             UNIFIED EXPLORATION LAB
           </div>
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6 md:mb-8 lg:mb-10">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-6 md:mb-8 lg:mb-10">
             Explore <br/><span className="gradient-text">Everything.</span>
           </h1>
           <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed mb-8 md:mb-12 lg:mb-16">
@@ -88,7 +88,7 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
               <button
                 key={tab.key}
                 onClick={() => { setActiveTab(tab.key); setSearch(''); }}
-                className={`px-8 py-4 rounded-2xl font-black uppercase tracking-[0.15em] text-sm transition-all border ${
+                className={`px-4 py-2.5 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-black uppercase tracking-wider md:tracking-[0.15em] text-xs md:text-sm transition-all border ${
                   activeTab === tab.key
                     ? `bg-${tab.color}-600 border-${tab.color}-400 text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]`
                     : 'bg-white/5 border-white/10 text-gray-300 hover:text-white hover:bg-white/10'
@@ -107,7 +107,7 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={`Search ${activeTab}...`}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-lg focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-400"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 md:px-8 md:py-5 text-base md:text-lg focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-400"
             />
           </div>
         </div>

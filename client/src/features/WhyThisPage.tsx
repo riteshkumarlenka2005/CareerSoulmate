@@ -169,7 +169,7 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       </section>
 
       {/* C. COMPARATIVE CONTEXT */}
-      <section className="py-32 px-6 bg-[#080808] border-y border-white/10">
+      <section className="py-14 md:py-24 lg:py-32 px-6 bg-[#080808] border-y border-white/10">
          <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-24 items-center">
                <div className="space-y-10">
@@ -261,7 +261,7 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       </section>
 
       {/* E. USER CONTROL */}
-      <section className="py-40 px-6 text-center">
+      <section className="py-16 md:py-28 lg:py-40 px-6 text-center">
         <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
            <h2 className="text-4xl md:text-7xl font-black uppercase mb-6 md:mb-10 lg:mb-12 leading-[0.9] tracking-tighter">
              Stay In <br/><span className="gradient-text">Command.</span>

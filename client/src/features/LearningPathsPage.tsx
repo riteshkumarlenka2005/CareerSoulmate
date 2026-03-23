@@ -60,7 +60,7 @@ const LearningPathsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
         <div className="absolute inset-0 z-0"><div className="absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-blue-600/5 blur-[180px] rounded-full" /></div>
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">LEARNING INTELLIGENCE ENGINE</div>
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6 md:mb-8 lg:mb-10">Learning <br/><span className="gradient-text">Paths.</span></h1>
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6 md:mb-8 lg:mb-10">Learning <br/><span className="gradient-text">Paths.</span></h1>
           <p className="text-gray-200 max-w-2xl mx-auto text-lg font-medium leading-relaxed mb-8 md:mb-12 lg:mb-16">Skill pathways, NEP 2020, and NSQF levels — your complete guide to structured learning.</p>
           <div className="flex justify-center gap-4">
             {(['pathways', 'nep', 'nsqf'] as Tab[]).map(t => (

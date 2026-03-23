@@ -670,13 +670,13 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      <div className="absolute top-28 left-12 z-20 pointer-events-none">
+      <div className="absolute top-20 md:top-28 left-4 md:left-12 z-20 pointer-events-none">
         <div className="space-y-1">
           <div className="flex items-center gap-3">
              <div className="w-2 h-2 bg-blue-500 animate-pulse shadow-[0_0_10px_#3b82f6]" />
              <span className="text-xs font-black tracking-[0.4em] text-blue-500/60 uppercase">System_Active_Neural_Map</span>
           </div>
-          <h1 className="text-5xl font-black tracking-tighter text-white uppercase leading-none">THE_BLUEPRINT</h1>
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter text-white uppercase leading-none">THE_BLUEPRINT</h1>
           
           <div className="mt-4 flex items-baseline gap-2">
             <span className="text-xs font-black tracking-[0.2em] text-gray-300 uppercase">Nodes_Active:</span>
