@@ -71,11 +71,11 @@ const Hero: React.FC<HeroProps> = ({ role, setRole }) => {
           <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-widest uppercase backdrop-blur-md">
             The Future of Global Recruitment
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6 tracking-tight uppercase">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6 tracking-tight uppercase">
             Map Your <br />
             <span className="gradient-text">Destiny</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-lg leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-300 mb-6 md:mb-8 lg:mb-10 max-w-lg leading-relaxed">
             Harnessing planetary-scale data and neural AI to map your unique talent to the most innovative roles across the globe. Professional, precise, and personally tailored.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -90,7 +90,7 @@ const Hero: React.FC<HeroProps> = ({ role, setRole }) => {
             </button>
           </div>
           
-          <div className="mt-12 flex items-center gap-4 text-gray-200 text-sm">
+          <div className="mt-6 md:mt-10 lg:mt-12 flex items-center gap-4 text-gray-200 text-sm">
             <div className="flex -space-x-2">
               {[10, 11, 12, 13].map(i => (
                 <img key={i} src={`https://picsum.photos/seed/soulmate-${i}/64/64`} className="w-8 h-8 rounded-full border-2 border-[#050505]" alt="Professional User" />

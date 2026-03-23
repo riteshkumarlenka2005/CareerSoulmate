@@ -744,7 +744,7 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
           className="fixed top-20 bottom-0 right-0 w-full md:w-[480px] bg-[#080808]/98 border-l border-white/10 z-[300] shadow-[-20px_0_60px_rgba(0,0,0,0.8)] animate-in slide-in-from-right duration-500 backdrop-blur-3xl overflow-hidden flex flex-col"
           onWheel={(e) => e.stopPropagation()}
         >
-          <div className="p-10 pb-4 flex justify-between items-start">
+          <div className="p-5 md:p-8 lg:p-10 pb-4 flex justify-between items-start">
             <div className="space-y-2">
               <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/30 text-xs font-black text-blue-400 rounded uppercase tracking-widest">Neural Dossier</span>
               <h2 className="text-4xl font-black text-white uppercase tracking-tighter leading-none">{selectedNodeData.label}</h2>
@@ -757,7 +757,7 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
             </button>
           </div>
 
-          <div className="flex-grow overflow-y-auto custom-scrollbar p-10 pt-0 space-y-12 pb-32">
+          <div className="flex-grow overflow-y-auto custom-scrollbar p-5 md:p-8 lg:p-10 pt-0 space-y-12 pb-16 md:pb-24 lg:pb-32">
             <section className="space-y-4">
               <h4 className="text-xs font-black text-blue-500 uppercase tracking-[0.4em]">Strategic Overview</h4>
               <p className="text-gray-200 text-sm leading-relaxed font-medium">{selectedNodeData.overview}</p>

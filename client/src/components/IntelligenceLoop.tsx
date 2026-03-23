@@ -14,7 +14,7 @@ const IntelligenceLoop: React.FC = () => {
   return (
     <section className="py-24 bg-[#080808] relative overflow-hidden border-y border-white/10">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
+        <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-20">
           <h2 className="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tight">The <span className="gradient-text">Intelligence</span> Loop</h2>
           <p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em]">Our Core Operating Logic</p>
         </div>

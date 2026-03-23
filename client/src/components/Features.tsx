@@ -35,7 +35,7 @@ const Features: React.FC = () => {
   return (
     <section id="features" className="py-24 bg-[#0a0a0a] relative">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Why we are your <span className="gradient-text">Soulmate</span></h2>
           <p className="text-gray-200 max-w-2xl mx-auto">
             Traditional job boards are broken. We built something that actually cares about your long-term fulfillment and happiness.

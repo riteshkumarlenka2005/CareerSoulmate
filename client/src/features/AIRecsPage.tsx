@@ -101,21 +101,21 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
   };
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
+    <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
       
       {/* A. RECOMMENDATION SUMMARY PANEL */}
-      <section className="relative pt-28 pb-16 px-6 overflow-visible border-b border-white/10">
+      <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 overflow-visible border-b border-white/10">
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/10 blur-[180px] rounded-full" />
+          <div className="absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-blue-600/10 blur-[180px] rounded-full" />
           <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-cyan-600/5 blur-[150px] rounded-full" />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16 space-y-6">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-6">
             <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">
               LIVE GUIDANCE PROTOCOL
             </div>
-            <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
               Strategic <br/><span className="gradient-text">Directives.</span>
             </h1>
             <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
@@ -154,8 +154,8 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
       </section>
 
       {/* B. RECOMMENDATION CATEGORIES & MAIN LIST */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-10">
+      <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12 lg:mb-16 gap-5 md:p-8 lg:p-10">
           <div className="flex gap-2 bg-white/[0.03] p-1.5 rounded-2xl border border-white/10">
             <button 
               onClick={() => setActiveTab('pending')}
@@ -187,7 +187,7 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
         {/* C. ACTIONABLE RECOMMENDATIONS LIST */}
         <div className="grid grid-cols-1 gap-6">
           {filteredRecs.map(rec => (
-            <div key={rec.id} className="group p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-blue-500/30 transition-all duration-500 flex flex-col lg:flex-row items-center gap-12 relative overflow-hidden">
+            <div key={rec.id} className="group p-5 md:p-8 lg:p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-blue-500/30 transition-all duration-500 flex flex-col lg:flex-row items-center gap-5 md:p-8 lg:p-12 relative overflow-hidden">
                {/* Impact Gauge Visual */}
                <div className="lg:w-24 lg:h-24 rounded-2xl bg-blue-600/10 flex flex-col items-center justify-center shrink-0 border border-blue-500/20 group-hover:bg-blue-600 transition-all duration-500">
                   <span className="text-xs font-black text-blue-400 group-hover:text-blue-200 uppercase mb-1">ROI</span>
@@ -200,7 +200,7 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
                      <h3 className="text-2xl font-black uppercase text-white group-hover:text-blue-400 transition-colors tracking-tight">{rec.title}</h3>
                   </div>
                   
-                  <div className="grid md:grid-cols-2 gap-10">
+                  <div className="grid md:grid-cols-2 gap-5 md:p-8 lg:p-10">
                      <div className="space-y-4">
                         <p className="text-xs font-black text-gray-300 uppercase tracking-widest border-l-2 border-blue-600 pl-4">The Strategic Why</p>
                         <p className="text-sm text-gray-200 font-medium leading-relaxed italic">{rec.why}</p>
@@ -257,8 +257,8 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
           <div className="grid lg:grid-cols-2 gap-24 items-center">
              <div className="relative">
                 <div className="absolute inset-0 bg-blue-600/5 blur-[120px] rounded-full" />
-                <div className="relative p-12 rounded-[60px] bg-white/[0.04] border border-white/10 overflow-hidden">
-                   <div className="flex flex-col gap-10">
+                <div className="relative p-5 md:p-8 lg:p-12 rounded-[60px] bg-white/[0.04] border border-white/10 overflow-hidden">
+                   <div className="flex flex-col gap-5 md:p-8 lg:p-10">
                       {[
                         { t: "Dynamic Re-Calibration", d: "As you complete courses, our AI reassesses your skill gaps in real-time.", i: "🔄" },
                         { t: "Market Sentiment Sync", d: "Global hiring trends update these cards every 24 hours.", i: "📊" },
@@ -279,7 +279,7 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
              </div>
 
              <div className="space-y-10">
-                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">The Living <br/><span className="text-blue-500">Algorithm.</span></h2>
+                <h2 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">The Living <br/><span className="text-blue-500">Algorithm.</span></h2>
                 <p className="text-gray-200 text-xl font-medium leading-relaxed">
                    Career Soulmate isn't a static plan. It's a continuous intelligence layer. 
                    When you evolve, your recommendations evolve. When the market shifts, 
@@ -298,8 +298,8 @@ const AIRecsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate 
 
       {/* FINAL CALL-TO-ACTION */}
       <section className="py-40 px-6 text-center">
-        <div className="max-w-4xl mx-auto">
-           <h2 className="text-4xl md:text-7xl font-black uppercase mb-12 leading-[0.9] tracking-tighter">
+        <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
+           <h2 className="text-4xl md:text-7xl font-black uppercase mb-6 md:mb-10 lg:mb-12 leading-[0.9] tracking-tighter">
              Confidence <br/><span className="gradient-text">Through Clarity.</span>
            </h2>
            <div className="flex flex-col sm:flex-row gap-6 justify-center">

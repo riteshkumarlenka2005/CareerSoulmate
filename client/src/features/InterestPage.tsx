@@ -124,28 +124,28 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
   }, [sortedResults]);
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
+    <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
       
       {/* A. INTEREST ASSESSMENT INTRO */}
       {view === 'intro' && (
-        <section className="relative pt-28 pb-16 px-6 overflow-visible">
+        <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 overflow-visible">
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-purple-600/5 blur-[180px] rounded-full" />
+            <div className="absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-purple-600/5 blur-[180px] rounded-full" />
           </div>
 
-          <div className="max-w-4xl mx-auto relative z-10 text-center">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-black tracking-widest uppercase mb-10">
+          <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto relative z-10 text-center">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-black tracking-widest uppercase mb-6 md:mb-8 lg:mb-10">
               CURIOSITY & PREFERENCE DISCOVERY
             </div>
-            <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-8">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
               Find What <br/><span className="gradient-text">Fuels You.</span>
             </h1>
-            <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
+            <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
               Forget what you're good at for a moment. What do you <span className="text-white">actually enjoy?</span> 
               Interests evolve over time. Our assessment eliminates performance bias to find your natural curiosity patterns.
             </p>
             
-            <div className="grid md:grid-cols-2 gap-8 text-left mb-16">
+            <div className="grid md:grid-cols-2 gap-8 text-left mb-8 md:mb-12 lg:mb-16">
                <div className="p-8 rounded-2xl bg-white/[0.04] border border-white/10">
                   <h4 className="text-sm font-black uppercase text-purple-500 mb-4 tracking-widest">No Wrong Answers</h4>
                   <p className="text-gray-200 text-sm leading-relaxed">This isn't a test. There are no right or wrong choices—only preferences. Be honest with your instincts.</p>
@@ -168,8 +168,8 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
       {/* B. INTEREST DIMENSIONS */}
       {view === 'dimensions' && (
-        <section className="py-24 px-6 max-w-7xl mx-auto animate-in slide-in-from-bottom-4 duration-700">
-          <div className="flex justify-between items-end mb-16">
+        <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto animate-in slide-in-from-bottom-4 duration-700">
+          <div className="flex justify-between items-end mb-8 md:mb-12 lg:mb-16">
              <div>
                 <h2 className="text-4xl font-black uppercase tracking-tight">The <span className="text-purple-500">Dimensions.</span></h2>
                 <p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em] mt-2">Archetypes of Human Preference</p>
@@ -181,11 +181,11 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
              {INTEREST_DIMENSIONS.map((dim) => (
                <div 
                  key={dim.id} 
-                 className="group p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-purple-500/40 transition-all duration-500 flex flex-col h-full relative overflow-hidden"
+                 className="group p-5 md:p-8 lg:p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-purple-500/40 transition-all duration-500 flex flex-col h-full relative overflow-hidden"
                >
-                  <div className={`absolute -top-10 -right-10 w-32 h-32 blur-[80px] opacity-20 bg-${dim.color}-500 transition-all group-hover:opacity-40`} />
+                  <div className={`absolute -top-5 md:p-8 lg:p-10 -right-10 w-32 h-32 blur-[80px] opacity-20 bg-${dim.color}-500 transition-all group-hover:opacity-40`} />
                   
-                  <div className="flex justify-between items-start mb-10">
+                  <div className="flex justify-between items-start mb-6 md:mb-8 lg:mb-10">
                      <div className="text-4xl">{dim.icon}</div>
                      <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-sm font-black uppercase tracking-widest text-gray-300">DIM_0{dim.id}</span>
                   </div>
@@ -193,7 +193,7 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
                   <h3 className="text-2xl font-black uppercase text-white mb-4 leading-tight tracking-tight">{dim.name}</h3>
                   <p className="text-gray-200 text-sm font-medium leading-relaxed italic">"{dim.scenario}"</p>
 
-                  <div className="mt-auto pt-10">
+                  <div className="mt-auto pt-4 md:pt-6 md:pt-8 lg:pt-10">
                      <button 
                        onClick={() => setView('assessment')}
                        className="text-xs font-black text-purple-400 uppercase tracking-widest flex items-center gap-2 group/btn"
@@ -210,8 +210,8 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
       {/* C. CHOICE-BASED QUESTIONS */}
       {view === 'assessment' && (
-        <section className="py-24 px-6 max-w-4xl mx-auto min-h-[70vh] flex flex-col animate-in zoom-in duration-500">
-           <div className="flex justify-between items-center mb-16">
+        <section className="py-10 px-4 md:py-20 md:px-6 max-w-full px-2 md:max-w-4xl md:px-0 mx-auto min-h-[70vh] flex flex-col animate-in zoom-in duration-500">
+           <div className="flex justify-between items-center mb-8 md:mb-12 lg:mb-16">
               <div className="space-y-2">
                  <p className="text-xs font-black text-purple-500 uppercase tracking-[0.4em]">Interest Lab</p>
                  <h2 className="text-2xl font-black uppercase text-white tracking-widest">A vs B Selection</h2>
@@ -223,7 +223,7 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
            </div>
 
            <div className="flex-grow flex flex-col justify-center">
-              <div className="mb-12 space-y-4">
+              <div className="mb-6 md:mb-10 lg:mb-12 space-y-4">
                  <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
                     <div className="h-full bg-purple-600 transition-all duration-700" style={{ width: `${((currentQuestionIdx + 1) / QUESTIONS.length) * 100}%` }} />
                  </div>
@@ -239,7 +239,7 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
                       <button 
                         key={i}
                         onClick={() => handleAnswer(opt.type)}
-                        className="group relative p-12 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-purple-500 hover:bg-purple-600/5 transition-all duration-500 flex flex-col items-center justify-center min-h-[280px]"
+                        className="group relative p-5 md:p-8 lg:p-12 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-purple-500 hover:bg-purple-600/5 transition-all duration-500 flex flex-col items-center justify-center min-h-[280px]"
                       >
                          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                          <span className="text-4xl mb-8 opacity-40 group-hover:opacity-100 group-hover:scale-125 transition-all">
@@ -257,7 +257,7 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
               </div>
            </div>
 
-           <div className="mt-16 text-center">
+           <div className="mt-8 md:mt-12 lg:mt-16 text-center">
               <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Take your time. There is no clock.</p>
            </div>
         </section>
@@ -265,12 +265,12 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
       {/* D. INTEREST PROFILE RESULT */}
       {view === 'results' && (
-        <section className="py-24 px-6 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000">
-           <div className="text-center mb-24 space-y-6">
+        <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000">
+           <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24 space-y-6">
               <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase">
                 INTEREST SYNTHESIS COMPLETE
               </div>
-              <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
                 Your Preferred <br/><span className="gradient-text">World.</span>
               </h1>
               <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
@@ -279,10 +279,10 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
               </p>
            </div>
 
-           <div className="grid lg:grid-cols-2 gap-20 items-center mb-32">
+           <div className="grid lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-center mb-32">
               <div className="space-y-12">
                  <div>
-                    <h3 className="text-3xl font-black uppercase tracking-tight mb-10">Interest <span className="text-purple-500">Hierarchy.</span></h3>
+                    <h3 className="text-3xl font-black uppercase tracking-tight mb-6 md:mb-8 lg:mb-10">Interest <span className="text-purple-500">Hierarchy.</span></h3>
                     <div className="space-y-10">
                        {sortedResults.map((item, i) => (
                          <div key={item.id} className="space-y-4">
@@ -312,8 +312,8 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
               <div className="relative">
                  <div className="absolute inset-0 bg-purple-600/5 blur-[120px]" />
-                 <div className="relative p-12 rounded-3xl border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl">
-                    <h4 className="text-xs font-black text-purple-500 uppercase tracking-[0.4em] mb-10">Matching Career Clusters</h4>
+                 <div className="relative p-5 md:p-8 lg:p-12 rounded-3xl border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl">
+                    <h4 className="text-xs font-black text-purple-500 uppercase tracking-[0.4em] mb-6 md:mb-8 lg:mb-10">Matching Career Clusters</h4>
                     <div className="space-y-10">
                        <div className="flex items-center gap-8">
                           <div className="w-20 h-20 rounded-[28px] bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-3xl">
@@ -329,7 +329,7 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
                           that {sortedResults[0].id === 'I' ? 'challenge your intellect' : sortedResults[0].id === 'A' ? 'allow for self-expression' : 'rely on interpersonal connection'}. 
                           You are likely motivated by {sortedResults[0].id === 'I' ? 'discovery' : 'impact'} rather than simple routine."
                        </p>
-                       <div className="pt-10 border-t border-white/10">
+                       <div className="pt-4 md:pt-6 md:pt-8 lg:pt-10 border-t border-white/10">
                           <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-4">Immediate Match Examples</p>
                           <div className="flex flex-wrap gap-2">
                              {matchingCareers.map(v => (
@@ -342,9 +342,9 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
               </div>
            </div>
 
-           <div className="p-16 rounded-3xl border border-white/10 bg-white/[0.01] text-center max-w-4xl mx-auto">
+           <div className="p-6 md:p-12 lg:p-16 rounded-3xl border border-white/10 bg-white/[0.01] text-center max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
               <h3 className="text-3xl font-black uppercase tracking-tight mb-6">Cross-Sync <span className="text-blue-500">Destiny.</span></h3>
-              <p className="text-gray-300 text-lg font-medium leading-relaxed mb-12">
+              <p className="text-gray-300 text-lg font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
                 Your interests are now synced with your Aptitude and Skill profile. 
                 Our AI will prioritize career recommendations that sit at the intersection 
                 of what you <span className="text-white">can do</span> and what you <span className="text-white">love to do</span>.

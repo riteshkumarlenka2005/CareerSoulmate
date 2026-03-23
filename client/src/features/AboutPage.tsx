@@ -51,7 +51,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="absolute inset-0 bg-blue-500/5 mix-blend-color-dodge" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-6 md:p-12 lg:p-16 items-center">
           <div className="space-y-8">
             <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase backdrop-blur-md animate-pulse">
               National Scale Intelligence
@@ -107,7 +107,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <div>
               <h3 className="text-xs font-black tracking-[0.5em] text-blue-500 uppercase mb-4">The Crisis We Solve</h3>
               <h2 className="text-5xl font-black uppercase mb-8 tracking-tighter">Why We <span className="text-red-500/30">Exist.</span></h2>
-              <p className="text-gray-200 font-medium leading-relaxed mb-12">
+              <p className="text-gray-200 font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
                 Traditional career guidance is fragmented, static, and disconnected from the real economy. CareerSoulmate solves three systemic failures in the education-to-employment pipeline:
               </p>
             </div>
@@ -125,11 +125,11 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
              </div>
           </div>
           <div className="flex flex-col justify-center">
-             <div className="p-12 md:p-16 rounded-[60px] bg-gradient-to-br from-blue-600/10 via-transparent to-transparent border border-white/10 relative overflow-hidden shadow-2xl">
+             <div className="p-5 md:p-8 lg:p-12 md:p-16 rounded-[60px] bg-gradient-to-br from-blue-600/10 via-transparent to-transparent border border-white/10 relative overflow-hidden shadow-2xl">
                 <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full" />
                 <h3 className="text-xs font-black tracking-[0.5em] text-blue-500 uppercase mb-4">Our Mission</h3>
-                <h2 className="text-4xl md:text-6xl font-black uppercase mb-8 leading-[1.1] tracking-tighter">Connecting <br/><span className="gradient-text">Ambition to Data.</span></h2>
-                <p className="text-gray-300 text-xl font-medium leading-relaxed mb-10">
+                <h2 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase mb-8 leading-[1.1] tracking-tighter">Connecting <br/><span className="gradient-text">Ambition to Data.</span></h2>
+                <p className="text-gray-300 text-xl font-medium leading-relaxed mb-6 md:mb-8 lg:mb-10">
                   To create a single, intelligent ecosystem that connects careers, education, skills, institutions, and policy—ensuring no learner is forced to choose blindly.
                 </p>
                 <div className="grid grid-cols-2 gap-8 py-8 border-t border-white/10">
@@ -150,12 +150,12 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       {/* 3. PLATFORM ARCHITECTURE */}
       <section className="py-32 px-6 bg-[#030303] overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
+          <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24">
             <h2 className="text-5xl font-black uppercase mb-6 tracking-tighter">System <span className="gradient-text">Architecture</span></h2>
             <p className="text-gray-300 text-xs font-black uppercase tracking-[0.5em]">The Engineering Behind the Guidance</p>
           </div>
           
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
             <div className="flex flex-col gap-6 relative z-10">
               {[
                 { title: "Layer 01: Multi-Modal Interface", desc: "Web, Mobile, and Voice interfaces for accessibility across rural and urban India.", color: "border-blue-500/20 bg-blue-500/5" },
@@ -177,18 +177,18 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 </div>
               ))}
             </div>
-            <div className="absolute left-[3.25rem] top-10 bottom-10 w-px bg-gradient-to-b from-blue-500 via-cyan-500 to-purple-500 opacity-20 -z-0" />
+            <div className="absolute left-[3.25rem] top-5 md:p-8 lg:p-10 bottom-10 w-px bg-gradient-to-b from-blue-500 via-cyan-500 to-purple-500 opacity-20 -z-0" />
           </div>
         </div>
       </section>
 
       {/* 4. THE INTELLIGENCE ENGINE (DATA VISUALS) */}
       <section className="py-32 px-6 border-y border-white/10">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-center">
           <div>
             <h3 className="text-xs font-black tracking-[0.5em] text-blue-500 uppercase mb-4">Intelligence Engine</h3>
             <h2 className="text-4xl md:text-5xl font-black uppercase mb-8 tracking-tighter">Real-Time <br/><span className="gradient-text">Labor Intelligence.</span></h2>
-            <p className="text-gray-200 font-medium leading-relaxed mb-10">
+            <p className="text-gray-200 font-medium leading-relaxed mb-6 md:mb-8 lg:mb-10">
               We don't just guess your future. Our models continuously scrape global labor market trends, job descriptions, and policy updates to ensure every recommendation is backed by empirical demand.
             </p>
             <ul className="space-y-4">
@@ -201,7 +201,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </ul>
           </div>
           
-          <div className="relative group p-10 rounded-[50px] bg-white/[0.01] border border-white/10 overflow-hidden">
+          <div className="relative group p-5 md:p-8 lg:p-10 rounded-[50px] bg-white/[0.01] border border-white/10 overflow-hidden">
              <div className="space-y-8">
                <div className="flex justify-between items-end h-40 gap-4">
                   {[40, 70, 45, 90, 60, 80, 50].map((h, i) => (
@@ -234,7 +234,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       {/* 5. POLICY & GOVERNANCE ALIGNMENT */}
       <section className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
+          <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24">
             <h2 className="text-4xl font-black uppercase mb-6 tracking-tighter">Governance <span className="gradient-text">& Alignment</span></h2>
             <p className="text-gray-300 text-xs font-black uppercase tracking-[0.5em]">Built for National Readiness</p>
           </div>
@@ -261,18 +261,18 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       {/* 6. CORE DEVELOPMENT TEAM - UPDATED WITH PHOTOS */}
       <section className="py-32 px-6 bg-[#030303] border-y border-white/10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
+          <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24">
             <h2 className="text-5xl font-black uppercase mb-6 tracking-tighter text-white">Engineering <span className="gradient-text">Core</span></h2>
             <p className="text-gray-300 text-xs font-black uppercase tracking-[0.5em]">The Architects of Professional Destiny</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-3 gap-5 md:p-8 lg:p-10">
             {team.map((member, i) => (
-              <div key={i} className="group p-10 rounded-3xl bg-white/[0.01] border border-white/10 hover:border-blue-500/30 transition-all relative overflow-hidden">
+              <div key={i} className="group p-5 md:p-8 lg:p-10 rounded-3xl bg-white/[0.01] border border-white/10 hover:border-blue-500/30 transition-all relative overflow-hidden">
                 <div className="absolute -top-20 -right-20 w-48 h-48 bg-blue-500/5 blur-[80px] rounded-full group-hover:bg-blue-500/10 transition-all" />
                 
                 {/* Team Photo with Glow Border */}
-                <div className="relative mb-10 w-24 h-24 group-hover:scale-105 transition-transform duration-500">
+                <div className="relative mb-6 md:mb-8 lg:mb-10 w-24 h-24 group-hover:scale-105 transition-transform duration-500">
                   <div className="absolute -inset-2 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl blur opacity-20 group-hover:opacity-40" />
                   <img 
                     src={member.photo} 
@@ -283,7 +283,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
                 <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2 leading-none">{member.name}</h3>
                 <p className="text-blue-500 font-black uppercase tracking-widest text-xs mb-8">{member.role}</p>
-                <p className="text-gray-300 text-xs font-medium leading-relaxed mb-10 min-h-[80px]">{member.desc}</p>
+                <p className="text-gray-300 text-xs font-medium leading-relaxed mb-6 md:mb-8 lg:mb-10 min-h-[80px]">{member.desc}</p>
                 
                 <div className="flex flex-wrap gap-2">
                    {member.skills.map((skill, si) => (
@@ -301,8 +301,8 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       {/* 7. TECHNOLOGY STACK */}
       <section className="py-32 px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl font-black uppercase mb-16 tracking-tighter">Technology <span className="text-blue-500">Infrastructure</span></h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+          <h2 className="text-4xl font-black uppercase mb-8 md:mb-12 lg:mb-16 tracking-tighter">Technology <span className="text-blue-500">Infrastructure</span></h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:p-8 lg:p-12">
             {[
               { category: "Frontend", tech: "React, Tailwind, Framer" },
               { category: "Backend", tech: "FastAPI, Node.js, Python" },
@@ -321,10 +321,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       {/* 8. FUTURE ROADMAP */}
       <section className="py-32 px-6 relative bg-[#080808] border-y border-white/10">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-black uppercase mb-24 text-center tracking-tighter">Evolution <span className="text-blue-500">Timeline</span></h2>
+          <h2 className="text-5xl font-black uppercase mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24 text-center tracking-tighter">Evolution <span className="text-blue-500">Timeline</span></h2>
           <div className="relative">
-             <div className="hidden lg:block absolute top-12 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
-             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+             <div className="hidden lg:block absolute top-5 md:p-8 lg:p-12 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 md:p-8 lg:p-12">
                {roadmap.map((item, i) => (
                  <div key={i} className="relative z-10 text-center group">
                     <div className="w-12 h-12 rounded-full bg-[#050505] border border-blue-600 mx-auto mb-8 flex items-center justify-center shadow-[0_0_30px_rgba(37,99,235,0.2)] group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
@@ -343,11 +343,11 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       {/* 9. FINAL CLOSING STATEMENT */}
       <section className="py-40 px-6 text-center relative overflow-hidden bg-gradient-to-t from-blue-900/10 to-transparent">
         <div className="absolute inset-0 bg-blue-600/5 blur-[150px]" />
-        <div className="max-w-4xl mx-auto relative z-10">
-           <h2 className="text-4xl md:text-6xl font-black uppercase mb-12 leading-[1.1] tracking-tighter">
+        <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto relative z-10">
+           <h2 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase mb-6 md:mb-10 lg:mb-12 leading-[1.1] tracking-tighter">
              Not just a platform. <br/>An <span className="gradient-text">Intelligence Layer</span> for professional destiny.
            </h2>
-           <p className="text-gray-200 text-lg mb-12 max-w-2xl mx-auto">
+           <p className="text-gray-200 text-lg mb-6 md:mb-10 lg:mb-12 max-w-2xl mx-auto">
              CareerSoulmate is an evolving intelligence system designed to guide learners with clarity, confidence, and credibility at every stage of their professional journey.
            </p>
            <div className="flex flex-col sm:flex-row gap-6 justify-center">

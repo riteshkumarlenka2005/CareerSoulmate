@@ -17,8 +17,8 @@ const TrustSection: React.FC = () => {
 
   return (
     <section className="py-24 bg-gradient-to-b from-[#050505] to-[#0a0a1a] overflow-hidden border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-20">
-        <div className="flex items-center justify-center gap-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-20">
+        <div className="flex items-center justify-center gap-5 md:p-8 lg:p-10">
           <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent to-white/10"></div>
           <h3 className="text-xs md:text-sm font-bold tracking-[0.5em] text-cyan-400/60 uppercase whitespace-nowrap">
             AUTHORIZED & TRUSTED BY

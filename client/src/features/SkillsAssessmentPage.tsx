@@ -73,29 +73,29 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
   }, [userRatings]);
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
+    <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
       
       {/* A. SKILLS INTRO SECTION */}
       {view === 'assess' && (
         <>
-          <section className="relative pt-28 pb-16 px-6 overflow-visible border-b border-white/10">
+          <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 overflow-visible border-b border-white/10">
             <div className="absolute inset-0 z-0">
-              <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-emerald-600/5 blur-[180px] rounded-full" />
+              <div className="absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-emerald-600/5 blur-[180px] rounded-full" />
             </div>
 
-            <div className="max-w-4xl mx-auto relative z-10 text-center">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase mb-10">
+            <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto relative z-10 text-center">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase mb-6 md:mb-8 lg:mb-10">
                 CAPABILITY BASELINE ENGINE
               </div>
-              <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-8">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
                 What Can You <br/><span className="gradient-text">Do Today?</span>
               </h1>
-              <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
+              <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
                 Honesty is the catalyst for growth. Declare your current proficiency across 
                 key domains to build a verifiable baseline of your professional value.
               </p>
               
-              <div className="grid md:grid-cols-2 gap-8 text-left mb-16">
+              <div className="grid md:grid-cols-2 gap-8 text-left mb-8 md:mb-12 lg:mb-16">
                  <div className="p-8 rounded-2xl bg-white/[0.04] border border-white/10">
                     <h4 className="text-sm font-black uppercase text-emerald-500 mb-4 tracking-widest">Growth First</h4>
                     <p className="text-gray-200 text-sm leading-relaxed">It's okay to be a beginner. The system uses your 'Beginner' tags to recommend the most efficient bridge-courses to 'Intermediate'.</p>
@@ -109,8 +109,8 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
           </section>
 
           {/* B. SKILL CATEGORIES & C. PROFICIENCY RATING */}
-          <section className="py-24 px-6 max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 lg:mb-16 gap-8">
                <div className="flex gap-2 bg-white/[0.03] p-1.5 rounded-2xl border border-white/10">
                   {(['Technical', 'Soft', 'Digital', 'Vocational'] as const).map(cat => (
                     <button 
@@ -129,9 +129,9 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                {MASTER_SKILLS.filter(s => s.category === activeCategory).map(skill => (
-                 <div key={skill.id} className="group p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-emerald-500/30 transition-all duration-500 flex flex-col h-full relative">
+                 <div key={skill.id} className="group p-5 md:p-8 lg:p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-emerald-500/30 transition-all duration-500 flex flex-col h-full relative">
                     <h3 className="text-2xl font-black uppercase text-white mb-2 leading-tight tracking-tight">{skill.name}</h3>
-                    <p className="text-gray-300 text-xs font-medium leading-relaxed mb-10">{skill.description}</p>
+                    <p className="text-gray-300 text-xs font-medium leading-relaxed mb-6 md:mb-8 lg:mb-10">{skill.description}</p>
                     
                     <div className="mt-auto space-y-4">
                        <p className="text-sm font-black text-gray-400 uppercase tracking-widest">Self-Rating</p>
@@ -165,12 +165,12 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
 
       {/* D. SKILL GAP SNAPSHOT (RESULTS) */}
       {view === 'results' && (
-        <section className="py-24 px-6 max-w-7xl mx-auto animate-in zoom-in duration-700">
-           <div className="text-center mb-24 space-y-6">
+        <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto animate-in zoom-in duration-700">
+           <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24 space-y-6">
               <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase">
                 ANALYSIS COMPLETE
               </div>
-              <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
                 Your Skill <br/><span className="gradient-text">Equilibrium.</span>
               </h1>
               <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
@@ -179,10 +179,10 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
               </p>
            </div>
 
-           <div className="grid lg:grid-cols-2 gap-20 items-start mb-32">
+           <div className="grid lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-start mb-32">
               <div className="space-y-12">
                  <div>
-                    <h3 className="text-3xl font-black uppercase tracking-tight mb-10">Primary <span className="text-emerald-500">Alignment.</span></h3>
+                    <h3 className="text-3xl font-black uppercase tracking-tight mb-6 md:mb-8 lg:mb-10">Primary <span className="text-emerald-500">Alignment.</span></h3>
                     <div className="space-y-10">
                        {gapAnalysis.map((item) => (
                          <div key={item.name} className="space-y-4 group">
@@ -213,8 +213,8 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
 
               <div className="relative">
                  <div className="absolute inset-0 bg-emerald-600/5 blur-[120px]" />
-                 <div className="relative p-12 rounded-3xl border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl overflow-hidden">
-                    <h4 className="text-xs font-black text-emerald-500 uppercase tracking-[0.4em] mb-10">AI Competency Verdict</h4>
+                 <div className="relative p-5 md:p-8 lg:p-12 rounded-3xl border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl overflow-hidden">
+                    <h4 className="text-xs font-black text-emerald-500 uppercase tracking-[0.4em] mb-6 md:mb-8 lg:mb-10">AI Competency Verdict</h4>
                     <div className="space-y-10">
                        <div className="flex items-center gap-8">
                           <div className="w-20 h-20 rounded-[28px] bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-3xl">🎯</div>
@@ -229,7 +229,7 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
                           recommend a focused 2-month sprint in 'Neural Frameworks' to close 
                           the gap by 34%."
                        </p>
-                       <div className="pt-10 border-t border-white/10">
+                       <div className="pt-4 md:pt-6 md:pt-8 lg:pt-10 border-t border-white/10">
                           <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-4">Urgent Upgrades Recommended</p>
                           <div className="flex flex-wrap gap-2">
                              {['PyTorch Syntax', 'MLOps Basics', 'Prompt Engineering'].map(v => (
@@ -242,9 +242,9 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
               </div>
            </div>
 
-           <div className="p-16 rounded-3xl border border-white/10 bg-white/[0.01] text-center max-w-4xl mx-auto">
+           <div className="p-6 md:p-12 lg:p-16 rounded-3xl border border-white/10 bg-white/[0.01] text-center max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
               <h3 className="text-3xl font-black uppercase tracking-tight mb-6">Skill <span className="text-blue-500">Redemption.</span></h3>
-              <p className="text-gray-300 text-lg font-medium leading-relaxed mb-12">
+              <p className="text-gray-300 text-lg font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
                 This baseline is dynamic. As you complete projects and courses, update 
                 your ratings to see your Gap Snapshot evolve into a Readiness Report.
               </p>

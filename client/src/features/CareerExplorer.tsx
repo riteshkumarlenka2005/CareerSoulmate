@@ -51,7 +51,7 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[#050505] text-white min-h-screen">
       {/* A. EXPLORER HERO SECTION */}
-      <section className="relative py-24 px-6 overflow-hidden">
+      <section className="relative py-10 px-4 md:py-20 md:px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-600/5 blur-[120px] pointer-events-none" />
         </div>
@@ -60,11 +60,11 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
           <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-widest uppercase">
             Market Discovery Engine
           </div>
-          <h1 className="text-4xl md:text-6xl font-black mb-8 uppercase tracking-tighter">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-black mb-8 uppercase tracking-tighter">
             Discover Your <span className="gradient-text">Next Chapter</span>
           </h1>
           
-          <div className="max-w-4xl mx-auto space-y-4">
+          <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto space-y-4">
             <div className="relative group">
               <input 
                 type="text" 
@@ -118,7 +118,7 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-4 gap-5 md:p-8 lg:p-12">
         {/* LEFT COLUMN: FILTERS & TRENDING */}
         <aside className="lg:col-span-1 space-y-12">
           {/* D. TRENDING & EMERGING CAREERS */}
@@ -161,7 +161,7 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
 
         {/* B. CAREER CARDS GRID (MAIN AREA) */}
         <div className="lg:col-span-3">
-          <div className="flex items-center justify-between mb-12">
+          <div className="flex items-center justify-between mb-6 md:mb-10 lg:mb-12">
             <h2 className="text-2xl font-black uppercase tracking-tighter">Market <span className="text-blue-500">Inventory</span></h2>
             <div className="flex gap-4">
               <span className="text-xs font-black text-gray-300 uppercase tracking-widest">Showing {filteredCareers.length} roles</span>
@@ -186,7 +186,7 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
                   </p>
                 </div>
 
-                <div className="mt-auto space-y-4 pt-6 border-t border-white/10">
+                <div className="mt-auto space-y-4 pt-4 md:pt-6 border-t border-white/10">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Avg Salary</p>

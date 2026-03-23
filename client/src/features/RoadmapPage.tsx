@@ -100,22 +100,22 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
   };
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
+    <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
       
       {/* A. ROADMAP HERO (PERSONAL CONTEXT) */}
-      <section className="relative pt-28 pb-16 px-6 overflow-visible border-b border-white/10">
+      <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 overflow-visible border-b border-white/10">
         <div className="absolute inset-0 z-0 opacity-20">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600 blur-[120px] rounded-full" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-900 blur-[100px] rounded-full" />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-5 md:p-8 lg:p-12">
             <div className="space-y-6">
               <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">
                 PERSONALIZED CAREER BLUEPRINT
               </div>
-              <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
                 {STUDENT_PROFILE.name}'s <br/><span className="gradient-text">Trajectory.</span>
               </h1>
               <div className="flex flex-wrap gap-8 pt-4">
@@ -136,7 +136,7 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
               </div>
             </div>
 
-            <div className="w-full lg:w-96 p-10 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl relative overflow-hidden shadow-2xl">
+            <div className="w-full lg:w-96 p-5 md:p-8 lg:p-10 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl relative overflow-hidden shadow-2xl">
                <div className="absolute top-0 right-0 p-6 opacity-10">
                   <svg width="80" height="80" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="white" strokeWidth="2" strokeDasharray="10,5" /></svg>
                </div>
@@ -156,7 +156,7 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
 
       {/* B. CAREER JOURNEY TIMELINE (MAIN VISUAL) */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
-        <div className="mb-24 flex items-center gap-6">
+        <div className="mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24 flex items-center gap-6">
           <h2 className="text-3xl font-black uppercase tracking-tight">The <span className="text-blue-500">Pipeline.</span></h2>
           <div className="h-px flex-grow bg-white/10" />
         </div>
@@ -171,7 +171,7 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
               const isCurrent = milestone.status === 'In Progress' && !isDone;
 
               return (
-                <div key={milestone.id} className={`relative flex flex-col md:flex-row gap-12 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                <div key={milestone.id} className={`relative flex flex-col md:flex-row gap-5 md:p-8 lg:p-12 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
                   {/* Status Indicator Bubble */}
                   <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-[24px] bg-black border-4 border-[#050505] z-10 flex items-center justify-center transition-all duration-500">
                     <div className={`w-10 h-10 rounded-2xl flex items-center justify-center text-xs font-black transition-all duration-500 ${
@@ -197,7 +197,7 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                   </div>
 
                   {/* C. MULTI-DIMENSION LAYERS CARD */}
-                  <div className={`md:w-[45%] p-10 rounded-3xl bg-white/[0.04] border border-white/10 shadow-2xl transition-all duration-500 hover:border-blue-500/40 relative overflow-hidden group ${isCurrent ? 'ring-2 ring-blue-500/20 bg-blue-600/5' : ''}`}>
+                  <div className={`md:w-[45%] p-5 md:p-8 lg:p-10 rounded-3xl bg-white/[0.04] border border-white/10 shadow-2xl transition-all duration-500 hover:border-blue-500/40 relative overflow-hidden group ${isCurrent ? 'ring-2 ring-blue-500/20 bg-blue-600/5' : ''}`}>
                     {/* Animated Grid Overlay */}
                     <div className="absolute inset-0 opacity-[0.03] grid-pattern pointer-events-none" />
 
@@ -267,8 +267,8 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       </section>
 
       {/* ADVISOR CALLOUT */}
-      <section className="py-24 px-6 bg-[#080808] border-y border-white/10">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-16">
+      <section className="py-10 px-4 md:py-20 md:px-6 bg-[#080808] border-y border-white/10">
+        <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto flex flex-col md:flex-row items-center gap-6 md:p-12 lg:p-16">
           <div className="w-48 h-48 rounded-3xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center shrink-0 shadow-2xl relative overflow-hidden">
              <div className="absolute inset-0 bg-blue-500/5 animate-pulse" />
              <svg width="80" height="80" viewBox="0 0 24 24" className="text-blue-500 relative z-10" fill="none" stroke="currentColor" strokeWidth="2">
@@ -290,8 +290,8 @@ const RoadmapPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
 
       {/* FINAL CTA */}
       <section className="py-40 px-6 text-center">
-        <div className="max-w-4xl mx-auto">
-           <h2 className="text-4xl md:text-7xl font-black uppercase mb-12 leading-[0.9] tracking-tighter">
+        <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
+           <h2 className="text-4xl md:text-7xl font-black uppercase mb-6 md:mb-10 lg:mb-12 leading-[0.9] tracking-tighter">
              Your Future <br/><span className="gradient-text">In Resolution.</span>
            </h2>
            <div className="flex flex-col sm:flex-row gap-6 justify-center">

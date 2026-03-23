@@ -46,14 +46,14 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
     };
 
     return (
-        <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700">
+        <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700">
             {/* Header */}
-            <section className="relative pt-28 pb-16 px-6 border-b border-white/10">
+            <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 border-b border-white/10">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[180px] rounded-full" />
+                    <div className="absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-blue-600/5 blur-[180px] rounded-full" />
                 </div>
 
-                <div className="max-w-4xl mx-auto relative z-10">
+                <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto relative z-10">
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         {/* Avatar */}
                         <div className="relative">
@@ -104,7 +104,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
             </section>
 
             {/* Main Content */}
-            <section className="py-12 px-6 max-w-4xl mx-auto">
+            <section className="py-12 px-6 max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
                 <div className="grid md:grid-cols-2 gap-8">
                     {/* Progress Card */}
                     <div>

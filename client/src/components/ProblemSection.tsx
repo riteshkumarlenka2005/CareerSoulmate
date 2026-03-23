@@ -38,7 +38,7 @@ const ProblemSection: React.FC = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-20">
           <h2 className="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tight">The Modern <span className="text-blue-500">Crisis</span></h2>
           <p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em]">Why CareerSoulmate Exists</p>
         </div>

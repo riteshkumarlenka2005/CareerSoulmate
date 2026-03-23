@@ -26,7 +26,7 @@ const MappingSection: React.FC = () => {
   return (
     <section className="py-24 bg-[#050505] relative border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-20">
+        <div className="flex flex-col lg:flex-row gap-8 md:gap-14 lg:gap-20">
           <div className="lg:w-1/3">
             <h2 className="text-4xl font-black uppercase mb-6 leading-tight">NEP 2020 <br />Pathways</h2>
             <p className="text-gray-300 font-medium leading-relaxed mb-8">

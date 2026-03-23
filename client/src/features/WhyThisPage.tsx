@@ -51,21 +51,21 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
   const [selectedFactor, setSelectedFactor] = useState<Factor | null>(WHY_THIS_FACTORS[0]);
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
+    <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
       
       {/* A. CAREER FIT SUMMARY */}
-      <section className="relative pt-28 pb-16 px-6 overflow-visible border-b border-white/10">
+      <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 overflow-visible border-b border-white/10">
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[180px] rounded-full" />
+          <div className="absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-blue-600/5 blur-[180px] rounded-full" />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
+          <div className="flex flex-col lg:flex-row items-center gap-6 md:p-12 lg:p-16">
             <div className="lg:w-1/2 space-y-8">
               <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">
                 EXPLAINABLE AI PROTOCOL
               </div>
-              <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
                 Logic Behind <br/><span className="gradient-text">Your Match.</span>
               </h1>
               <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed">
@@ -76,7 +76,7 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
             </div>
 
             <div className="lg:w-1/2 w-full">
-               <div className="p-12 rounded-3xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 backdrop-blur-3xl shadow-2xl relative overflow-hidden">
+               <div className="p-5 md:p-8 lg:p-12 rounded-3xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 backdrop-blur-3xl shadow-2xl relative overflow-hidden">
                   <div className="flex flex-col items-center text-center space-y-6">
                      <p className="text-xs font-black text-blue-500 uppercase tracking-[0.4em]">Overall Fit Confidence</p>
                      <div className="relative w-48 h-48 flex items-center justify-center">
@@ -99,13 +99,13 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       </section>
 
       {/* B. FACTOR BREAKDOWN (MAIN) */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="mb-20">
+      <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto">
+        <div className="mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-20">
            <h2 className="text-3xl font-black uppercase tracking-tight">The <span className="text-blue-500">Decision Matrix.</span></h2>
            <p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em] mt-2">Weighted Contributions to your Recommendation</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-20">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20">
            <div className="space-y-4">
               {WHY_THIS_FACTORS.map((f) => (
                 <button
@@ -128,7 +128,7 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
            </div>
 
            <div className="sticky top-32 h-fit">
-              <div className={`p-16 rounded-3xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 backdrop-blur-3xl transition-all duration-700 ${selectedFactor ? `border-${selectedFactor.color}-500/30` : ''}`}>
+              <div className={`p-6 md:p-12 lg:p-16 rounded-3xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 backdrop-blur-3xl transition-all duration-700 ${selectedFactor ? `border-${selectedFactor.color}-500/30` : ''}`}>
                  {selectedFactor ? (
                     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
                        <div className="flex items-center gap-6">
@@ -148,7 +148,7 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                           </p>
                        </div>
 
-                       <div className="pt-10 border-t border-white/10">
+                       <div className="pt-4 md:pt-6 md:pt-8 lg:pt-10 border-t border-white/10">
                           <div className="flex justify-between text-xs font-black uppercase tracking-widest text-gray-300 mb-2">
                              <span>Factor Reliability</span>
                              <span className="text-white">High (Data Confirmed)</span>
@@ -173,7 +173,7 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
          <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-24 items-center">
                <div className="space-y-10">
-                  <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">Relative <br/><span className="text-blue-500">Dominance.</span></h2>
+                  <h2 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">Relative <br/><span className="text-blue-500">Dominance.</span></h2>
                   <p className="text-gray-200 text-xl font-medium leading-relaxed">
                      Why this and not your second choice (Data Scientist)? 
                      While you have the technical skills for both, your 'Curiosity Quotient' 
@@ -201,11 +201,11 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
 
                <div className="relative">
                   <div className="absolute inset-0 bg-blue-600/5 blur-[120px]" />
-                  <div className="relative p-12 rounded-[60px] bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 shadow-2xl">
+                  <div className="relative p-5 md:p-8 lg:p-12 rounded-[60px] bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 shadow-2xl">
                      <h4 className="text-xs font-black text-blue-500 uppercase tracking-[0.4em] mb-8">Evolution of your Match</h4>
                      <div className="space-y-12">
                         <div className="flex gap-8 items-start relative">
-                           <div className="absolute left-4 top-10 bottom-[-40px] w-px bg-white/10" />
+                           <div className="absolute left-4 top-5 md:p-8 lg:p-10 bottom-[-40px] w-px bg-white/10" />
                            <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs font-black text-gray-300 z-10 shrink-0">01</div>
                            <div>
                               <h5 className="text-xs font-black uppercase text-white mb-2">Initial Onboarding (Jan 2025)</h5>
@@ -213,7 +213,7 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                            </div>
                         </div>
                         <div className="flex gap-8 items-start relative">
-                           <div className="absolute left-4 top-10 bottom-[-40px] w-px bg-white/10" />
+                           <div className="absolute left-4 top-5 md:p-8 lg:p-10 bottom-[-40px] w-px bg-white/10" />
                            <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs font-black text-gray-300 z-10 shrink-0">02</div>
                            <div>
                               <h5 className="text-xs font-black uppercase text-white mb-2">After Aptitude Test (Feb 2025)</h5>
@@ -235,13 +235,13 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       </section>
 
       {/* D. ASSUMPTIONS & FLEXIBILITY */}
-      <section className="py-24 px-6 max-w-4xl mx-auto">
-         <div className="p-16 rounded-3xl border border-white/10 bg-white/[0.01] relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-10 opacity-10">
+      <section className="py-10 px-4 md:py-20 md:px-6 max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
+         <div className="p-6 md:p-12 lg:p-16 rounded-3xl border border-white/10 bg-white/[0.01] relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-5 md:p-8 lg:p-10 opacity-10">
                <svg width="100" height="100" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" stroke="white" strokeWidth="2" fill="none" strokeDasharray="10,5" /></svg>
             </div>
             <h3 className="text-3xl font-black uppercase tracking-tight mb-8">Platform <span className="text-blue-500">Assumptions.</span></h3>
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-2 gap-5 md:p-8 lg:p-12">
                <div className="space-y-4">
                   <h5 className="text-xs font-black text-white uppercase tracking-widest">Technological Continuity</h5>
                   <p className="text-xs text-gray-300 font-medium leading-relaxed">
@@ -262,11 +262,11 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
 
       {/* E. USER CONTROL */}
       <section className="py-40 px-6 text-center">
-        <div className="max-w-4xl mx-auto">
-           <h2 className="text-4xl md:text-7xl font-black uppercase mb-12 leading-[0.9] tracking-tighter">
+        <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
+           <h2 className="text-4xl md:text-7xl font-black uppercase mb-6 md:mb-10 lg:mb-12 leading-[0.9] tracking-tighter">
              Stay In <br/><span className="gradient-text">Command.</span>
            </h2>
-           <p className="text-gray-200 text-lg mb-12 max-w-xl mx-auto font-medium leading-relaxed">
+           <p className="text-gray-200 text-lg mb-6 md:mb-10 lg:mb-12 max-w-xl mx-auto font-medium leading-relaxed">
               AI is your co-pilot, not your destination. Adjust your trajectory 
               manually at any time if your human intuition signals a different path.
            </p>
@@ -278,7 +278,7 @@ const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                Browse All Alternative Destinies
              </button>
            </div>
-           <div className="mt-12 flex justify-center gap-10">
+           <div className="mt-6 md:mt-10 lg:mt-12 flex justify-center gap-5 md:p-8 lg:p-10">
               <button className="text-xs font-black text-gray-300 hover:text-blue-500 uppercase tracking-widest transition-colors">Adjust Interests</button>
               <button className="text-xs font-black text-gray-300 hover:text-blue-500 uppercase tracking-widest transition-colors">Override Persona</button>
               <button className="text-xs font-black text-gray-300 hover:text-blue-500 uppercase tracking-widest transition-colors">Export Logic Dossier</button>

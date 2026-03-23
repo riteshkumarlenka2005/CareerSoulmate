@@ -59,21 +59,21 @@ const OpportunitiesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
     ), [search, activeTab]);
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans">
+    <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans">
       {/* HERO */}
-      <section className="relative pt-28 pb-16 px-6 border-b border-white/10">
-        <div className="absolute inset-0 z-0"><div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[180px] rounded-full" /></div>
+      <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 border-b border-white/10">
+        <div className="absolute inset-0 z-0"><div className="absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-blue-600/5 blur-[180px] rounded-full" /></div>
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">OPPORTUNITY COMMAND CENTER</div>
-          <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-10">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6 md:mb-8 lg:mb-10">
             Your <br/><span className="gradient-text">Opportunities.</span>
           </h1>
-          <p className="text-gray-200 max-w-2xl mx-auto text-lg font-medium leading-relaxed mb-12">
+          <p className="text-gray-200 max-w-2xl mx-auto text-lg font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
             Apprenticeships, scholarships, certifications, exams, and admissions — everything you need to advance, in one place.
           </p>
 
           {/* TABS */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-6 md:mb-10 lg:mb-12">
             {(Object.keys(ALL_DATA) as Tab[]).map(key => (
               <button key={key} onClick={() => { setActiveTab(key); setSearch(''); }}
                 className={`px-6 py-3 rounded-2xl font-black uppercase tracking-[0.12em] text-xs transition-all border ${
@@ -94,15 +94,15 @@ const OpportunitiesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
       </section>
 
       {/* RESULTS */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-16">
+      <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto">
+        <div className="flex justify-between items-end mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-3xl font-black uppercase tracking-tight">{current.label} <span className="text-blue-500">Hub.</span></h2>
           <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{filtered.length} Results</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:p-8 lg:p-10">
           {filtered.map(item => (
-            <div key={item.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-blue-500/40 transition-all duration-500 p-10">
+            <div key={item.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-blue-500/40 transition-all duration-500 p-5 md:p-8 lg:p-10">
               <div className="mb-6">
                 <div className="flex justify-between items-start mb-4">
                   <span className="text-xs font-black text-blue-500 uppercase tracking-[0.3em]">{item.provider} • {item.type}</span>

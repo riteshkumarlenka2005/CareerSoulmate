@@ -5,8 +5,8 @@ const VocationalNavigator: React.FC = () => {
   return (
     <section className="py-24 bg-[#050505] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="bg-gradient-to-br from-blue-900/20 to-transparent p-12 md:p-20 rounded-[40px] border border-white/10 relative">
-          <div className="absolute top-0 right-0 p-10 hidden xl:block opacity-20 hover:opacity-100 transition-opacity">
+        <div className="bg-gradient-to-br from-blue-900/20 to-transparent p-5 md:p-8 lg:p-12 md:p-20 rounded-[40px] border border-white/10 relative">
+          <div className="absolute top-0 right-0 p-5 md:p-8 lg:p-10 hidden xl:block opacity-20 hover:opacity-100 transition-opacity">
             {/* Robot Illustration Placeholder using SVG */}
             <svg width="300" height="300" viewBox="0 0 200 200" fill="none">
               <circle cx="100" cy="80" r="40" stroke="#3b82f6" strokeWidth="2" strokeDasharray="5,5" />
@@ -17,7 +17,7 @@ const VocationalNavigator: React.FC = () => {
 
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-black uppercase mb-8 leading-tight">AI Skilling & <br /><span className="gradient-text">Vocational Navigator</span></h2>
-            <p className="text-gray-300 text-lg mb-10 leading-relaxed font-medium">
+            <p className="text-gray-300 text-lg mb-6 md:mb-8 lg:mb-10 leading-relaxed font-medium">
               Skills are stackable. Careers are adaptable. Our navigator uses NSQF Level 1-10 mapping to bridge the gap between rural craftsmanship and global technology roles.
             </p>
 

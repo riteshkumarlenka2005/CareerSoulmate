@@ -28,11 +28,11 @@ const Footer: React.FC = () => {
   return (
     <footer className="relative bg-gradient-to-b from-[#010204] via-[#020617] to-[#0a1e4d] text-white pt-24 pb-12 border-t border-white/10 overflow-hidden">
       {/* Decorative Glow Effects */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 blur-[180px] -z-10 animate-pulse" />
+      <div className="absolute top-0 right-0 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-blue-600/10 blur-[180px] -z-10 animate-pulse" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-900/10 blur-[150px] -z-10" />
       
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:p-12 lg:p-16 mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-20">
           
           {/* Column 1: Brand & Contact */}
           <div className="space-y-8">
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
 
           {/* Column 2: Essentials */}
           <div>
-            <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white mb-10 border-l-4 border-blue-600 pl-4">Essentials</h4>
+            <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white mb-6 md:mb-8 lg:mb-10 border-l-4 border-blue-600 pl-4">Essentials</h4>
             <ul className="space-y-5">
               {essentials.map((item, idx) => (
                 <li key={idx}>
@@ -103,7 +103,7 @@ const Footer: React.FC = () => {
 
           {/* Column 3: Legal */}
           <div>
-            <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white mb-10 border-l-4 border-blue-600 pl-4">Legal & Trust</h4>
+            <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white mb-6 md:mb-8 lg:mb-10 border-l-4 border-blue-600 pl-4">Legal & Trust</h4>
             <ul className="space-y-5">
               {legal.map((item, idx) => (
                 <li key={idx}>
@@ -156,7 +156,7 @@ const Footer: React.FC = () => {
           <p className="text-xs font-black text-gray-300 tracking-[0.4em] uppercase text-center md:text-left">
             © 2025 CareerSoulmate AI Systems. Global Professional Destiny Managed.
           </p>
-          <div className="flex gap-10">
+          <div className="flex gap-5 md:p-8 lg:p-10">
             <a href="#" className="text-xs font-black text-gray-300 hover:text-white uppercase tracking-widest transition-colors">Neural Ethics</a>
             <a href="#" className="text-xs font-black text-gray-300 hover:text-white uppercase tracking-widest transition-colors">Carrier Board</a>
           </div>

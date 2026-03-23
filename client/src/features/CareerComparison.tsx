@@ -142,7 +142,7 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
       {isSelectorOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-6">
           <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setIsSelectorOpen(false)} />
-          <div className="relative w-full max-w-4xl bg-[#080808] border border-white/10 rounded-[40px] p-10 overflow-hidden animate-in zoom-in duration-300">
+          <div className="relative w-full max-w-4xl bg-[#080808] border border-white/10 rounded-[40px] p-5 md:p-8 lg:p-10 overflow-hidden animate-in zoom-in duration-300">
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h2 className="text-3xl font-black uppercase tracking-tight">Select <span className="text-blue-500">Careers</span></h2>
@@ -206,8 +206,8 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
       {/* A. CAREER SELECTION PANEL */}
       <section className="pt-32 pb-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">
+          <div className="text-center mb-6 md:mb-10 lg:mb-12">
+            <h1 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">
               Decision <span className="gradient-text">Matrix</span>
             </h1>
             <p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em]">Compare logically, Decide decisively.</p>
@@ -308,7 +308,7 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
 
       {/* C. AI MATCH SCORES GRID */}
       <section className="max-w-7xl mx-auto px-6 py-12">
-        <div className="flex items-center gap-4 mb-16">
+        <div className="flex items-center gap-4 mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-2xl font-black uppercase tracking-tighter">AI <span className="text-blue-500">Match Analysis</span></h2>
           <div className="h-px flex-grow bg-white/10" />
         </div>
@@ -344,15 +344,15 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
 
       {/* D. LIFESTYLE & PERSONALITY FIT */}
       <section className="max-w-7xl mx-auto px-6 py-12">
-        <div className="flex items-center gap-4 mb-16">
+        <div className="flex items-center gap-4 mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-2xl font-black uppercase tracking-tighter">Lifestyle <span className="text-cyan-500">Alignment</span></h2>
           <div className="h-px flex-grow bg-white/10" />
         </div>
 
-        <div className="p-10 rounded-3xl bg-white/[0.01] border border-white/10">
+        <div className="p-5 md:p-8 lg:p-10 rounded-3xl bg-white/[0.01] border border-white/10">
            <div className="space-y-10">
               {selectedCareers.map(c => (
-                <div key={c.id} className="flex flex-col lg:flex-row items-center gap-10">
+                <div key={c.id} className="flex flex-col lg:flex-row items-center gap-5 md:p-8 lg:p-10">
                   <div className="lg:w-1/4">
                     <p className="text-xs font-black uppercase tracking-[0.2em] text-white">{c.name}</p>
                     <p className="text-xs text-gray-300 font-black uppercase mt-1">Persona Analysis</p>
@@ -383,8 +383,8 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
 
       {/* E. RISK & STABILITY ANALYSIS */}
       <section className="max-w-7xl mx-auto px-6 py-24">
-        <h2 className="text-2xl font-black uppercase tracking-tighter border-l-4 border-red-600 pl-6 mb-16">Future-Proof Resilience</h2>
-        <div className="grid md:grid-cols-2 gap-16">
+        <h2 className="text-2xl font-black uppercase tracking-tighter border-l-4 border-red-600 pl-6 mb-8 md:mb-12 lg:mb-16">Future-Proof Resilience</h2>
+        <div className="grid md:grid-cols-2 gap-6 md:p-12 lg:p-16">
           {selectedCareers.map(c => (
             <div key={c.id} className="space-y-6">
               <div className="flex justify-between items-end">
@@ -410,14 +410,14 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
       </section>
 
       {/* F. FINAL RECOMMENDATION PANEL */}
-      <section className="max-w-5xl mx-auto px-6 py-20 bg-gradient-to-br from-blue-600/10 to-indigo-600/5 rounded-[60px] border border-blue-500/20 text-center relative overflow-hidden mt-12">
+      <section className="max-w-5xl mx-auto px-6 py-20 bg-gradient-to-br from-blue-600/10 to-indigo-600/5 rounded-[60px] border border-blue-500/20 text-center relative overflow-hidden mt-6 md:mt-10 lg:mt-12">
         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[100px]" />
         
         <div className="relative z-10 space-y-10">
           <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">
             AI Soulmate Decision Engine
           </div>
-          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
             Optimal <span className="gradient-text">Destiny</span> Found.
           </h2>
           <p className="text-gray-200 text-lg max-w-2xl mx-auto leading-relaxed">

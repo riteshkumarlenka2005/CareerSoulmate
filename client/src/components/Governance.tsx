@@ -12,7 +12,7 @@ const Governance: React.FC = () => {
   return (
     <section className="py-24 bg-[#050505] border-t border-white/10 relative">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:p-8 lg:p-12">
           {badges.map((b, i) => (
             <div key={i} className="flex flex-col items-center text-center group">
               <div className="w-16 h-16 rounded-full bg-blue-500/5 border border-blue-500/20 flex items-center justify-center mb-6 group-hover:bg-blue-500 group-hover:border-blue-400 transition-all duration-500 shadow-xl">

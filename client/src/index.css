@@ -95,3 +95,46 @@
   z-index: 9999;
   animation: slideUp 0.3s ease-out;
 }
+
+/* ── MOBILE RESPONSIVE OVERRIDES ── */
+@media (max-width: 640px) {
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Ensure all containers don't overflow */
+  section, div {
+    max-width: 100vw;
+  }
+
+  /* Touch-friendly minimum tap targets */
+  button, a, [role="button"] {
+    min-height: 40px;
+  }
+
+  /* Reduce heavy tracking on mobile (saves space) */
+  .tracking-widest {
+    letter-spacing: 0.08em;
+  }
+  .tracking-\[0\.3em\] {
+    letter-spacing: 0.12em;
+  }
+  .tracking-\[0\.4em\] {
+    letter-spacing: 0.15em;
+  }
+  .tracking-\[0\.2em\] {
+    letter-spacing: 0.1em;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}

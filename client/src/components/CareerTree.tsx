@@ -8,19 +8,19 @@ const CareerTree: React.FC = () => {
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
-      <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-6 md:p-12 lg:p-16 items-center">
         {/* Left Side: Content */}
         <div className="relative z-10">
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
             The Interactive <br />
             <span className="gradient-text">Career Branching Tree</span>
           </h2>
-          <p className="text-gray-200 text-lg mb-10 max-w-xl leading-relaxed">
+          <p className="text-gray-200 text-lg mb-6 md:mb-8 lg:mb-10 max-w-xl leading-relaxed">
             Our Career Tree visualization shows you how one skill leads to multiple potential careers. 
             Hover over nodes to see requirements, salary projections, and industry demand.
           </p>
           
-          <ul className="space-y-6 mb-12">
+          <ul className="space-y-6 mb-6 md:mb-10 lg:mb-12">
             {[
               "Dynamic node-based exploration",
               "Cross-industry skill mapping",

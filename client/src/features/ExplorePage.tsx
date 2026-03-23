@@ -62,28 +62,28 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
   const tabColor = tabs.find(t => t.key === activeTab)?.color || 'blue';
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
+    <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
       
       {/* HERO + TAB HEADER */}
-      <section className="relative pt-28 pb-16 px-6 border-b border-white/10">
+      <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 border-b border-white/10">
         <div className="absolute inset-0 z-0">
-          <div className={`absolute top-0 right-1/4 w-[600px] h-[600px] bg-${tabColor}-600/5 blur-[180px] rounded-full`} />
+          <div className={`absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-${tabColor}-600/5 blur-[180px] rounded-full`} />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <div className={`inline-block px-4 py-1.5 mb-8 rounded-full bg-${tabColor}-500/10 border border-${tabColor}-500/20 text-${tabColor}-400 text-xs font-black tracking-widest uppercase`}>
             UNIFIED EXPLORATION LAB
           </div>
-          <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-10">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6 md:mb-8 lg:mb-10">
             Explore <br/><span className="gradient-text">Everything.</span>
           </h1>
-          <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed mb-16">
+          <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed mb-8 md:mb-12 lg:mb-16">
             Careers, degrees, and skills — all in one place. Search the global landscape to 
             find what aligns with your natural curiosity.
           </p>
 
           {/* TAB SWITCHER */}
-          <div className="flex justify-center gap-4 mb-12">
+          <div className="flex justify-center gap-4 mb-6 md:mb-10 lg:mb-12">
             {tabs.map(tab => (
               <button
                 key={tab.key}
@@ -114,7 +114,7 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       </section>
 
       {/* CONTENT */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
+      <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto">
         
         {/* CAREERS TAB */}
         {activeTab === 'careers' && <CareersTab search={search} onNavigate={onNavigate} />}
@@ -139,14 +139,14 @@ const CareersTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
 
   return (
     <>
-      <div className="flex justify-between items-end mb-16">
+      <div className="flex justify-between items-end mb-8 md:mb-12 lg:mb-16">
         <h2 className="text-3xl font-black uppercase tracking-tight">Active <span className="text-blue-500">Inventory.</span></h2>
         <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{filtered.length} Roles Synced</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:p-8 lg:p-10">
         {filtered.map(career => (
-          <div key={career.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-blue-500/40 transition-all duration-500 cursor-pointer shadow-xl p-10">
+          <div key={career.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-blue-500/40 transition-all duration-500 cursor-pointer shadow-xl p-5 md:p-8 lg:p-10">
             <div className="flex justify-between items-start mb-8">
               <div>
                 <span className="text-xs font-black text-blue-500 uppercase tracking-[0.3em] mb-2 block">{career.industry}</span>
@@ -166,7 +166,7 @@ const CareersTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
                   <span className={`text-xs font-black uppercase ${career.growth === 'Extreme' ? 'text-red-500' : 'text-emerald-500'}`}>{career.growth}</span>
                 </div>
               </div>
-              <div className="pt-6 border-t border-white/10 flex flex-wrap gap-2">
+              <div className="pt-4 md:pt-6 border-t border-white/10 flex flex-wrap gap-2">
                 {career.skills.slice(0, 3).map(s => (
                   <span key={s} className="px-3 py-1 bg-white/5 rounded-lg text-sm font-black text-gray-300 uppercase tracking-widest">#{s.replace(/\s+/g, '')}</span>
                 ))}
@@ -178,7 +178,7 @@ const CareersTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
 
       {shortlist.length > 0 && (
         <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[250]">
-          <div className="bg-blue-600/95 backdrop-blur-2xl px-10 py-6 rounded-2xl shadow-2xl flex items-center gap-12 border border-blue-400/30">
+          <div className="bg-blue-600/95 backdrop-blur-2xl px-10 py-6 rounded-2xl shadow-2xl flex items-center gap-5 md:p-8 lg:p-12 border border-blue-400/30">
             <span className="text-sm font-black uppercase tracking-widest text-white">{shortlist.length} Careers Chosen</span>
             <button onClick={() => onNavigate('comparison')} className="bg-white text-blue-600 px-8 py-3 rounded-2xl text-sm font-black uppercase tracking-[0.2em]">Compare</button>
           </div>
@@ -197,20 +197,20 @@ const DegreesTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
 
   return (
     <>
-      <div className="flex justify-between items-end mb-16">
+      <div className="flex justify-between items-end mb-8 md:mb-12 lg:mb-16">
         <h2 className="text-3xl font-black uppercase tracking-tight">Academic <span className="text-purple-500">Assets.</span></h2>
         <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{filtered.length} Programs Mapped</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:p-8 lg:p-10">
         {filtered.map(degree => (
-          <div key={degree.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-purple-500/40 transition-all duration-500 cursor-pointer shadow-xl relative p-12">
+          <div key={degree.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-purple-500/40 transition-all duration-500 cursor-pointer shadow-xl relative p-5 md:p-8 lg:p-12">
             {degree.trending && (
               <div className="absolute top-8 right-8 z-10">
                 <span className="px-3 py-1 bg-purple-600 text-white rounded-full text-sm font-black uppercase tracking-widest shadow-2xl">TRENDING</span>
               </div>
             )}
-            <div className="mb-10">
+            <div className="mb-6 md:mb-8 lg:mb-10">
               <span className="text-xs font-black text-purple-500 uppercase tracking-[0.3em] mb-3 block">{degree.level} • {degree.stream}</span>
               <h3 className="text-2xl font-black uppercase text-white leading-tight group-hover:text-purple-400 transition-colors tracking-tighter">{degree.name}</h3>
             </div>
@@ -250,14 +250,14 @@ const SkillsTab: React.FC<{ search: string; onNavigate: (page: any) => void }> =
 
   return (
     <>
-      <div className="flex justify-between items-end mb-16">
+      <div className="flex justify-between items-end mb-8 md:mb-12 lg:mb-16">
         <h2 className="text-3xl font-black uppercase tracking-tight">Active <span className="text-cyan-500">Toolkit.</span></h2>
         <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{filtered.length} Proficiencies Scanned</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:p-8 lg:p-10">
         {filtered.map(skill => (
-          <div key={skill.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-cyan-500/40 transition-all duration-500 cursor-pointer shadow-xl p-12">
+          <div key={skill.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-cyan-500/40 transition-all duration-500 cursor-pointer shadow-xl p-5 md:p-8 lg:p-12">
             <div className="mb-8 flex justify-between items-start">
               <div>
                 <span className="text-xs font-black text-cyan-500 uppercase tracking-[0.3em] mb-2 block">{skill.category} • {skill.domain}</span>
@@ -282,7 +282,7 @@ const SkillsTab: React.FC<{ search: string; onNavigate: (page: any) => void }> =
               </div>
             )}
 
-            <div className="space-y-4 mt-auto border-t border-white/10 pt-6">
+            <div className="space-y-4 mt-auto border-t border-white/10 pt-4 md:pt-6">
               <div className="flex justify-between">
                 <div>
                   <p className="text-sm font-black text-gray-400 uppercase mb-1">Standard</p>

@@ -53,28 +53,28 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
   };
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
+    <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
       
       {/* A. APTITUDE INTRO SECTION */}
       {view === 'intro' && (
-        <section className="relative pt-28 pb-16 px-6 overflow-visible">
+        <section className="relative pt-20 pb-10 px-4 md:pt-28 md:pb-16 md:px-6 overflow-visible">
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[180px] rounded-full" />
+            <div className="absolute top-0 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] bg-blue-600/5 blur-[180px] rounded-full" />
           </div>
 
-          <div className="max-w-4xl mx-auto relative z-10 text-center">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase mb-10">
+          <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto relative z-10 text-center">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase mb-6 md:mb-8 lg:mb-10">
               COGNITIVE CAPABILITY ASSESSMENT
             </div>
-            <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-8">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
               Skill vs <br/><span className="gradient-text">Aptitude.</span>
             </h1>
-            <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
+            <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
               Skills are what you've learned; Aptitude is what you're <span className="text-white">built for</span>. 
               Our assessments measure raw cognitive patterns to identify your natural professional advantage—no memorization required.
             </p>
             
-            <div className="grid md:grid-cols-2 gap-8 text-left mb-16">
+            <div className="grid md:grid-cols-2 gap-8 text-left mb-8 md:mb-12 lg:mb-16">
                <div className="p-8 rounded-2xl bg-white/[0.04] border border-white/10">
                   <h4 className="text-sm font-black uppercase text-blue-500 mb-4 tracking-widest">Why it Matters</h4>
                   <p className="text-gray-200 text-sm leading-relaxed">Understanding your aptitude helps you choose paths that feel intuitive. When your work matches your brain's natural logic, burnout drops and performance skyrockets.</p>
@@ -97,8 +97,8 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
       {/* B. APTITUDE CATEGORIES */}
       {view === 'categories' && (
-        <section className="py-24 px-6 max-w-7xl mx-auto animate-in slide-in-from-bottom-4 duration-700">
-          <div className="flex justify-between items-end mb-16">
+        <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto animate-in slide-in-from-bottom-4 duration-700">
+          <div className="flex justify-between items-end mb-8 md:mb-12 lg:mb-16">
              <div>
                 <h2 className="text-4xl font-black uppercase tracking-tight">The <span className="text-blue-500">Dimensions.</span></h2>
                 <p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em] mt-2">Core Cognitive Benchmarks</p>
@@ -110,17 +110,17 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
              {APTITUDE_CATEGORIES.map((cat) => (
                <div 
                  key={cat.id} 
-                 className="group p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-blue-500/40 transition-all duration-500 flex flex-col h-full relative overflow-hidden"
+                 className="group p-5 md:p-8 lg:p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-blue-500/40 transition-all duration-500 flex flex-col h-full relative overflow-hidden"
                >
-                  <div className={`absolute -top-10 -right-10 w-32 h-32 blur-[80px] opacity-20 bg-${cat.color}-500 transition-all group-hover:opacity-40`} />
+                  <div className={`absolute -top-5 md:p-8 lg:p-10 -right-10 w-32 h-32 blur-[80px] opacity-20 bg-${cat.color}-500 transition-all group-hover:opacity-40`} />
                   
-                  <div className="flex justify-between items-start mb-10">
+                  <div className="flex justify-between items-start mb-6 md:mb-8 lg:mb-10">
                      <div className="text-4xl">{cat.icon}</div>
                      <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-sm font-black uppercase tracking-widest text-gray-300">{cat.difficulty}</span>
                   </div>
 
                   <h3 className="text-2xl font-black uppercase text-white mb-4 leading-tight tracking-tight">{cat.name}</h3>
-                  <p className="text-gray-200 text-sm font-medium leading-relaxed mb-10">{cat.description}</p>
+                  <p className="text-gray-200 text-sm font-medium leading-relaxed mb-6 md:mb-8 lg:mb-10">{cat.description}</p>
 
                   <div className="mt-auto pt-8 border-t border-white/10 flex items-center justify-between">
                      <div className="space-y-1">
@@ -142,8 +142,8 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
       {/* C. ASSESSMENT FLOW (SIMULATOR) */}
       {view === 'assessment' && activeCategory && (
-        <section className="py-24 px-6 max-w-4xl mx-auto min-h-[70vh] flex flex-col animate-in zoom-in duration-500">
-           <div className="flex justify-between items-center mb-16">
+        <section className="py-10 px-4 md:py-20 md:px-6 max-w-full px-2 md:max-w-4xl md:px-0 mx-auto min-h-[70vh] flex flex-col animate-in zoom-in duration-500">
+           <div className="flex justify-between items-center mb-8 md:mb-12 lg:mb-16">
               <div className="space-y-2">
                  <p className="text-xs font-black text-blue-500 uppercase tracking-[0.4em]">{activeCategory.name} Lab</p>
                  <h2 className="text-2xl font-black uppercase text-white tracking-widest">Active Session</h2>
@@ -155,7 +155,7 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
            </div>
 
            <div className="flex-grow flex flex-col">
-              <div className="mb-12 space-y-4">
+              <div className="mb-6 md:mb-10 lg:mb-12 space-y-4">
                  <div className="flex justify-between text-xs font-black uppercase tracking-widest text-gray-300">
                     <span>Question 0{currentQuestion} of 10</span>
                     <span>Adaptive Complexity: Level 4</span>
@@ -165,8 +165,8 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
                  </div>
               </div>
 
-              <div className="p-12 md:p-20 rounded-3xl bg-white/[0.04] border border-white/10 relative overflow-hidden flex-grow flex flex-col justify-center">
-                 <div className="absolute top-0 right-0 p-10 opacity-10">
+              <div className="p-5 md:p-8 lg:p-12 md:p-20 rounded-3xl bg-white/[0.04] border border-white/10 relative overflow-hidden flex-grow flex flex-col justify-center">
+                 <div className="absolute top-0 right-0 p-5 md:p-8 lg:p-10 opacity-10">
                     <svg width="100" height="100" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" stroke="white" strokeWidth="1" fill="none" strokeDasharray="5,5" /></svg>
                  </div>
                  
@@ -197,7 +197,7 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
                  </div>
               </div>
 
-              <div className="mt-12 flex justify-between items-center">
+              <div className="mt-6 md:mt-10 lg:mt-12 flex justify-between items-center">
                  <button className="text-xs font-black text-gray-400 hover:text-white uppercase tracking-widest transition-colors">Skip Dimension</button>
                  <div className="flex gap-4">
                     <button className="px-8 py-3 bg-white/5 border border-white/10 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-white/10 transition-all">Previous</button>
@@ -210,12 +210,12 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
       {/* D. RESULTS & INSIGHTS */}
       {view === 'results' && (
-        <section className="py-24 px-6 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000">
-           <div className="text-center mb-24 space-y-6">
+        <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000">
+           <div className="text-center mb-6 md:mb-8 lg:mb-10 md:mb-16 lg:mb-24 space-y-6">
               <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase">
                 ANALYSIS COMPLETE
               </div>
-              <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
                 Your Cognitive <br/><span className="gradient-text">Landscape.</span>
               </h1>
               <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
@@ -224,7 +224,7 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
               </p>
            </div>
 
-           <div className="grid lg:grid-cols-2 gap-20 items-center mb-32">
+           <div className="grid lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-center mb-32">
               <div className="space-y-12">
                  <div>
                     <h3 className="text-3xl font-black uppercase tracking-tight mb-8">Strength <span className="text-blue-500">Distribution.</span></h3>
@@ -255,8 +255,8 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
               <div className="relative">
                  <div className="absolute inset-0 bg-blue-600/5 blur-[120px]" />
-                 <div className="relative p-12 rounded-3xl border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl">
-                    <h4 className="text-xs font-black text-blue-500 uppercase tracking-[0.4em] mb-10">AI Personality Sync</h4>
+                 <div className="relative p-5 md:p-8 lg:p-12 rounded-3xl border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl">
+                    <h4 className="text-xs font-black text-blue-500 uppercase tracking-[0.4em] mb-6 md:mb-8 lg:mb-10">AI Personality Sync</h4>
                     <div className="space-y-10">
                        <div className="flex items-center gap-8">
                           <div className="w-20 h-20 rounded-[28px] bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-3xl">🕵️‍♂️</div>
@@ -270,7 +270,7 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
                           complex system navigation and pattern synthesis. You thrive in 
                           structured but ambiguous environments where root-cause analysis is critical."
                        </p>
-                       <div className="pt-10 border-t border-white/10">
+                       <div className="pt-4 md:pt-6 md:pt-8 lg:pt-10 border-t border-white/10">
                           <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-4">Recommended Career Verticals</p>
                           <div className="flex flex-wrap gap-2">
                              {['AI Research', 'Systems Engineering', 'Strategic Consulting', 'Quantum Cryptography'].map(v => (
@@ -283,9 +283,9 @@ const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
               </div>
            </div>
 
-           <div className="p-16 rounded-3xl border border-white/10 bg-white/[0.01] text-center max-w-4xl mx-auto">
+           <div className="p-6 md:p-12 lg:p-16 rounded-3xl border border-white/10 bg-white/[0.01] text-center max-w-full px-2 md:max-w-4xl md:px-0 mx-auto">
               <h3 className="text-3xl font-black uppercase tracking-tight mb-6">Developing <span className="text-cyan-500">Horizons.</span></h3>
-              <p className="text-gray-300 text-lg font-medium leading-relaxed mb-12">
+              <p className="text-gray-300 text-lg font-medium leading-relaxed mb-6 md:mb-10 lg:mb-12">
                 Spatial reasoning is currently your secondary trait. This means you might find 
                 abstract architecture easier than physical 3D manipulation. This can be 
                 enhanced through targeted neural training exercises.
