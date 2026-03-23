@@ -62,9 +62,14 @@ export function useInstallPrompt() {
     setPromptEvent(null);
   }, [promptEvent]);
 
+  // Check if already running as a PWA
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches 
+                    || (window.navigator as any).standalone 
+                    || document.referrer.includes('android-app://');
+
   return {
-    isInstallable: !!promptEvent && !isInstalled,
-    isInstalled,
+    isInstallable: !!promptEvent && !isInstalled && !isStandalone,
+    isInstalled: isInstalled || isStandalone,
     promptInstall,
   };
 }

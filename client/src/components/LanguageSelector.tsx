@@ -46,7 +46,7 @@ const LanguageSelector: React.FC = () => {
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 top-full mt-2 w-48 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute left-0 bottom-full mb-2 md:left-auto md:right-0 md:bottom-auto md:top-full md:mt-2 w-56 md:w-48 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 shadow-2xl z-[200] animate-in fade-in slide-in-from-bottom-2 md:slide-in-from-top-2 duration-200 max-h-[60vh] overflow-y-auto">
                     <div className="px-4 py-2 border-b border-white/10">
                         <p className="text-xs font-bold text-gray-300 uppercase tracking-widest">
                             Select Language

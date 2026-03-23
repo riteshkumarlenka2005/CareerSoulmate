@@ -73,7 +73,7 @@ const NotificationCenter: React.FC = () => {
 
             {/* Dropdown Panel */}
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-96 max-h-[500px] bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="fixed inset-x-0 bottom-0 max-h-[70vh] md:absolute md:inset-auto md:right-0 md:top-full md:mt-2 md:w-96 md:max-h-[500px] bg-[#0a0a0a] border border-white/10 rounded-t-2xl md:rounded-2xl shadow-2xl overflow-hidden z-[200] animate-in fade-in slide-in-from-bottom-2 md:slide-in-from-top-2 duration-200">
                     {/* Header */}
                     <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10">
                         <h3 className="font-semibold text-white">Notifications</h3>
