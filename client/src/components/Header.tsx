@@ -3,6 +3,7 @@ import LanguageSelector from './LanguageSelector';
 import AuthModal from './AuthModal';
 import UserProgress from './UserProgress';
 import NotificationCenter from './NotificationCenter';
+import InstallAppButton from './InstallAppButton';
 import { useAuth } from '../context/AuthContext';
 import { useI18n } from '../context/I18nContext';
 
@@ -306,6 +307,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
         {/* RIGHT ACTIONS */}
         <div className="flex items-center gap-5">
           <div className="hidden lg:flex items-center gap-5 ml-6">
+            <InstallAppButton />
             <LanguageSelector />
             <NotificationCenter />
           </div>
@@ -461,6 +463,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
           ))}
 
           <div className="pt-4 md:pt-6 border-t border-white/10 flex flex-col gap-4">
+            <InstallAppButton className="w-full justify-center py-4" />
             <button className="w-full py-4 text-sm font-bold text-center text-white uppercase tracking-widest bg-blue-600 rounded-xl">
               Get Started
             </button>

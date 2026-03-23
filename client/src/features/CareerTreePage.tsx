@@ -730,22 +730,7 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="absolute top-20 md:top-28 left-4 md:left-12 z-20 pointer-events-none">
-        <div className="space-y-1">
-          <div className="flex items-center gap-3">
-             <div className="w-2 h-2 bg-blue-500 animate-pulse shadow-[0_0_10px_#3b82f6]" />
-             <span className="text-xs font-black tracking-[0.4em] text-blue-500/60 uppercase">System_Active_Neural_Map</span>
-          </div>
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter text-white uppercase leading-none">THE_BLUEPRINT</h1>
-          
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-xs font-black tracking-[0.2em] text-gray-300 uppercase">Nodes_Active:</span>
-            <span className="text-2xl font-black text-blue-400 tabular-nums">
-              {positionedNodes.length.toString().padStart(2, '0')}
-            </span>
-          </div>
-        </div>
-      </div>
+
 
       {isSearchOpen && (
         <div 
@@ -978,7 +963,7 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      <div className="fixed right-12 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-12 md:bottom-auto md:top-1/2 md:-translate-y-1/2 z-50 flex flex-row md:flex-col gap-3 md:gap-4 bg-black/70 md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-2 md:p-0 rounded-2xl md:rounded-none border border-white/10 md:border-0">
         {[
           { 
             icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>, 
@@ -1000,7 +985,7 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
             key={i}
             onClick={btn.action}
             title={btn.label}
-            className={`w-12 h-12 flex items-center justify-center font-black text-xl transition-all border shadow-2xl relative group
+            className={`w-11 h-11 md:w-12 md:h-12 flex items-center justify-center font-black text-xl transition-all border shadow-2xl relative group rounded-xl md:rounded-none
               ${btn.active ? 'bg-blue-600 border-blue-400 text-white shadow-[0_0_20px_#3b82f6]' : 'bg-black/80 border-white/10 text-blue-500 hover:text-white hover:bg-blue-600'}
             `}
           >
