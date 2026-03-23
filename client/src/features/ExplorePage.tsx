@@ -65,19 +65,19 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
     <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans overflow-x-hidden">
       
       {/* HERO + TAB HEADER */}
-      <section className="relative pt-28 pb-16 px-6 border-b border-white/5">
+      <section className="relative pt-28 pb-16 px-6 border-b border-white/10">
         <div className="absolute inset-0 z-0">
           <div className={`absolute top-0 right-1/4 w-[600px] h-[600px] bg-${tabColor}-600/5 blur-[180px] rounded-full`} />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <div className={`inline-block px-4 py-1.5 mb-8 rounded-full bg-${tabColor}-500/10 border border-${tabColor}-500/20 text-${tabColor}-400 text-[10px] font-black tracking-widest uppercase`}>
+          <div className={`inline-block px-4 py-1.5 mb-8 rounded-full bg-${tabColor}-500/10 border border-${tabColor}-500/20 text-${tabColor}-400 text-xs font-black tracking-widest uppercase`}>
             UNIFIED EXPLORATION LAB
           </div>
           <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-10">
             Explore <br/><span className="gradient-text">Everything.</span>
           </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed mb-16">
+          <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed mb-16">
             Careers, degrees, and skills — all in one place. Search the global landscape to 
             find what aligns with your natural curiosity.
           </p>
@@ -88,14 +88,14 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
               <button
                 key={tab.key}
                 onClick={() => { setActiveTab(tab.key); setSearch(''); }}
-                className={`px-8 py-4 rounded-2xl font-black uppercase tracking-[0.15em] text-[11px] transition-all border ${
+                className={`px-8 py-4 rounded-2xl font-black uppercase tracking-[0.15em] text-sm transition-all border ${
                   activeTab === tab.key
                     ? `bg-${tab.color}-600 border-${tab.color}-400 text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]`
-                    : 'bg-white/5 border-white/10 text-gray-500 hover:text-white hover:bg-white/10'
+                    : 'bg-white/5 border-white/10 text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {tab.label}
-                <span className="ml-3 text-[9px] opacity-60">{tab.count}</span>
+                <span className="ml-3 text-xs opacity-60">{tab.count}</span>
               </button>
             ))}
           </div>
@@ -107,7 +107,7 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={`Search ${activeTab}...`}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-lg focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-600"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-lg focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-400"
             />
           </div>
         </div>
@@ -141,34 +141,34 @@ const CareersTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
     <>
       <div className="flex justify-between items-end mb-16">
         <h2 className="text-3xl font-black uppercase tracking-tight">Active <span className="text-blue-500">Inventory.</span></h2>
-        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{filtered.length} Roles Synced</p>
+        <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{filtered.length} Roles Synced</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {filtered.map(career => (
-          <div key={career.id} className="group flex flex-col bg-[#0a0a0a] border border-white/5 rounded-[48px] overflow-hidden hover:border-blue-500/40 transition-all duration-500 cursor-pointer shadow-xl p-10">
+          <div key={career.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-blue-500/40 transition-all duration-500 cursor-pointer shadow-xl p-10">
             <div className="flex justify-between items-start mb-8">
               <div>
-                <span className="text-[9px] font-black text-blue-500 uppercase tracking-[0.3em] mb-2 block">{career.industry}</span>
+                <span className="text-xs font-black text-blue-500 uppercase tracking-[0.3em] mb-2 block">{career.industry}</span>
                 <h3 className="text-2xl font-black uppercase text-white leading-tight group-hover:text-blue-400 transition-colors tracking-tighter">{career.name}</h3>
               </div>
-              {career.trending && <span className="px-3 py-1 bg-orange-500/10 text-orange-500 border border-orange-500/20 rounded-full text-[8px] font-black uppercase tracking-widest">Trending</span>}
+              {career.trending && <span className="px-3 py-1 bg-orange-500/10 text-orange-500 border border-orange-500/20 rounded-full text-sm font-black uppercase tracking-widest">Trending</span>}
             </div>
-            <p className="text-gray-400 text-sm font-medium leading-relaxed mb-8 line-clamp-3">{career.description}</p>
+            <p className="text-gray-200 text-sm font-medium leading-relaxed mb-8 line-clamp-3">{career.description}</p>
             <div className="space-y-6 mt-auto">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-[8px] font-black text-gray-600 uppercase mb-1 tracking-widest">Avg Salary</p>
+                  <p className="text-sm font-black text-gray-400 uppercase mb-1 tracking-widest">Avg Salary</p>
                   <p className="text-xs font-black text-white">{career.salaryRange}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-[8px] font-black text-gray-600 uppercase mb-1 tracking-widest">Growth</p>
-                  <span className={`text-[10px] font-black uppercase ${career.growth === 'Extreme' ? 'text-red-500' : 'text-emerald-500'}`}>{career.growth}</span>
+                  <p className="text-sm font-black text-gray-400 uppercase mb-1 tracking-widest">Growth</p>
+                  <span className={`text-xs font-black uppercase ${career.growth === 'Extreme' ? 'text-red-500' : 'text-emerald-500'}`}>{career.growth}</span>
                 </div>
               </div>
-              <div className="pt-6 border-t border-white/5 flex flex-wrap gap-2">
+              <div className="pt-6 border-t border-white/10 flex flex-wrap gap-2">
                 {career.skills.slice(0, 3).map(s => (
-                  <span key={s} className="px-3 py-1 bg-white/5 rounded-lg text-[8px] font-black text-gray-500 uppercase tracking-widest">#{s.replace(/\s+/g, '')}</span>
+                  <span key={s} className="px-3 py-1 bg-white/5 rounded-lg text-sm font-black text-gray-300 uppercase tracking-widest">#{s.replace(/\s+/g, '')}</span>
                 ))}
               </div>
             </div>
@@ -178,9 +178,9 @@ const CareersTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
 
       {shortlist.length > 0 && (
         <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[250]">
-          <div className="bg-blue-600/95 backdrop-blur-2xl px-10 py-6 rounded-[32px] shadow-2xl flex items-center gap-12 border border-blue-400/30">
-            <span className="text-[12px] font-black uppercase tracking-widest text-white">{shortlist.length} Careers Chosen</span>
-            <button onClick={() => onNavigate('comparison')} className="bg-white text-blue-600 px-8 py-3 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em]">Compare</button>
+          <div className="bg-blue-600/95 backdrop-blur-2xl px-10 py-6 rounded-2xl shadow-2xl flex items-center gap-12 border border-blue-400/30">
+            <span className="text-sm font-black uppercase tracking-widest text-white">{shortlist.length} Careers Chosen</span>
+            <button onClick={() => onNavigate('comparison')} className="bg-white text-blue-600 px-8 py-3 rounded-2xl text-sm font-black uppercase tracking-[0.2em]">Compare</button>
           </div>
         </div>
       )}
@@ -199,40 +199,40 @@ const DegreesTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
     <>
       <div className="flex justify-between items-end mb-16">
         <h2 className="text-3xl font-black uppercase tracking-tight">Academic <span className="text-purple-500">Assets.</span></h2>
-        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{filtered.length} Programs Mapped</p>
+        <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{filtered.length} Programs Mapped</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {filtered.map(degree => (
-          <div key={degree.id} className="group flex flex-col bg-[#0a0a0a] border border-white/5 rounded-[48px] overflow-hidden hover:border-purple-500/40 transition-all duration-500 cursor-pointer shadow-xl relative p-12">
+          <div key={degree.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-purple-500/40 transition-all duration-500 cursor-pointer shadow-xl relative p-12">
             {degree.trending && (
               <div className="absolute top-8 right-8 z-10">
-                <span className="px-3 py-1 bg-purple-600 text-white rounded-full text-[8px] font-black uppercase tracking-widest shadow-2xl">TRENDING</span>
+                <span className="px-3 py-1 bg-purple-600 text-white rounded-full text-sm font-black uppercase tracking-widest shadow-2xl">TRENDING</span>
               </div>
             )}
             <div className="mb-10">
-              <span className="text-[10px] font-black text-purple-500 uppercase tracking-[0.3em] mb-3 block">{degree.level} • {degree.stream}</span>
+              <span className="text-xs font-black text-purple-500 uppercase tracking-[0.3em] mb-3 block">{degree.level} • {degree.stream}</span>
               <h3 className="text-2xl font-black uppercase text-white leading-tight group-hover:text-purple-400 transition-colors tracking-tighter">{degree.name}</h3>
             </div>
             <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-                <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Duration</p>
+              <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10">
+                <p className="text-sm font-black text-gray-400 uppercase mb-1">Duration</p>
                 <p className="text-xs font-black text-white uppercase">{degree.duration}</p>
               </div>
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-                <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Mode</p>
+              <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10">
+                <p className="text-sm font-black text-gray-400 uppercase mb-1">Mode</p>
                 <p className="text-xs font-black text-white uppercase">{degree.mode}</p>
               </div>
             </div>
             <div className="mb-8">
-              <p className="text-[8px] font-black text-gray-500 uppercase tracking-widest mb-3">Core Subjects</p>
+              <p className="text-sm font-black text-gray-300 uppercase tracking-widest mb-3">Core Subjects</p>
               <div className="flex flex-wrap gap-2">
-                {degree.subjects.slice(0, 3).map(s => <span key={s} className="px-3 py-1 bg-white/5 rounded-lg text-[9px] font-bold text-gray-400 uppercase tracking-tight">{s}</span>)}
+                {degree.subjects.slice(0, 3).map(s => <span key={s} className="px-3 py-1 bg-white/5 rounded-lg text-xs font-bold text-gray-200 uppercase tracking-tight">{s}</span>)}
               </div>
             </div>
-            <div className="mt-auto pt-4 border-t border-white/5">
-              <p className="text-[8px] font-black text-gray-600 uppercase tracking-widest mb-1">Career Outcomes</p>
-              <p className="text-[10px] font-black text-gray-300 uppercase">{degree.outcomes.join(' • ')}</p>
+            <div className="mt-auto pt-4 border-t border-white/10">
+              <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Career Outcomes</p>
+              <p className="text-xs font-black text-gray-300 uppercase">{degree.outcomes.join(' • ')}</p>
             </div>
           </div>
         ))}
@@ -252,28 +252,28 @@ const SkillsTab: React.FC<{ search: string; onNavigate: (page: any) => void }> =
     <>
       <div className="flex justify-between items-end mb-16">
         <h2 className="text-3xl font-black uppercase tracking-tight">Active <span className="text-cyan-500">Toolkit.</span></h2>
-        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{filtered.length} Proficiencies Scanned</p>
+        <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{filtered.length} Proficiencies Scanned</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {filtered.map(skill => (
-          <div key={skill.id} className="group flex flex-col bg-[#0a0a0a] border border-white/5 rounded-[48px] overflow-hidden hover:border-cyan-500/40 transition-all duration-500 cursor-pointer shadow-xl p-12">
+          <div key={skill.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-cyan-500/40 transition-all duration-500 cursor-pointer shadow-xl p-12">
             <div className="mb-8 flex justify-between items-start">
               <div>
-                <span className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.3em] mb-2 block">{skill.category} • {skill.domain}</span>
+                <span className="text-xs font-black text-cyan-500 uppercase tracking-[0.3em] mb-2 block">{skill.category} • {skill.domain}</span>
                 <h3 className="text-2xl font-black uppercase text-white leading-tight group-hover:text-cyan-400 transition-colors tracking-tighter">{skill.name}</h3>
               </div>
-              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-xs border border-white/10 ${skill.demand === 'Critical' ? 'bg-red-500/10 text-red-500 border-red-500/20' : 'bg-white/5 text-gray-400'}`}>
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-xs border border-white/10 ${skill.demand === 'Critical' ? 'bg-red-500/10 text-red-500 border-red-500/20' : 'bg-white/5 text-gray-200'}`}>
                 {skill.demand.charAt(0)}
               </div>
             </div>
-            <p className="text-gray-400 text-sm font-medium leading-relaxed mb-8 line-clamp-3 italic">"{skill.description}"</p>
+            <p className="text-gray-200 text-sm font-medium leading-relaxed mb-8 line-clamp-3 italic">"{skill.description}"</p>
 
             {/* Gap analysis bar */}
             {skill.currentLevel !== undefined && (
               <div className="mb-6 space-y-3">
-                <div className="flex justify-between text-[9px] font-black uppercase">
-                  <span className="text-gray-500">Your Level</span>
+                <div className="flex justify-between text-xs font-black uppercase">
+                  <span className="text-gray-300">Your Level</span>
                   <span className="text-cyan-400">{skill.currentLevel}%</span>
                 </div>
                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
@@ -282,15 +282,15 @@ const SkillsTab: React.FC<{ search: string; onNavigate: (page: any) => void }> =
               </div>
             )}
 
-            <div className="space-y-4 mt-auto border-t border-white/5 pt-6">
+            <div className="space-y-4 mt-auto border-t border-white/10 pt-6">
               <div className="flex justify-between">
                 <div>
-                  <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Standard</p>
+                  <p className="text-sm font-black text-gray-400 uppercase mb-1">Standard</p>
                   <p className="text-xs font-black text-white uppercase">NSQF Level {skill.nsqf}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Careers</p>
-                  <p className="text-[9px] font-black text-gray-400 uppercase">{skill.careers.slice(0, 2).join(', ')}</p>
+                  <p className="text-sm font-black text-gray-400 uppercase mb-1">Careers</p>
+                  <p className="text-xs font-black text-gray-200 uppercase">{skill.careers.slice(0, 2).join(', ')}</p>
                 </div>
               </div>
             </div>

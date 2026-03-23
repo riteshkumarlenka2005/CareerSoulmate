@@ -78,31 +78,31 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
       {/* A. SKILLS INTRO SECTION */}
       {view === 'assess' && (
         <>
-          <section className="relative pt-28 pb-16 px-6 overflow-visible border-b border-white/5">
+          <section className="relative pt-28 pb-16 px-6 overflow-visible border-b border-white/10">
             <div className="absolute inset-0 z-0">
               <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-emerald-600/5 blur-[180px] rounded-full" />
             </div>
 
             <div className="max-w-4xl mx-auto relative z-10 text-center">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black tracking-widest uppercase mb-10">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase mb-10">
                 CAPABILITY BASELINE ENGINE
               </div>
               <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-8">
                 What Can You <br/><span className="gradient-text">Do Today?</span>
               </h1>
-              <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed mb-12">
+              <p className="text-gray-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
                 Honesty is the catalyst for growth. Declare your current proficiency across 
                 key domains to build a verifiable baseline of your professional value.
               </p>
               
               <div className="grid md:grid-cols-2 gap-8 text-left mb-16">
-                 <div className="p-8 rounded-[32px] bg-white/[0.02] border border-white/5">
+                 <div className="p-8 rounded-2xl bg-white/[0.04] border border-white/10">
                     <h4 className="text-sm font-black uppercase text-emerald-500 mb-4 tracking-widest">Growth First</h4>
-                    <p className="text-gray-400 text-sm leading-relaxed">It's okay to be a beginner. The system uses your 'Beginner' tags to recommend the most efficient bridge-courses to 'Intermediate'.</p>
+                    <p className="text-gray-200 text-sm leading-relaxed">It's okay to be a beginner. The system uses your 'Beginner' tags to recommend the most efficient bridge-courses to 'Intermediate'.</p>
                  </div>
-                 <div className="p-8 rounded-[32px] bg-white/[0.02] border border-white/5">
+                 <div className="p-8 rounded-2xl bg-white/[0.04] border border-white/10">
                     <h4 className="text-sm font-black uppercase text-blue-500 mb-4 tracking-widest">Evidence Counts</h4>
-                    <p className="text-gray-400 text-sm leading-relaxed">Advanced ratings require proof later. For now, mark what you feel confident using in a real-world scenario.</p>
+                    <p className="text-gray-200 text-sm leading-relaxed">Advanced ratings require proof later. For now, mark what you feel confident using in a real-world scenario.</p>
                  </div>
               </div>
             </div>
@@ -111,36 +111,36 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
           {/* B. SKILL CATEGORIES & C. PROFICIENCY RATING */}
           <section className="py-24 px-6 max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-               <div className="flex gap-2 bg-white/[0.03] p-1.5 rounded-2xl border border-white/5">
+               <div className="flex gap-2 bg-white/[0.03] p-1.5 rounded-2xl border border-white/10">
                   {(['Technical', 'Soft', 'Digital', 'Vocational'] as const).map(cat => (
                     <button 
                       key={cat}
                       onClick={() => setActiveCategory(cat)}
-                      className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeCategory === cat ? 'bg-emerald-600 text-white shadow-[0_0_20px_rgba(16,185,129,0.3)]' : 'text-gray-500 hover:text-white'}`}
+                      className={`px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${activeCategory === cat ? 'bg-emerald-600 text-white shadow-[0_0_20px_rgba(16,185,129,0.3)]' : 'text-gray-300 hover:text-white'}`}
                     >
                       {cat}
                     </button>
                   ))}
                </div>
                <div className="text-right">
-                  <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Skills Tagged: {currentSkillsCount}</p>
+                  <p className="text-xs font-black text-gray-300 uppercase tracking-[0.4em]">Skills Tagged: {currentSkillsCount}</p>
                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                {MASTER_SKILLS.filter(s => s.category === activeCategory).map(skill => (
-                 <div key={skill.id} className="group p-10 rounded-[48px] bg-white/[0.02] border border-white/5 hover:border-emerald-500/30 transition-all duration-500 flex flex-col h-full relative">
+                 <div key={skill.id} className="group p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-emerald-500/30 transition-all duration-500 flex flex-col h-full relative">
                     <h3 className="text-2xl font-black uppercase text-white mb-2 leading-tight tracking-tight">{skill.name}</h3>
-                    <p className="text-gray-500 text-xs font-medium leading-relaxed mb-10">{skill.description}</p>
+                    <p className="text-gray-300 text-xs font-medium leading-relaxed mb-10">{skill.description}</p>
                     
                     <div className="mt-auto space-y-4">
-                       <p className="text-[8px] font-black text-gray-600 uppercase tracking-widest">Self-Rating</p>
+                       <p className="text-sm font-black text-gray-400 uppercase tracking-widest">Self-Rating</p>
                        <div className="grid grid-cols-4 gap-1">
                           {(['None', 'Beginner', 'Intermediate', 'Advanced'] as Proficiency[]).map(level => (
                             <button
                               key={level}
                               onClick={() => handleRate(skill.id, level)}
-                              className={`py-2.5 rounded-lg text-[8px] font-black uppercase tracking-tighter border transition-all ${userRatings[skill.id] === level ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-white/5 border-white/5 text-gray-500 hover:text-gray-300'}`}
+                              className={`py-2.5 rounded-lg text-sm font-black uppercase tracking-tighter border transition-all ${userRatings[skill.id] === level ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-white/5 border-white/10 text-gray-300 hover:text-gray-300'}`}
                             >
                               {level}
                             </button>
@@ -154,7 +154,7 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
             <div className="mt-24 flex justify-center">
                <button 
                  onClick={() => setView('results')}
-                 className="px-12 py-6 bg-emerald-600 hover:bg-emerald-500 text-white rounded-[24px] font-black transition-all shadow-2xl shadow-emerald-600/40 uppercase tracking-[0.2em] text-[10px] active:scale-95"
+                 className="px-12 py-6 bg-emerald-600 hover:bg-emerald-500 text-white rounded-[24px] font-black transition-all shadow-2xl shadow-emerald-600/40 uppercase tracking-[0.2em] text-xs active:scale-95"
                >
                  Generate Gap Snapshot
                </button>
@@ -167,13 +167,13 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
       {view === 'results' && (
         <section className="py-24 px-6 max-w-7xl mx-auto animate-in zoom-in duration-700">
            <div className="text-center mb-24 space-y-6">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black tracking-widest uppercase">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase">
                 ANALYSIS COMPLETE
               </div>
               <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">
                 Your Skill <br/><span className="gradient-text">Equilibrium.</span>
               </h1>
-              <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
+              <p className="text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
                 We've mapped your current toolkit against your target career as an 
                 <span className="text-white"> AI Research Scientist</span>.
               </p>
@@ -192,8 +192,8 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
                                   <span className="text-sm font-black uppercase tracking-widest text-white">{item.name}</span>
                                </div>
                                <div className="text-right">
-                                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 block">Required: {item.requiredLevel}</span>
-                                  <span className={`text-[10px] font-black uppercase tracking-widest ${item.isMet ? 'text-emerald-500' : 'text-orange-500'}`}>Current: {item.userLevel}</span>
+                                  <span className="text-xs font-black uppercase tracking-widest text-gray-300 block">Required: {item.requiredLevel}</span>
+                                  <span className={`text-xs font-black uppercase tracking-widest ${item.isMet ? 'text-emerald-500' : 'text-orange-500'}`}>Current: {item.userLevel}</span>
                                </div>
                             </div>
                             <div className="relative h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
@@ -213,27 +213,27 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
 
               <div className="relative">
                  <div className="absolute inset-0 bg-emerald-600/5 blur-[120px]" />
-                 <div className="relative p-12 rounded-[64px] border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl overflow-hidden">
-                    <h4 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.4em] mb-10">AI Competency Verdict</h4>
+                 <div className="relative p-12 rounded-3xl border border-white/10 bg-[#080808] backdrop-blur-3xl shadow-2xl overflow-hidden">
+                    <h4 className="text-xs font-black text-emerald-500 uppercase tracking-[0.4em] mb-10">AI Competency Verdict</h4>
                     <div className="space-y-10">
                        <div className="flex items-center gap-8">
                           <div className="w-20 h-20 rounded-[28px] bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-3xl">🎯</div>
                           <div>
                              <h4 className="text-xl font-black uppercase text-white tracking-tight">Technical Ready</h4>
-                             <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-1">Status: Partially Qualified</p>
+                             <p className="text-xs text-gray-300 font-bold uppercase tracking-widest mt-1">Status: Partially Qualified</p>
                           </div>
                        </div>
-                       <p className="text-gray-400 text-base leading-relaxed font-medium">
+                       <p className="text-gray-200 text-base leading-relaxed font-medium">
                           "Your mathematical foundation is strong, but your Python syntax is 
                           at a 'Beginner' level. To meet AI Research Scientist standards, we 
                           recommend a focused 2-month sprint in 'Neural Frameworks' to close 
                           the gap by 34%."
                        </p>
-                       <div className="pt-10 border-t border-white/5">
-                          <p className="text-[8px] font-black text-gray-600 uppercase tracking-widest mb-4">Urgent Upgrades Recommended</p>
+                       <div className="pt-10 border-t border-white/10">
+                          <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-4">Urgent Upgrades Recommended</p>
                           <div className="flex flex-wrap gap-2">
                              {['PyTorch Syntax', 'MLOps Basics', 'Prompt Engineering'].map(v => (
-                               <span key={v} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase text-emerald-400 tracking-widest">{v}</span>
+                               <span key={v} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-xs font-black uppercase text-emerald-400 tracking-widest">{v}</span>
                              ))}
                           </div>
                        </div>
@@ -242,15 +242,15 @@ const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ o
               </div>
            </div>
 
-           <div className="p-16 rounded-[64px] border border-white/10 bg-white/[0.01] text-center max-w-4xl mx-auto">
+           <div className="p-16 rounded-3xl border border-white/10 bg-white/[0.01] text-center max-w-4xl mx-auto">
               <h3 className="text-3xl font-black uppercase tracking-tight mb-6">Skill <span className="text-blue-500">Redemption.</span></h3>
-              <p className="text-gray-500 text-lg font-medium leading-relaxed mb-12">
+              <p className="text-gray-300 text-lg font-medium leading-relaxed mb-12">
                 This baseline is dynamic. As you complete projects and courses, update 
                 your ratings to see your Gap Snapshot evolve into a Readiness Report.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                 <button onClick={() => onNavigate('ai-recs')} className="px-12 py-6 bg-emerald-600 hover:bg-emerald-500 text-white rounded-[24px] font-black transition-all shadow-2xl shadow-emerald-600/40 uppercase tracking-[0.2em] text-[10px]">View Recommended Courses</button>
-                 <button onClick={() => setView('assess')} className="px-12 py-6 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-[24px] font-black transition-all backdrop-blur-md uppercase tracking-[0.2em] text-[10px]">Update Skill Profile</button>
+                 <button onClick={() => onNavigate('ai-recs')} className="px-12 py-6 bg-emerald-600 hover:bg-emerald-500 text-white rounded-[24px] font-black transition-all shadow-2xl shadow-emerald-600/40 uppercase tracking-[0.2em] text-xs">View Recommended Courses</button>
+                 <button onClick={() => setView('assess')} className="px-12 py-6 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-[24px] font-black transition-all backdrop-blur-md uppercase tracking-[0.2em] text-xs">Update Skill Profile</button>
               </div>
            </div>
         </section>

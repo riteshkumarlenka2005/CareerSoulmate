@@ -42,7 +42,7 @@ const CareerAdvisor: React.FC = () => {
       <div className="p-4 border-b border-white/10 bg-black/40 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-sm font-semibold tracking-wide uppercase text-gray-400">Career Soulmate Live</span>
+          <span className="text-sm font-semibold tracking-wide uppercase text-gray-200">Career Soulmate Live</span>
         </div>
       </div>
 

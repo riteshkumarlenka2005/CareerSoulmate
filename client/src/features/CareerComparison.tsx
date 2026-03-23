@@ -146,9 +146,9 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h2 className="text-3xl font-black uppercase tracking-tight">Select <span className="text-blue-500">Careers</span></h2>
-                <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest mt-1">Select 2 to 4 careers to compare</p>
+                <p className="text-gray-300 text-xs font-black uppercase tracking-widest mt-1">Select 2 to 4 careers to compare</p>
               </div>
-              <button onClick={() => setIsSelectorOpen(false)} className="text-gray-500 hover:text-white">
+              <button onClick={() => setIsSelectorOpen(false)} className="text-gray-300 hover:text-white">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
@@ -170,11 +170,11 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
                     className={`p-6 rounded-3xl border transition-all cursor-pointer relative group ${
                       isSelected 
                         ? 'bg-blue-600/10 border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.1)]' 
-                        : 'bg-white/[0.02] border-white/5 hover:border-white/20'
+                        : 'bg-white/[0.04] border-white/10 hover:border-white/20'
                     } ${(!canSelect && !isSelected) || (!canDeselect && isSelected) ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <div className="flex justify-between items-start mb-4">
-                      <span className="text-[8px] font-black text-blue-500 uppercase tracking-widest">{career.industry}</span>
+                      <span className="text-sm font-black text-blue-500 uppercase tracking-widest">{career.industry}</span>
                       {isSelected && (
                          <div className="w-4 h-4 rounded-full bg-blue-500 flex items-center justify-center">
                             <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
@@ -182,19 +182,19 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
                       )}
                     </div>
                     <h4 className="text-white font-black uppercase tracking-tight mb-2">{career.name}</h4>
-                    <p className="text-[10px] text-gray-500 font-bold uppercase">{career.salary.mid} • {career.growth}</p>
+                    <p className="text-xs text-gray-300 font-bold uppercase">{career.salary.mid} • {career.growth}</p>
                   </div>
                 );
               })}
             </div>
 
             <div className="mt-10 flex justify-between items-center">
-              <span className="text-[11px] font-black text-gray-500 uppercase tracking-widest">
+              <span className="text-sm font-black text-gray-300 uppercase tracking-widest">
                 Selected: <span className="text-blue-500">{selectedIds.length} / 4</span>
               </span>
               <button 
                 onClick={() => setIsSelectorOpen(false)}
-                className="px-10 py-4 bg-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-600/30"
+                className="px-10 py-4 bg-blue-600 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl shadow-blue-600/30"
               >
                 Confirm Selection
               </button>
@@ -210,7 +210,7 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
             <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">
               Decision <span className="gradient-text">Matrix</span>
             </h1>
-            <p className="text-gray-500 text-[10px] font-black uppercase tracking-[0.4em]">Compare logically, Decide decisively.</p>
+            <p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em]">Compare logically, Decide decisively.</p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-6">
@@ -222,7 +222,7 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
                   </div>
                   <div>
                     <h3 className="text-sm font-black uppercase tracking-widest text-white">{career.name}</h3>
-                    <p className="text-[9px] text-gray-500 font-black uppercase tracking-widest">{career.industry}</p>
+                    <p className="text-xs text-gray-300 font-black uppercase tracking-widest">{career.industry}</p>
                   </div>
                   {selectedIds.length > 2 && (
                     <button 
@@ -239,12 +239,12 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
             {selectedIds.length < 4 && (
               <button 
                 onClick={() => setIsSelectorOpen(true)}
-                className="p-6 rounded-3xl border border-dashed border-white/10 hover:border-blue-500/50 hover:bg-blue-600/5 transition-all flex items-center justify-center gap-4 text-gray-500 hover:text-blue-400 group min-w-[280px]"
+                className="p-6 rounded-3xl border border-dashed border-white/10 hover:border-blue-500/50 hover:bg-blue-600/5 transition-all flex items-center justify-center gap-4 text-gray-300 hover:text-blue-400 group min-w-[280px]"
               >
                 <div className="w-12 h-12 rounded-full border border-dashed border-gray-600 flex items-center justify-center group-hover:border-blue-500">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest">Add Career</span>
+                <span className="text-xs font-black uppercase tracking-widest">Add Career</span>
               </button>
             )}
           </div>
@@ -254,16 +254,16 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
       {/* B. SIDE-BY-SIDE COMPARISON TABLE */}
       <section className="px-6 py-12">
         <div className="max-w-7xl mx-auto overflow-x-auto custom-scrollbar">
-          <div className="min-w-[900px] bg-[#080808] border border-white/5 rounded-[48px] overflow-hidden shadow-2xl">
+          <div className="min-w-[900px] bg-[#080808] border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
             <table className="w-full text-left">
               <thead>
-                <tr className="border-b border-white/10 bg-white/[0.02]">
-                  <th className="p-8 text-[10px] font-black uppercase tracking-widest text-gray-500 w-1/5">Dimension</th>
+                <tr className="border-b border-white/10 bg-white/[0.04]">
+                  <th className="p-8 text-xs font-black uppercase tracking-widest text-gray-300 w-1/5">Dimension</th>
                   {selectedCareers.map(c => (
-                    <th key={c.id} className="p-8 text-center border-l border-white/5">
+                    <th key={c.id} className="p-8 text-center border-l border-white/10">
                       <div className="flex flex-col items-center gap-2">
                         <span className="text-blue-500 text-xs font-black uppercase tracking-widest">{c.name}</span>
-                        <span className="text-[9px] text-gray-600 font-black uppercase tracking-[0.2em]">{c.industry}</span>
+                        <span className="text-xs text-gray-400 font-black uppercase tracking-[0.2em]">{c.industry}</span>
                       </div>
                     </th>
                   ))}
@@ -280,15 +280,15 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
                   { label: "Learning Curve", key: "learningCurve" },
                 ].map((row, idx) => (
                   <tr key={idx} className="hover:bg-white/[0.01] transition-colors group">
-                    <td className="p-8 text-[11px] font-black uppercase text-gray-400 tracking-widest group-hover:text-white transition-colors">
+                    <td className="p-8 text-sm font-black uppercase text-gray-200 tracking-widest group-hover:text-white transition-colors">
                       {row.label}
                     </td>
                     {selectedCareers.map(c => (
-                      <td key={c.id} className="p-8 text-center border-l border-white/5">
+                      <td key={c.id} className="p-8 text-center border-l border-white/10">
                         {row.isTags ? (
                           <div className="flex flex-wrap justify-center gap-1.5">
                             {c.skills.map(s => (
-                              <span key={s} className="px-2 py-1 rounded-lg bg-white/5 text-[8px] font-black text-gray-500 uppercase tracking-widest border border-white/5">{s}</span>
+                              <span key={s} className="px-2 py-1 rounded-lg bg-white/5 text-sm font-black text-gray-300 uppercase tracking-widest border border-white/10">{s}</span>
                             ))}
                           </div>
                         ) : row.isSalary ? (
@@ -315,7 +315,7 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {selectedCareers.map(c => (
-            <div key={c.id} className="p-8 rounded-[40px] bg-white/[0.01] border border-white/5 relative overflow-hidden group hover:border-blue-500/30 transition-all">
+            <div key={c.id} className="p-8 rounded-[40px] bg-white/[0.01] border border-white/10 relative overflow-hidden group hover:border-blue-500/30 transition-all">
               <div className="absolute top-0 right-0 p-6 opacity-20">
                  <div className="w-16 h-16 rounded-full border-4 border-blue-500/20 flex items-center justify-center">
                     <span className="text-xs font-black text-blue-500">{c.matchScore}%</span>
@@ -325,15 +325,15 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
               
               <div className="space-y-6">
                 <div>
-                  <p className="text-[9px] font-black text-blue-500 uppercase mb-3 tracking-widest">Strengths</p>
+                  <p className="text-xs font-black text-blue-500 uppercase mb-3 tracking-widest">Strengths</p>
                   <div className="flex flex-wrap gap-2">
-                    {c.strengths.map(s => <span key={s} className="text-[10px] text-gray-300 font-bold uppercase">{s}</span>)}
+                    {c.strengths.map(s => <span key={s} className="text-xs text-gray-300 font-bold uppercase">{s}</span>)}
                   </div>
                 </div>
                 <div>
-                  <p className="text-[9px] font-black text-red-500 uppercase mb-3 tracking-widest">Risk Areas</p>
+                  <p className="text-xs font-black text-red-500 uppercase mb-3 tracking-widest">Risk Areas</p>
                   <div className="flex flex-wrap gap-2">
-                    {c.risks.map(r => <span key={r} className="text-[10px] text-gray-500 font-bold uppercase">{r}</span>)}
+                    {c.risks.map(r => <span key={r} className="text-xs text-gray-300 font-bold uppercase">{r}</span>)}
                   </div>
                 </div>
               </div>
@@ -349,30 +349,30 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
           <div className="h-px flex-grow bg-white/10" />
         </div>
 
-        <div className="p-10 rounded-[48px] bg-white/[0.01] border border-white/5">
+        <div className="p-10 rounded-3xl bg-white/[0.01] border border-white/10">
            <div className="space-y-10">
               {selectedCareers.map(c => (
                 <div key={c.id} className="flex flex-col lg:flex-row items-center gap-10">
                   <div className="lg:w-1/4">
                     <p className="text-xs font-black uppercase tracking-[0.2em] text-white">{c.name}</p>
-                    <p className="text-[9px] text-gray-500 font-black uppercase mt-1">Persona Analysis</p>
+                    <p className="text-xs text-gray-300 font-black uppercase mt-1">Persona Analysis</p>
                   </div>
                   <div className="flex-grow grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
                      <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center group hover:border-blue-500 transition-all">
-                        <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Archetype</p>
-                        <p className="text-[10px] font-black text-blue-400 uppercase tracking-widest">{c.personality}</p>
+                        <p className="text-sm font-black text-gray-400 uppercase mb-1">Archetype</p>
+                        <p className="text-xs font-black text-blue-400 uppercase tracking-widest">{c.personality}</p>
                      </div>
                      <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
-                        <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Flexibility</p>
-                        <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest">{c.wlb}</p>
+                        <p className="text-sm font-black text-gray-400 uppercase mb-1">Flexibility</p>
+                        <p className="text-xs font-black text-cyan-400 uppercase tracking-widest">{c.wlb}</p>
                      </div>
                      <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
-                        <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Stress</p>
-                        <p className="text-[10px] font-black text-red-500 uppercase tracking-widest">{c.stress}</p>
+                        <p className="text-sm font-black text-gray-400 uppercase mb-1">Stress</p>
+                        <p className="text-xs font-black text-red-500 uppercase tracking-widest">{c.stress}</p>
                      </div>
                      <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
-                        <p className="text-[8px] font-black text-gray-600 uppercase mb-1">Volatility</p>
-                        <p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">{c.marketVolatility}</p>
+                        <p className="text-sm font-black text-gray-400 uppercase mb-1">Volatility</p>
+                        <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{c.marketVolatility}</p>
                      </div>
                   </div>
                 </div>
@@ -390,7 +390,7 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
               <div className="flex justify-between items-end">
                 <div>
                    <h4 className="text-sm font-black uppercase tracking-widest text-white">{c.name}</h4>
-                   <p className="text-[9px] text-gray-600 uppercase font-black tracking-widest mt-1">Automation Displacement Risk</p>
+                   <p className="text-xs text-gray-400 uppercase font-black tracking-widest mt-1">Automation Displacement Risk</p>
                 </div>
                 <span className="text-lg font-black text-red-500">{c.automationRisk}%</span>
               </div>
@@ -400,7 +400,7 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
                   style={{ width: `${c.automationRisk}%` }}
                 />
               </div>
-              <div className="flex justify-between text-[9px] font-black uppercase tracking-widest text-gray-500">
+              <div className="flex justify-between text-xs font-black uppercase tracking-widest text-gray-300">
                 <span>Industry Volatility: <span className="text-white">{c.marketVolatility}</span></span>
                 <span>Role Persistence: <span className="text-white">{100 - c.automationRisk}%</span></span>
               </div>
@@ -414,13 +414,13 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[100px]" />
         
         <div className="relative z-10 space-y-10">
-          <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest uppercase">
+          <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">
             AI Soulmate Decision Engine
           </div>
           <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
             Optimal <span className="gradient-text">Destiny</span> Found.
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-200 text-lg max-w-2xl mx-auto leading-relaxed">
             Based on your high aptitude for <span className="text-white">Neural Logic</span> and <span className="text-white">Systems Thinking</span>, 
             the AI recommends the <span className="text-blue-500 font-black uppercase">{selectedCareers.sort((a,b) => b.matchScore - a.matchScore)[0].name}</span> pathway 
             for maximum professional ROI and personal fulfillment.
@@ -429,11 +429,11 @@ const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
               onClick={() => onNavigate('explorer')}
-              className="px-12 py-6 bg-blue-600 hover:bg-blue-500 text-white rounded-[24px] font-black transition-all shadow-2xl shadow-blue-600/40 uppercase tracking-[0.2em] text-[10px]"
+              className="px-12 py-6 bg-blue-600 hover:bg-blue-500 text-white rounded-[24px] font-black transition-all shadow-2xl shadow-blue-600/40 uppercase tracking-[0.2em] text-xs"
             >
               Initialize Roadmap
             </button>
-            <button className="px-12 py-6 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-[24px] font-black transition-all backdrop-blur-md uppercase tracking-[0.2em] text-[10px]">
+            <button className="px-12 py-6 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-[24px] font-black transition-all backdrop-blur-md uppercase tracking-[0.2em] text-xs">
               Export Analysis
             </button>
           </div>

@@ -61,14 +61,14 @@ const OpportunitiesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
   return (
     <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans">
       {/* HERO */}
-      <section className="relative pt-28 pb-16 px-6 border-b border-white/5">
+      <section className="relative pt-28 pb-16 px-6 border-b border-white/10">
         <div className="absolute inset-0 z-0"><div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[180px] rounded-full" /></div>
         <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest uppercase">OPPORTUNITY COMMAND CENTER</div>
+          <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">OPPORTUNITY COMMAND CENTER</div>
           <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-10">
             Your <br/><span className="gradient-text">Opportunities.</span>
           </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg font-medium leading-relaxed mb-12">
+          <p className="text-gray-200 max-w-2xl mx-auto text-lg font-medium leading-relaxed mb-12">
             Apprenticeships, scholarships, certifications, exams, and admissions — everything you need to advance, in one place.
           </p>
 
@@ -76,10 +76,10 @@ const OpportunitiesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {(Object.keys(ALL_DATA) as Tab[]).map(key => (
               <button key={key} onClick={() => { setActiveTab(key); setSearch(''); }}
-                className={`px-6 py-3 rounded-2xl font-black uppercase tracking-[0.12em] text-[10px] transition-all border ${
-                  activeTab === key ? 'bg-blue-600 border-blue-400 text-white shadow-xl' : 'bg-white/5 border-white/10 text-gray-500 hover:text-white'
+                className={`px-6 py-3 rounded-2xl font-black uppercase tracking-[0.12em] text-xs transition-all border ${
+                  activeTab === key ? 'bg-blue-600 border-blue-400 text-white shadow-xl' : 'bg-white/5 border-white/10 text-gray-300 hover:text-white'
                 }`}
-              >{ALL_DATA[key].label}<span className="ml-2 text-[9px] opacity-60">{ALL_DATA[key].data.length}</span></button>
+              >{ALL_DATA[key].label}<span className="ml-2 text-xs opacity-60">{ALL_DATA[key].data.length}</span></button>
             ))}
           </div>
 
@@ -87,7 +87,7 @@ const OpportunitiesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
           <div className="max-w-3xl mx-auto">
             <input type="text" value={search} onChange={e => setSearch(e.target.value)}
               placeholder={`Search ${current.label.toLowerCase()}...`}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-lg focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-600"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-lg focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-400"
             />
           </div>
         </div>
@@ -97,34 +97,34 @@ const OpportunitiesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <div className="flex justify-between items-end mb-16">
           <h2 className="text-3xl font-black uppercase tracking-tight">{current.label} <span className="text-blue-500">Hub.</span></h2>
-          <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{filtered.length} Results</p>
+          <p className="text-xs font-black text-gray-300 uppercase tracking-widest">{filtered.length} Results</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {filtered.map(item => (
-            <div key={item.id} className="group flex flex-col bg-[#0a0a0a] border border-white/5 rounded-[48px] overflow-hidden hover:border-blue-500/40 transition-all duration-500 p-10">
+            <div key={item.id} className="group flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden hover:border-blue-500/40 transition-all duration-500 p-10">
               <div className="mb-6">
                 <div className="flex justify-between items-start mb-4">
-                  <span className="text-[9px] font-black text-blue-500 uppercase tracking-[0.3em]">{item.provider} • {item.type}</span>
-                  {item.deadline && <span className="px-3 py-1 bg-orange-500/10 text-orange-500 border border-orange-500/20 rounded-full text-[8px] font-black uppercase">{item.deadline}</span>}
+                  <span className="text-xs font-black text-blue-500 uppercase tracking-[0.3em]">{item.provider} • {item.type}</span>
+                  {item.deadline && <span className="px-3 py-1 bg-orange-500/10 text-orange-500 border border-orange-500/20 rounded-full text-sm font-black uppercase">{item.deadline}</span>}
                 </div>
                 <h3 className="text-xl font-black uppercase text-white leading-tight group-hover:text-blue-400 transition-colors tracking-tighter">{item.title}</h3>
               </div>
-              <p className="text-gray-400 text-sm font-medium leading-relaxed mb-6">{item.description}</p>
+              <p className="text-gray-200 text-sm font-medium leading-relaxed mb-6">{item.description}</p>
 
               <div className="space-y-4 mt-auto">
                 {(item.amount || item.duration) && (
                   <div className="grid grid-cols-2 gap-4">
-                    {item.amount && <div><p className="text-[8px] font-black text-gray-600 uppercase mb-1">Amount</p><p className="text-xs font-black text-emerald-400">{item.amount}</p></div>}
-                    {item.duration && <div><p className="text-[8px] font-black text-gray-600 uppercase mb-1">Duration</p><p className="text-xs font-black text-white">{item.duration}</p></div>}
+                    {item.amount && <div><p className="text-sm font-black text-gray-400 uppercase mb-1">Amount</p><p className="text-xs font-black text-emerald-400">{item.amount}</p></div>}
+                    {item.duration && <div><p className="text-sm font-black text-gray-400 uppercase mb-1">Duration</p><p className="text-xs font-black text-white">{item.duration}</p></div>}
                   </div>
                 )}
-                <div className="pt-4 border-t border-white/5">
-                  <p className="text-[8px] font-black text-gray-600 uppercase mb-2">Eligibility</p>
-                  <p className="text-[10px] font-black text-gray-400 uppercase">{item.eligibility}</p>
+                <div className="pt-4 border-t border-white/10">
+                  <p className="text-sm font-black text-gray-400 uppercase mb-2">Eligibility</p>
+                  <p className="text-xs font-black text-gray-200 uppercase">{item.eligibility}</p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {item.tags.map(t => <span key={t} className="px-3 py-1 bg-white/5 rounded-lg text-[8px] font-black text-gray-500 uppercase tracking-widest">#{t}</span>)}
+                  {item.tags.map(t => <span key={t} className="px-3 py-1 bg-white/5 rounded-lg text-sm font-black text-gray-300 uppercase tracking-widest">#{t}</span>)}
                 </div>
               </div>
             </div>

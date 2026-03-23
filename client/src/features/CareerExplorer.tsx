@@ -74,7 +74,7 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-lg focus:outline-none focus:border-blue-500 transition-all backdrop-blur-md"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                <svg className="w-6 h-6 text-gray-500 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-gray-300 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
@@ -82,7 +82,7 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
 
             <div className="flex flex-wrap justify-center gap-3">
               {["Remote", "Field Work", "Research", "Corporate", "Freelance"].map(filter => (
-                <button key={filter} className="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:border-blue-500 transition-all">
+                <button key={filter} className="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-black uppercase tracking-widest hover:bg-blue-600 hover:border-blue-500 transition-all">
                   {filter}
                 </button>
               ))}
@@ -92,16 +92,16 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
       </section>
 
       {/* C. CAREER CATEGORIES / DOMAINS */}
-      <section className="py-12 px-6 border-y border-white/5 bg-black/20">
+      <section className="py-12 px-6 border-y border-white/10 bg-black/20">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
-            <h2 className="text-xl font-black uppercase tracking-widest text-gray-400">Domains</h2>
+            <h2 className="text-xl font-black uppercase tracking-widest text-gray-200">Domains</h2>
             <div className="h-px flex-grow bg-white/10" />
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
             <button 
               onClick={() => setSelectedCategory(null)}
-              className={`px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-all ${!selectedCategory ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-400 hover:text-white'}`}
+              className={`px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-all ${!selectedCategory ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-200 hover:text-white'}`}
             >
               All Roles
             </button>
@@ -109,7 +109,7 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
               <button 
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-all ${selectedCategory === cat ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-400 hover:text-white'}`}
+                className={`px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-all ${selectedCategory === cat ? 'bg-blue-600 text-white' : 'bg-white/5 text-gray-200 hover:text-white'}`}
               >
                 {cat}
               </button>
@@ -126,9 +126,9 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
             <h3 className="text-sm font-black uppercase tracking-[0.3em] text-blue-500 border-l-2 border-blue-500 pl-4">Trending Now</h3>
             <div className="space-y-4">
               {CAREERS.filter(c => c.trending || c.emerging).map(c => (
-                <div key={c.id} className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-blue-500/30 transition-all cursor-pointer group">
+                <div key={c.id} className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-blue-500/30 transition-all cursor-pointer group">
                   <div className="flex items-center justify-between mb-2">
-                    <span className={`text-[8px] font-black px-2 py-0.5 rounded ${c.trending ? 'bg-orange-500/20 text-orange-400' : 'bg-blue-500/20 text-blue-400'} uppercase tracking-widest`}>
+                    <span className={`text-sm font-black px-2 py-0.5 rounded ${c.trending ? 'bg-orange-500/20 text-orange-400' : 'bg-blue-500/20 text-blue-400'} uppercase tracking-widest`}>
                       {c.trending ? 'Trending' : 'Emerging'}
                     </span>
                     <div className="w-10 h-4 bg-white/5 rounded relative overflow-hidden">
@@ -144,13 +144,13 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
           {/* E. SKILL-BASED DISCOVERY */}
           <div className="space-y-6">
             <h3 className="text-sm font-black uppercase tracking-[0.3em] text-cyan-500 border-l-2 border-cyan-500 pl-4">Skill Discovery</h3>
-            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest leading-relaxed">Select your toolkit to see matching destinies.</p>
+            <p className="text-xs text-gray-300 font-bold uppercase tracking-widest leading-relaxed">Select your toolkit to see matching destinies.</p>
             <div className="flex flex-wrap gap-2">
               {["Python", "Logic", "Ethics", "3D Modeling", "Leadership", "Math", "Legal", "Writing"].map(skill => (
                 <button 
                   key={skill}
                   onClick={() => toggleSkill(skill)}
-                  className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${selectedSkills.includes(skill) ? 'bg-cyan-600 text-white' : 'bg-white/5 text-gray-500 hover:text-white'}`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${selectedSkills.includes(skill) ? 'bg-cyan-600 text-white' : 'bg-white/5 text-gray-300 hover:text-white'}`}
                 >
                   {skill}
                 </button>
@@ -164,50 +164,50 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-2xl font-black uppercase tracking-tighter">Market <span className="text-blue-500">Inventory</span></h2>
             <div className="flex gap-4">
-              <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Showing {filteredCareers.length} roles</span>
+              <span className="text-xs font-black text-gray-300 uppercase tracking-widest">Showing {filteredCareers.length} roles</span>
             </div>
           </div>
 
           {/* F. ENTRY-LEVEL vs ADVANCED SPLIT */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filteredCareers.map((career) => (
-              <div key={career.id} className="group relative p-8 rounded-[32px] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
+              <div key={career.id} className="group relative p-8 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-blue-500/30 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
                 <div className="absolute top-0 right-0 p-6">
-                  <span className={`text-[9px] font-black uppercase tracking-widest ${career.level === 'Entry' ? 'text-green-500' : 'text-purple-500'}`}>
+                  <span className={`text-xs font-black uppercase tracking-widest ${career.level === 'Entry' ? 'text-green-500' : 'text-purple-500'}`}>
                     {career.level} Level
                   </span>
                 </div>
                 
                 <div className="mb-6">
-                  <p className="text-[10px] font-black text-blue-500/60 uppercase tracking-[0.2em] mb-2">{career.industry}</p>
+                  <p className="text-xs font-black text-blue-500/60 uppercase tracking-[0.2em] mb-2">{career.industry}</p>
                   <h3 className="text-2xl font-black text-white group-hover:text-white transition-colors uppercase tracking-tight leading-none mb-4">{career.name}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed font-medium min-h-[3rem]">
+                  <p className="text-gray-200 text-sm leading-relaxed font-medium min-h-[3rem]">
                     {career.description}
                   </p>
                 </div>
 
-                <div className="mt-auto space-y-4 pt-6 border-t border-white/5">
+                <div className="mt-auto space-y-4 pt-6 border-t border-white/10">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-[8px] font-black text-gray-600 uppercase tracking-widest mb-1">Avg Salary</p>
+                      <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Avg Salary</p>
                       <p className="text-white text-xs font-black uppercase">{career.salaryRange}</p>
                     </div>
                     <div>
-                      <p className="text-[8px] font-black text-gray-600 uppercase tracking-widest mb-1">Growth</p>
+                      <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Growth</p>
                       <div className="flex items-center gap-2">
                         <div className="flex gap-0.5">
                           {[1,2,3].map(i => (
                             <div key={i} className={`w-1 h-3 rounded-full ${i <= (career.growth === 'High' ? 3 : career.growth === 'Medium' ? 2 : 1) ? 'bg-blue-500' : 'bg-white/10'}`} />
                           ))}
                         </div>
-                        <span className="text-[10px] font-black text-blue-400 uppercase">{career.growth}</span>
+                        <span className="text-xs font-black text-blue-400 uppercase">{career.growth}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-[8px] font-black text-gray-600 uppercase tracking-widest mb-1">Intensity</p>
+                      <p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Intensity</p>
                       <p className="text-xs font-black uppercase text-gray-300">{career.skillIntensity}</p>
                     </div>
                     <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-500 transition-all">
@@ -222,8 +222,8 @@ const CareerExplorer: React.FC<CareerExplorerProps> = ({ onNavigate }) => {
           </div>
 
           {filteredCareers.length === 0 && (
-            <div className="text-center py-20 bg-white/[0.01] border border-dashed border-white/10 rounded-[32px]">
-              <p className="text-gray-500 font-black uppercase tracking-widest">No matching destinies found. Try broadening your search.</p>
+            <div className="text-center py-20 bg-white/[0.01] border border-dashed border-white/10 rounded-2xl">
+              <p className="text-gray-300 font-black uppercase tracking-widest">No matching destinies found. Try broadening your search.</p>
             </div>
           )}
         </div>

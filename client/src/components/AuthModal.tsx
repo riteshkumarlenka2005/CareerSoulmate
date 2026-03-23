@@ -88,7 +88,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                 <button
                     onClick={onClose}
                     aria-label="Close modal"
-                    className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                    className="absolute top-4 right-4 text-gray-200 hover:text-white transition-colors"
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -105,7 +105,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                     <h2 className="text-2xl font-bold text-white">
                         {mode === 'login' ? t('auth.login') : t('auth.signup')}
                     </h2>
-                    <p className="text-gray-400 text-sm mt-2">
+                    <p className="text-gray-200 text-sm mt-2">
                         {mode === 'login'
                             ? 'Welcome back to CareerSoulmate'
                             : 'Start your career journey today'
@@ -126,7 +126,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {mode === 'signup' && (
                         <div>
-                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                            <label className="block text-xs font-bold text-gray-200 uppercase tracking-wider mb-2">
                                 {t('auth.fullName')}
                             </label>
                             <input
@@ -141,7 +141,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                     )}
 
                     <div>
-                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                        <label className="block text-xs font-bold text-gray-200 uppercase tracking-wider mb-2">
                             {t('auth.email')}
                         </label>
                         <input
@@ -155,7 +155,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                        <label className="block text-xs font-bold text-gray-200 uppercase tracking-wider mb-2">
                             {t('auth.password')}
                         </label>
                         <input
@@ -171,7 +171,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                     {mode === 'signup' && (
                         <>
                             <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                                <label className="block text-xs font-bold text-gray-200 uppercase tracking-wider mb-2">
                                     {t('auth.confirmPassword')}
                                 </label>
                                 <input
@@ -185,7 +185,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                                <label className="block text-xs font-bold text-gray-200 uppercase tracking-wider mb-2">
                                     Education Level
                                 </label>
                                 <select
@@ -237,7 +237,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
 
                 {/* Switch Mode */}
                 <div className="mt-6 text-center">
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-200 text-sm">
                         {mode === 'login' ? t('auth.noAccount') : t('auth.hasAccount')}{' '}
                         <button
                             onClick={switchMode}

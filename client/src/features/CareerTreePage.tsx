@@ -674,12 +674,12 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
         <div className="space-y-1">
           <div className="flex items-center gap-3">
              <div className="w-2 h-2 bg-blue-500 animate-pulse shadow-[0_0_10px_#3b82f6]" />
-             <span className="text-[10px] font-black tracking-[0.4em] text-blue-500/60 uppercase">System_Active_Neural_Map</span>
+             <span className="text-xs font-black tracking-[0.4em] text-blue-500/60 uppercase">System_Active_Neural_Map</span>
           </div>
           <h1 className="text-5xl font-black tracking-tighter text-white uppercase leading-none">THE_BLUEPRINT</h1>
           
           <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-[10px] font-black tracking-[0.2em] text-gray-500 uppercase">Nodes_Active:</span>
+            <span className="text-xs font-black tracking-[0.2em] text-gray-300 uppercase">Nodes_Active:</span>
             <span className="text-2xl font-black text-blue-400 tabular-nums">
               {positionedNodes.length.toString().padStart(2, '0')}
             </span>
@@ -700,11 +700,11 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search career node name..."
-                className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl text-lg outline-none focus:border-blue-500 transition-all placeholder:text-gray-600"
+                className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl text-lg outline-none focus:border-blue-500 transition-all placeholder:text-gray-400"
               />
               <button 
                 onClick={() => setIsSearchOpen(false)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-white"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
@@ -722,12 +722,12 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
                       className="flex-grow text-left"
                     >
                       <p className="text-sm font-black text-white group-hover/res:text-blue-400 uppercase tracking-widest">{res.label}</p>
-                      <p className="text-[9px] text-gray-500 uppercase font-black">{res.subLabel || 'Career Path'}</p>
+                      <p className="text-xs text-gray-300 uppercase font-black">{res.subLabel || 'Career Path'}</p>
                     </button>
                     <button 
                       onClick={(e) => { e.stopPropagation(); downloadPath(res.id); }} 
                       title="Download Path from Root"
-                      className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-all border border-white/5"
+                      className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-all border border-white/10"
                     >
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                     </button>
@@ -746,30 +746,30 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
         >
           <div className="p-10 pb-4 flex justify-between items-start">
             <div className="space-y-2">
-              <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/30 text-[10px] font-black text-blue-400 rounded uppercase tracking-widest">Neural Dossier</span>
+              <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/30 text-xs font-black text-blue-400 rounded uppercase tracking-widest">Neural Dossier</span>
               <h2 className="text-4xl font-black text-white uppercase tracking-tighter leading-none">{selectedNodeData.label}</h2>
             </div>
             <button 
               onClick={() => setSelectedNodeId(null)} 
-              className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all group border border-white/5 shrink-0"
+              className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all group border border-white/10 shrink-0"
             >
-              <svg className="w-6 h-6 text-gray-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+              <svg className="w-6 h-6 text-gray-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
 
           <div className="flex-grow overflow-y-auto custom-scrollbar p-10 pt-0 space-y-12 pb-32">
             <section className="space-y-4">
-              <h4 className="text-[10px] font-black text-blue-500 uppercase tracking-[0.4em]">Strategic Overview</h4>
-              <p className="text-gray-400 text-sm leading-relaxed font-medium">{selectedNodeData.overview}</p>
+              <h4 className="text-xs font-black text-blue-500 uppercase tracking-[0.4em]">Strategic Overview</h4>
+              <p className="text-gray-200 text-sm leading-relaxed font-medium">{selectedNodeData.overview}</p>
             </section>
 
             <div className="grid grid-cols-2 gap-6">
               <div className="p-6 rounded-3xl bg-white/5 border border-white/10">
-                <p className="text-[8px] font-black text-gray-500 uppercase mb-2">Projected Salary</p>
+                <p className="text-sm font-black text-gray-300 uppercase mb-2">Projected Salary</p>
                 <p className="text-white font-black uppercase text-xs">{selectedNodeData.salaryRange}</p>
               </div>
               <div className="p-6 rounded-3xl bg-white/5 border border-white/10">
-                <p className="text-[8px] font-black text-gray-500 uppercase mb-2">Demand Level</p>
+                <p className="text-sm font-black text-gray-300 uppercase mb-2">Demand Level</p>
                 <div className="flex gap-1">
                   {[1,2,3,4,5].map(i => <div key={i} className={`w-1 h-3 rounded-full ${i <= 4 ? 'bg-blue-500' : 'bg-white/10'}`} />)}
                 </div>
@@ -777,10 +777,10 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
             </div>
 
             <section className="space-y-4">
-              <h4 className="text-[10px] font-black text-blue-500 uppercase tracking-[0.4em]">Core Competencies</h4>
+              <h4 className="text-xs font-black text-blue-500 uppercase tracking-[0.4em]">Core Competencies</h4>
               <div className="flex flex-wrap gap-2">
                 {selectedNodeData.skills.map(s => (
-                  <span key={s} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black text-gray-400 uppercase tracking-widest hover:text-white hover:border-blue-500 transition-all">{s}</span>
+                  <span key={s} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-xs font-black text-gray-200 uppercase tracking-widest hover:text-white hover:border-blue-500 transition-all">{s}</span>
                 ))}
               </div>
             </section>
@@ -882,7 +882,7 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
                   transform: `translate(-50%, -50%) ${isDragging ? 'scale(1.1)' : ''}`,
                 }}
               >
-                <div className={`absolute -top-6 left-0 text-[8px] font-black uppercase tracking-[0.2em] transition-colors duration-500 ${isNodeActive ? 'text-white' : 'text-gray-500'}`}>
+                <div className={`absolute -top-6 left-0 text-sm font-black uppercase tracking-[0.2em] transition-colors duration-500 ${isNodeActive ? 'text-white' : 'text-gray-300'}`}>
                   {node.parentId ? `BRANCH_LVL_0${node.depth}` : 'ROOT_ORIGIN'}
                 </div>
 
@@ -901,7 +901,7 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
                   <div className={`absolute left-0 top-0 bottom-0 w-1.5 transition-colors duration-500 ${isNodeActive ? 'bg-white' : theme.accent}`} />
                   
                   <div className="flex-grow pl-5 pr-10 flex flex-col justify-center">
-                    <h3 className={`text-[11px] font-black uppercase tracking-widest font-sans leading-none transition-colors duration-300 ${isNodeActive ? 'text-white' : 'text-slate-100 group-hover:text-white'}`}>
+                    <h3 className={`text-sm font-black uppercase tracking-widest font-sans leading-none transition-colors duration-300 ${isNodeActive ? 'text-white' : 'text-slate-100 group-hover:text-white'}`}>
                       {node.label}
                     </h3>
                   </div>

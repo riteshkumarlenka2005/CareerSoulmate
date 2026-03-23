@@ -15,7 +15,7 @@ const CareerTree: React.FC = () => {
             The Interactive <br />
             <span className="gradient-text">Career Branching Tree</span>
           </h2>
-          <p className="text-gray-400 text-lg mb-10 max-w-xl leading-relaxed">
+          <p className="text-gray-200 text-lg mb-10 max-w-xl leading-relaxed">
             Our Career Tree visualization shows you how one skill leads to multiple potential careers. 
             Hover over nodes to see requirements, salary projections, and industry demand.
           </p>
@@ -45,14 +45,14 @@ const CareerTree: React.FC = () => {
         {/* Right Side: Visual Map Representation */}
         <div className="relative group">
           <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-3xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
-          <div className="relative bg-[#0a0a0a] border border-white/5 rounded-3xl p-8 aspect-[1.4/1] flex flex-col shadow-2xl overflow-hidden">
+          <div className="relative bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 aspect-[1.4/1] flex flex-col shadow-2xl overflow-hidden">
             {/* Inner Grid */}
             <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
                  style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
             
             <div className="relative z-10 mb-8">
               <h3 className="text-xl font-bold">Interactive Map</h3>
-              <p className="text-gray-500 text-sm">Discover paths and intersections</p>
+              <p className="text-gray-300 text-sm">Discover paths and intersections</p>
             </div>
 
             {/* Tree Mockup Visualization */}
@@ -78,20 +78,20 @@ const CareerTree: React.FC = () => {
                 </g>
 
                 {/* Nodes & Labels */}
-                <g className="text-[10px] font-medium fill-white">
+                <g className="text-xs font-medium fill-white">
                   {/* Root */}
                   <circle cx="50" cy="150" r="4" className="fill-blue-500 shadow-blue-500 shadow-lg" />
-                  <text x="5" y="153" className="text-[9px] fill-gray-400">Your Future</text>
+                  <text x="5" y="153" className="text-xs fill-gray-400">Your Future</text>
 
                   {/* Categories */}
                   <circle cx="185" cy="50" r="4" className="fill-blue-400" />
-                  <text x="145" y="53" className="text-[8px] fill-gray-300">Technology</text>
+                  <text x="145" y="53" className="text-sm fill-gray-300">Technology</text>
                   
                   <circle cx="185" cy="150" r="4" className="fill-blue-400" />
-                  <text x="145" y="153" className="text-[8px] fill-gray-300">Creative Arts</text>
+                  <text x="145" y="153" className="text-sm fill-gray-300">Creative Arts</text>
                   
                   <circle cx="185" cy="250" r="4" className="fill-blue-400" />
-                  <text x="155" y="253" className="text-[8px] fill-gray-300">Business</text>
+                  <text x="155" y="253" className="text-sm fill-gray-300">Business</text>
 
                   {/* Leaves */}
                   <g className="fill-gray-400">

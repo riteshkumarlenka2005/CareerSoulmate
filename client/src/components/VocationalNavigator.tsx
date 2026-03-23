@@ -27,11 +27,11 @@ const VocationalNavigator: React.FC = () => {
                 { title: "Digital Literacy Core", level: "NSQF Level 3", icon: "💻" },
                 { title: "Advanced Automation", level: "NSQF Level 8", icon: "🤖" }
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-6 p-4 rounded-2xl bg-black/40 border border-white/5 hover:border-blue-500/40 transition-all cursor-pointer group">
+                <div key={i} className="flex items-center gap-6 p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-blue-500/40 transition-all cursor-pointer group">
                   <div className="text-2xl">{item.icon}</div>
                   <div className="flex-grow">
                     <h4 className="text-white font-black uppercase tracking-wide text-sm">{item.title}</h4>
-                    <p className="text-[10px] text-blue-500 font-black uppercase tracking-[0.2em]">{item.level}</p>
+                    <p className="text-xs text-blue-500 font-black uppercase tracking-[0.2em]">{item.level}</p>
                   </div>
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

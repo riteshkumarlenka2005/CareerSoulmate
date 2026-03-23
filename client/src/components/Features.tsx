@@ -37,7 +37,7 @@ const Features: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Why we are your <span className="gradient-text">Soulmate</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-200 max-w-2xl mx-auto">
             Traditional job boards are broken. We built something that actually cares about your long-term fulfillment and happiness.
           </p>
         </div>
@@ -49,7 +49,7 @@ const Features: React.FC = () => {
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-              <p className="text-gray-400 leading-relaxed text-sm">
+              <p className="text-gray-200 leading-relaxed text-sm">
                 {feature.description}
               </p>
             </div>

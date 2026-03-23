@@ -107,15 +107,15 @@ const UserProgress: React.FC<UserProgressProps> = ({ compact = false }) => {
                 <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-xl">
                     <span className="text-xl">⭐</span>
                     <span className="text-lg font-bold text-white">{points}</span>
-                    <span className="text-xs text-gray-400">points</span>
+                    <span className="text-xs text-gray-200">points</span>
                 </div>
             </div>
 
             {/* Level Progress */}
             <div className="mb-6">
                 <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-gray-400">Level {level}</span>
-                    <span className="text-xs text-gray-500">{pointsInLevel}/100 to next level</span>
+                    <span className="text-sm font-medium text-gray-200">Level {level}</span>
+                    <span className="text-xs text-gray-300">{pointsInLevel}/100 to next level</span>
                 </div>
                 <div className="h-2 bg-white/5 rounded-full overflow-hidden">
                     <div
@@ -127,7 +127,7 @@ const UserProgress: React.FC<UserProgressProps> = ({ compact = false }) => {
 
             {/* Badges */}
             <div>
-                <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">
+                <h4 className="text-sm font-bold text-gray-200 uppercase tracking-wider mb-4">
                     Badges Earned ({userBadges.length})
                 </h4>
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
@@ -161,12 +161,12 @@ const UserProgress: React.FC<UserProgressProps> = ({ compact = false }) => {
                         .map(([id, badge]) => (
                             <div
                                 key={id}
-                                className="flex flex-col items-center p-3 bg-white/5 border border-white/5 rounded-xl opacity-40"
+                                className="flex flex-col items-center p-3 bg-white/5 border border-white/10 rounded-xl opacity-40"
                             >
                                 <div className="w-12 h-12 rounded-xl bg-gray-800 flex items-center justify-center mb-2">
                                     <span className="text-2xl grayscale">🔒</span>
                                 </div>
-                                <span className="text-xs font-medium text-gray-500 text-center leading-tight">
+                                <span className="text-xs font-medium text-gray-300 text-center leading-tight">
                                     {badge.name}
                                 </span>
                             </div>

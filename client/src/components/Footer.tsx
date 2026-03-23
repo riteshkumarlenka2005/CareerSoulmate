@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-[#010204] via-[#020617] to-[#0a1e4d] text-white pt-24 pb-12 border-t border-white/5 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-[#010204] via-[#020617] to-[#0a1e4d] text-white pt-24 pb-12 border-t border-white/10 overflow-hidden">
       {/* Decorative Glow Effects */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 blur-[180px] -z-10 animate-pulse" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-900/10 blur-[150px] -z-10" />
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
               <span className="text-2xl font-bold tracking-tight text-[#f8fafc] uppercase leading-none">CareerSoulmate</span>
             </div>
             
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs font-medium">
+            <p className="text-gray-200 text-sm leading-relaxed max-w-xs font-medium">
               Transforming career trajectories through proprietary neural network architectures and planetary-scale labor data.
             </p>
 
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest font-black text-blue-500/60 mb-1">Global HQ</p>
+                  <p className="text-xs uppercase tracking-widest font-black text-blue-500/60 mb-1">Global HQ</p>
                   <p className="text-gray-300 text-sm font-medium">101 Neural Plaza, Silicon Corridor,<br />Innovation District, IND</p>
                 </div>
               </div>
@@ -79,7 +79,7 @@ const Footer: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest font-black text-blue-500/60 mb-1">Direct Support</p>
+                  <p className="text-xs uppercase tracking-widest font-black text-blue-500/60 mb-1">Direct Support</p>
                   <p className="text-gray-300 text-sm font-medium">destiny@careersoulmate.ai</p>
                 </div>
               </div>
@@ -88,11 +88,11 @@ const Footer: React.FC = () => {
 
           {/* Column 2: Essentials */}
           <div>
-            <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-white mb-10 border-l-4 border-blue-600 pl-4">Essentials</h4>
+            <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white mb-10 border-l-4 border-blue-600 pl-4">Essentials</h4>
             <ul className="space-y-5">
               {essentials.map((item, idx) => (
                 <li key={idx}>
-                  <a href={item.path} className="text-gray-400 hover:text-blue-400 transition-all font-bold tracking-widest text-[11px] uppercase flex items-center gap-2 group">
+                  <a href={item.path} className="text-gray-200 hover:text-blue-400 transition-all font-bold tracking-widest text-sm uppercase flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 group-hover:bg-blue-400 transition-colors" />
                     {item.name}
                   </a>
@@ -103,11 +103,11 @@ const Footer: React.FC = () => {
 
           {/* Column 3: Legal */}
           <div>
-            <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-white mb-10 border-l-4 border-blue-600 pl-4">Legal & Trust</h4>
+            <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white mb-10 border-l-4 border-blue-600 pl-4">Legal & Trust</h4>
             <ul className="space-y-5">
               {legal.map((item, idx) => (
                 <li key={idx}>
-                  <a href={item.path} className="text-gray-400 hover:text-blue-400 transition-all font-bold tracking-widest text-[11px] uppercase flex items-center gap-2 group">
+                  <a href={item.path} className="text-gray-200 hover:text-blue-400 transition-all font-bold tracking-widest text-sm uppercase flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 group-hover:bg-blue-400 transition-colors" />
                     {item.name}
                   </a>
@@ -119,28 +119,28 @@ const Footer: React.FC = () => {
           {/* Column 4: Updates & Social */}
           <div className="space-y-10">
             <div>
-              <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-white mb-8 border-l-4 border-blue-600 pl-4">Neural Feed</h4>
-              <div className="bg-[#050505]/60 border border-white/5 rounded-2xl p-4 hover:border-blue-500/30 transition-all cursor-pointer group backdrop-blur-sm">
+              <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white mb-8 border-l-4 border-blue-600 pl-4">Neural Feed</h4>
+              <div className="bg-[#050505]/60 border border-white/10 rounded-2xl p-4 hover:border-blue-500/30 transition-all cursor-pointer group backdrop-blur-sm">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                  <span className="text-[9px] font-black text-blue-500/80 uppercase tracking-widest">Platform Update v2.5</span>
+                  <span className="text-xs font-black text-blue-500/80 uppercase tracking-widest">Platform Update v2.5</span>
                 </div>
-                <p className="text-[11px] text-gray-300 font-bold leading-relaxed mb-4">
+                <p className="text-sm text-gray-300 font-bold leading-relaxed mb-4">
                   Global salary benchmarking expanded to 45 new emerging tech sectors.
                 </p>
-                <span className="text-[9px] font-black text-blue-400 uppercase tracking-widest group-hover:underline">View Intelligence Hub →</span>
+                <span className="text-xs font-black text-blue-400 uppercase tracking-widest group-hover:underline">View Intelligence Hub →</span>
               </div>
             </div>
 
             <div>
-              <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-white mb-6">Network Connect</h4>
+              <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white mb-6">Network Connect</h4>
               <div className="flex flex-wrap gap-3">
                 {socials.map((social, sidx) => (
                   <a 
                     key={sidx} 
                     href="#" 
                     title={social.name}
-                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 hover:border-blue-400 hover:scale-110 transition-all shadow-[0_10px_15px_-3px_rgba(0,0,0,0.5)] active:scale-95"
+                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-200 hover:text-white hover:bg-blue-600 hover:border-blue-400 hover:scale-110 transition-all shadow-[0_10px_15px_-3px_rgba(0,0,0,0.5)] active:scale-95"
                   >
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                       <path d={social.icon} />
@@ -152,13 +152,13 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-[10px] font-black text-gray-500 tracking-[0.4em] uppercase text-center md:text-left">
+        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-xs font-black text-gray-300 tracking-[0.4em] uppercase text-center md:text-left">
             © 2025 CareerSoulmate AI Systems. Global Professional Destiny Managed.
           </p>
           <div className="flex gap-10">
-            <a href="#" className="text-[10px] font-black text-gray-500 hover:text-white uppercase tracking-widest transition-colors">Neural Ethics</a>
-            <a href="#" className="text-[10px] font-black text-gray-500 hover:text-white uppercase tracking-widest transition-colors">Carrier Board</a>
+            <a href="#" className="text-xs font-black text-gray-300 hover:text-white uppercase tracking-widest transition-colors">Neural Ethics</a>
+            <a href="#" className="text-xs font-black text-gray-300 hover:text-white uppercase tracking-widest transition-colors">Carrier Board</a>
           </div>
         </div>
       </div>

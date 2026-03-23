@@ -36,7 +36,7 @@ const LanguageSelector: React.FC = () => {
                     {currentLanguage.code.toUpperCase()}
                 </span>
                 <svg
-                    className={`w-3 h-3 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                    className={`w-3 h-3 text-gray-200 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -48,7 +48,7 @@ const LanguageSelector: React.FC = () => {
             {isOpen && (
                 <div className="absolute right-0 top-full mt-2 w-48 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="px-4 py-2 border-b border-white/10">
-                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                        <p className="text-xs font-bold text-gray-300 uppercase tracking-widest">
                             Select Language
                         </p>
                     </div>
@@ -62,7 +62,7 @@ const LanguageSelector: React.FC = () => {
                             <span className="text-xl">{lang.flag}</span>
                             <div className="flex flex-col items-start">
                                 <span className="text-sm font-medium text-white">{lang.nativeName}</span>
-                                <span className="text-xs text-gray-500">{lang.name}</span>
+                                <span className="text-xs text-gray-300">{lang.name}</span>
                             </div>
                             {language === lang.code && (
                                 <svg className="w-4 h-4 text-blue-500 ml-auto" fill="currentColor" viewBox="0 0 20 20">

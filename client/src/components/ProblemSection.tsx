@@ -40,18 +40,18 @@ const ProblemSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tight">The Modern <span className="text-blue-500">Crisis</span></h2>
-          <p className="text-gray-500 text-xs font-black uppercase tracking-[0.4em]">Why CareerSoulmate Exists</p>
+          <p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em]">Why CareerSoulmate Exists</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {problems.map((p, i) => (
-            <div key={i} className="group relative p-8 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-xl hover:bg-white/[0.05] hover:border-blue-500/30 transition-all duration-500 hover:-translate-y-2">
+            <div key={i} className="group relative p-8 rounded-3xl bg-white/[0.04] border border-white/10 backdrop-blur-xl hover:bg-white/[0.05] hover:border-blue-500/30 transition-all duration-500 hover:-translate-y-2">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5 group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all">
+              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all">
                 {p.icon}
               </div>
               <h3 className="text-xl font-black mb-4 uppercase tracking-wide text-white">{p.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed font-medium">
+              <p className="text-gray-200 text-sm leading-relaxed font-medium">
                 {p.text}
               </p>
             </div>

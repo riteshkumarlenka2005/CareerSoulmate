@@ -33,27 +33,56 @@
 
 @layer utilities {
   .gradient-text {
-    background: linear-gradient(to right, #3b82f6, #06b6d4, #8b5cf6);
+    background: linear-gradient(to right, #60a5fa, #22d3ee, #a78bfa);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(96, 165, 250, 0.4));
   }
 
+  /* Enhanced Hero Background */
   .hero-gradient-overlay {
-    background: linear-gradient(to right, #050505 0%, #050505 40%, transparent 100%);
+    background: linear-gradient(to bottom, transparent 0%, rgba(5, 5, 5, 0.8) 50%, #050505 100%);
   }
 
   @media (max-width: 768px) {
     .hero-gradient-overlay {
-      background: linear-gradient(to bottom, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.7) 100%);
+      background: linear-gradient(to bottom, rgba(5, 5, 5, 0.8) 0%, #050505 100%);
     }
   }
 
+  /* Professional Glassmorphism */
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  /* Premium Colored Glow Shadows */
+  .glow-blue {
+    box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.25);
+  }
+  .glow-purple {
+    box-shadow: 0 0 40px -10px rgba(168, 85, 247, 0.25);
+  }
+  .glow-cyan {
+    box-shadow: 0 0 40px -10px rgba(6, 182, 212, 0.25);
+  }
+  .glow-emerald {
+    box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.25);
+  }
+  .glow-orange {
+    box-shadow: 0 0 40px -10px rgba(249, 115, 22, 0.25);
+  }
+  .glow-rose {
+    box-shadow: 0 0 40px -10px rgba(244, 63, 94, 0.25);
+  }
+
+  /* High Contrast Text Glows */
+  .text-glow-white {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
   }
 }
 

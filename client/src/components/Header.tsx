@@ -218,7 +218,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
             <span className="text-xl font-bold tracking-tight text-[#f8fafc]">
               CareerSoulmate
             </span>
-            <span className="text-[10px] tracking-[0.2em] text-[#94a3b8] uppercase">
+            <span className="text-xs tracking-[0.2em] text-[#94a3b8] uppercase">
               Mapping Destiny
             </span>
           </div>
@@ -238,7 +238,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
               >
                 <button
                   onClick={() => !hasDropdown && item.action?.()}
-                  className={`flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase py-4 transition-colors ${activeDropdown === item.label ? 'text-white' : 'text-[#9ca3af] hover:text-white'}`}
+                  className={`flex items-center gap-1.5 text-sm font-bold tracking-widest uppercase py-4 transition-colors ${activeDropdown === item.label ? 'text-white' : 'text-[#9ca3af] hover:text-white'}`}
                 >
                   {item.label}
                   {hasDropdown && (
@@ -255,7 +255,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
                       <button
                         key={i}
                         onClick={child.action}
-                        className="block w-full text-left px-6 py-3 text-[10px] font-bold text-[#9ca3af] hover:text-white hover:bg-white/5 uppercase tracking-widest transition-all"
+                        className="block w-full text-left px-6 py-3 text-xs font-bold text-[#9ca3af] hover:text-white hover:bg-white/5 uppercase tracking-widest transition-all"
                       >
                         {child.label}
                       </button>
@@ -265,11 +265,11 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
 
                 {/* Mega Menu */}
                 {item.megaMenu && activeDropdown === item.label && (
-                  <div className="absolute top-full w-[680px] bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] animate-in fade-in slide-in-from-top-2 duration-200 border-white/5 left-0">
+                  <div className="absolute top-full w-[680px] bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] animate-in fade-in slide-in-from-top-2 duration-200 border-white/10 left-0">
                     <div className={`grid ${item.megaMenu.length > 1 ? 'grid-cols-2 gap-x-12' : 'grid-cols-1'} gap-y-10`}>
                       {item.megaMenu.map((section, sIdx) => (
                         <div key={sIdx} className="space-y-6">
-                          <h4 className="text-[11px] font-black tracking-[0.2em] text-[#4285f4] uppercase px-2 border-l-2 border-[#4285f4]/30">
+                          <h4 className="text-sm font-black tracking-[0.2em] text-[#4285f4] uppercase px-2 border-l-2 border-[#4285f4]/30">
                             {section.title}
                           </h4>
                           <div className="space-y-2">
@@ -283,10 +283,10 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
                                   {subItem.icon}
                                 </div>
                                 <div className="flex flex-col items-start text-left">
-                                  <span className="text-[12px] font-extrabold text-[#f8fafc] group-hover:text-white tracking-wide uppercase mb-1">
+                                  <span className="text-sm font-extrabold text-[#f8fafc] group-hover:text-white tracking-wide uppercase mb-1">
                                     {subItem.label}
                                   </span>
-                                  <span className="text-[11px] text-[#94a3b8] font-medium leading-relaxed group-hover:text-[#cbd5e1]">
+                                  <span className="text-sm text-[#94a3b8] font-medium leading-relaxed group-hover:text-[#cbd5e1]">
                                     {subItem.description}
                                   </span>
                                 </div>
@@ -321,9 +321,9 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
                 </div>
                 <div className="hidden md:flex flex-col items-start">
                   <span className="text-xs font-semibold text-white">{user.fullName.split(' ')[0]}</span>
-                  <span className="text-[10px] text-gray-500">{user.points || 0} pts</span>
+                  <span className="text-xs text-gray-300">{user.points || 0} pts</span>
                 </div>
-                <svg className={`w-3 h-3 text-gray-400 transition-transform ${showUserMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className={`w-3 h-3 text-gray-200 transition-transform ${showUserMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
@@ -332,7 +332,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
                 <div className="absolute right-0 top-full mt-2 w-64 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2">
                   <div className="px-4 py-3 border-b border-white/10">
                     <p className="text-sm font-semibold text-white">{user.fullName}</p>
-                    <p className="text-xs text-gray-500">{user.email}</p>
+                    <p className="text-xs text-gray-300">{user.email}</p>
                   </div>
                   <div className="px-4 py-3 border-b border-white/10">
                     <UserProgress compact />
@@ -362,13 +362,13 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
             <div className="hidden lg:flex items-center gap-6">
               <button
                 onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}
-                className="text-[11px] font-bold tracking-[0.15em] text-[#9ca3af] hover:text-white uppercase transition-colors px-2"
+                className="text-sm font-bold tracking-[0.15em] text-[#9ca3af] hover:text-white uppercase transition-colors px-2"
               >
                 {t('nav.login')}
               </button>
               <button
                 onClick={() => { setAuthMode('signup'); setShowAuthModal(true); }}
-                className="text-[11px] font-bold tracking-[0.15em] px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white uppercase transition-all rounded-lg shadow-lg shadow-blue-500/25 whitespace-nowrap"
+                className="text-sm font-bold tracking-[0.15em] px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white uppercase transition-all rounded-lg shadow-lg shadow-blue-500/25 whitespace-nowrap"
               >
                 {t('nav.signup')}
               </button>
@@ -397,7 +397,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
         <div className="xl:hidden fixed inset-0 top-20 bg-black p-6 overflow-y-auto z-[90] animate-in slide-in-from-bottom-2">
           {navItems.map((item, idx) => (
             <div key={idx} className="mb-8">
-              <div className="text-[10px] font-black tracking-[0.2em] text-blue-500 uppercase mb-4 px-2 border-l-2 border-blue-500/50">
+              <div className="text-xs font-black tracking-[0.2em] text-blue-500 uppercase mb-4 px-2 border-l-2 border-blue-500/50">
                 {item.label}
               </div>
 
@@ -410,7 +410,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
                         child.action?.();
                         setIsMobileMenuOpen(false);
                       }}
-                      className="block w-full text-left py-3 px-2 text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider"
+                      className="block w-full text-left py-3 px-2 text-sm font-bold text-gray-200 hover:text-white uppercase tracking-wider"
                     >
                       {child.label}
                     </button>
@@ -452,7 +452,7 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
                     item.action?.();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="block w-full text-left py-3 px-2 text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider"
+                  className="block w-full text-left py-3 px-2 text-sm font-bold text-gray-200 hover:text-white uppercase tracking-wider"
                 >
                   {item.label}
                 </button>
@@ -461,10 +461,10 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
           ))}
 
           <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
-            <button className="w-full py-4 text-[11px] font-bold text-center text-white uppercase tracking-widest bg-blue-600 rounded-xl">
+            <button className="w-full py-4 text-sm font-bold text-center text-white uppercase tracking-widest bg-blue-600 rounded-xl">
               Get Started
             </button>
-            <button className="w-full py-4 text-[11px] font-bold text-center text-gray-400 uppercase tracking-widest">
+            <button className="w-full py-4 text-sm font-bold text-center text-gray-200 uppercase tracking-widest">
               Login to Account
             </button>
           </div>

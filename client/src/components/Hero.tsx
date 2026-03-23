@@ -18,7 +18,7 @@ const Hero: React.FC<HeroProps> = ({ role, setRole }) => {
       {/* Role Switcher Vertical Sidebar - Only in Hero */}
       <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-3">
         <div className="h-20 w-px bg-gradient-to-b from-transparent via-blue-500/50 to-transparent mx-auto mb-4" />
-        <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] vertical-text mb-6 [writing-mode:vertical-lr] rotate-180">
+        <p className="text-xs font-black text-gray-300 uppercase tracking-[0.3em] vertical-text mb-6 [writing-mode:vertical-lr] rotate-180">
           Select Identity
         </p>
         {roles.map((r) => (
@@ -26,10 +26,10 @@ const Hero: React.FC<HeroProps> = ({ role, setRole }) => {
             key={r}
             onClick={() => setRole(r)}
             className={`group relative flex items-center gap-4 transition-all duration-300 ${
-              role === r ? 'text-white' : 'text-gray-500 hover:text-gray-300'
+              role === r ? 'text-white' : 'text-gray-300 hover:text-gray-300'
             }`}
           >
-            <span className={`text-[10px] font-black uppercase tracking-widest text-right min-w-[120px] transition-all duration-300 ${
+            <span className={`text-xs font-black uppercase tracking-widest text-right min-w-[120px] transition-all duration-300 ${
               role === r ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
             }`}>
               {r.replace('_', ' ')}
@@ -90,13 +90,13 @@ const Hero: React.FC<HeroProps> = ({ role, setRole }) => {
             </button>
           </div>
           
-          <div className="mt-12 flex items-center gap-4 text-gray-400 text-sm">
+          <div className="mt-12 flex items-center gap-4 text-gray-200 text-sm">
             <div className="flex -space-x-2">
               {[10, 11, 12, 13].map(i => (
                 <img key={i} src={`https://picsum.photos/seed/soulmate-${i}/64/64`} className="w-8 h-8 rounded-full border-2 border-[#050505]" alt="Professional User" />
               ))}
             </div>
-            <p className="uppercase text-[10px] font-bold tracking-widest">Trusted by <span className="text-blue-400">50,000+</span> professionals worldwide</p>
+            <p className="uppercase text-xs font-bold tracking-widest">Trusted by <span className="text-blue-400">50,000+</span> professionals worldwide</p>
           </div>
         </div>
       </div>

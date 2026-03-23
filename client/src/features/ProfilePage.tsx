@@ -48,7 +48,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
     return (
         <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700">
             {/* Header */}
-            <section className="relative pt-28 pb-16 px-6 border-b border-white/5">
+            <section className="relative pt-28 pb-16 px-6 border-b border-white/10">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[180px] rounded-full" />
                 </div>
@@ -70,7 +70,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                         {/* Info */}
                         <div className="text-center md:text-left flex-grow">
                             <h1 className="text-4xl font-bold text-white mb-2">{user.fullName}</h1>
-                            <p className="text-gray-400 mb-4">{user.email}</p>
+                            <p className="text-gray-200 mb-4">{user.email}</p>
                             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                                 <span className="px-4 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-full text-sm text-blue-400 capitalize">
                                     {user.role}
@@ -118,7 +118,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                         {isEditing ? (
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Full Name</label>
+                                    <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Full Name</label>
                                     <input
                                         type="text"
                                         value={editForm.fullName}
@@ -129,7 +129,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Phone</label>
+                                    <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Phone</label>
                                     <input
                                         type="tel"
                                         value={editForm.phone}
@@ -139,7 +139,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Education Level</label>
+                                    <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Education Level</label>
                                     <select
                                         value={editForm.educationLevel}
                                         onChange={(e) => setEditForm(prev => ({ ...prev, educationLevel: e.target.value }))}
@@ -154,7 +154,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Stream/Field</label>
+                                    <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Stream/Field</label>
                                     <input
                                         type="text"
                                         value={editForm.stream}
@@ -180,24 +180,24 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                             </div>
                         ) : (
                             <div className="space-y-4">
-                                <div className="flex justify-between py-3 border-b border-white/5">
-                                    <span className="text-gray-400">Email</span>
+                                <div className="flex justify-between py-3 border-b border-white/10">
+                                    <span className="text-gray-200">Email</span>
                                     <span className="text-white">{user.email}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/5">
-                                    <span className="text-gray-400">Phone</span>
+                                <div className="flex justify-between py-3 border-b border-white/10">
+                                    <span className="text-gray-200">Phone</span>
                                     <span className="text-white">{user.phone || 'Not set'}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/5">
-                                    <span className="text-gray-400">Education Level</span>
+                                <div className="flex justify-between py-3 border-b border-white/10">
+                                    <span className="text-gray-200">Education Level</span>
                                     <span className="text-white capitalize">{user.education?.level?.replace('class', 'Class ') || 'Not set'}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/5">
-                                    <span className="text-gray-400">Stream</span>
+                                <div className="flex justify-between py-3 border-b border-white/10">
+                                    <span className="text-gray-200">Stream</span>
                                     <span className="text-white">{user.education?.stream || 'Not set'}</span>
                                 </div>
                                 <div className="flex justify-between py-3">
-                                    <span className="text-gray-400">Member Since</span>
+                                    <span className="text-gray-200">Member Since</span>
                                     <span className="text-white">{new Date(user.createdAt).toLocaleDateString('en-IN', { year: 'numeric', month: 'long' })}</span>
                                 </div>
                             </div>
@@ -211,19 +211,19 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
                             <p className="text-3xl font-bold text-blue-400">{user.completedAssessments?.length || 0}</p>
-                            <p className="text-xs text-gray-500 uppercase mt-1">Assessments</p>
+                            <p className="text-xs text-gray-300 uppercase mt-1">Assessments</p>
                         </div>
                         <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
                             <p className="text-3xl font-bold text-purple-400">{user.badges?.length || 0}</p>
-                            <p className="text-xs text-gray-500 uppercase mt-1">Badges</p>
+                            <p className="text-xs text-gray-300 uppercase mt-1">Badges</p>
                         </div>
                         <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
                             <p className="text-3xl font-bold text-emerald-400">3</p>
-                            <p className="text-xs text-gray-500 uppercase mt-1">Bookmarked Colleges</p>
+                            <p className="text-xs text-gray-300 uppercase mt-1">Bookmarked Colleges</p>
                         </div>
                         <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
                             <p className="text-3xl font-bold text-orange-400">7</p>
-                            <p className="text-xs text-gray-500 uppercase mt-1">Day Streak</p>
+                            <p className="text-xs text-gray-300 uppercase mt-1">Day Streak</p>
                         </div>
                     </div>
                 </div>

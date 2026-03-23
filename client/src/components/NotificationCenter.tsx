@@ -92,13 +92,13 @@ const NotificationCenter: React.FC = () => {
                         {notifications.length === 0 ? (
                             <div className="py-12 text-center">
                                 <div className="text-4xl mb-3">🔔</div>
-                                <p className="text-gray-500">No notifications yet</p>
+                                <p className="text-gray-300">No notifications yet</p>
                             </div>
                         ) : (
                             notifications.map((notification) => (
                                 <div
                                     key={notification.id}
-                                    className={`px-4 py-3 border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer ${!notification.read ? 'bg-blue-500/5' : ''}`}
+                                    className={`px-4 py-3 border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer ${!notification.read ? 'bg-blue-500/5' : ''}`}
                                     onClick={() => {
                                         markAsRead(notification.id);
                                         if (notification.actionUrl) {
@@ -122,10 +122,10 @@ const NotificationCenter: React.FC = () => {
                                                     <span className={`w-2 h-2 rounded-full ${getPriorityColor(notification.priority)}`} />
                                                 )}
                                             </div>
-                                            <p className="text-xs text-gray-400 line-clamp-2">
+                                            <p className="text-xs text-gray-200 line-clamp-2">
                                                 {notification.message}
                                             </p>
-                                            <span className="text-xs text-gray-500 mt-1 block">
+                                            <span className="text-xs text-gray-300 mt-1 block">
                                                 {formatTime(notification.timestamp)}
                                             </span>
                                         </div>
@@ -139,7 +139,7 @@ const NotificationCenter: React.FC = () => {
                                             aria-label="Dismiss notification"
                                             className="p-1 hover:bg-white/10 rounded-lg transition-colors flex-shrink-0"
                                         >
-                                            <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg className="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </button>

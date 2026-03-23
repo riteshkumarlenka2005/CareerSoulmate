@@ -56,15 +56,15 @@ const LearningPathsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
   return (
     <div className="bg-[#050505] text-white min-h-screen pb-40 animate-in fade-in duration-700 font-sans">
       {/* HERO */}
-      <section className="relative pt-28 pb-16 px-6 border-b border-white/5">
+      <section className="relative pt-28 pb-16 px-6 border-b border-white/10">
         <div className="absolute inset-0 z-0"><div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 blur-[180px] rounded-full" /></div>
         <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest uppercase">LEARNING INTELLIGENCE ENGINE</div>
+          <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black tracking-widest uppercase">LEARNING INTELLIGENCE ENGINE</div>
           <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-10">Learning <br/><span className="gradient-text">Paths.</span></h1>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg font-medium leading-relaxed mb-16">Skill pathways, NEP 2020, and NSQF levels — your complete guide to structured learning.</p>
+          <p className="text-gray-200 max-w-2xl mx-auto text-lg font-medium leading-relaxed mb-16">Skill pathways, NEP 2020, and NSQF levels — your complete guide to structured learning.</p>
           <div className="flex justify-center gap-4">
             {(['pathways', 'nep', 'nsqf'] as Tab[]).map(t => (
-              <button key={t} onClick={() => setActiveTab(t)} className={`px-8 py-4 rounded-2xl font-black uppercase tracking-[0.15em] text-[11px] transition-all border ${activeTab === t ? 'bg-blue-600 border-blue-400 text-white shadow-xl' : 'bg-white/5 border-white/10 text-gray-500 hover:text-white'}`}>
+              <button key={t} onClick={() => setActiveTab(t)} className={`px-8 py-4 rounded-2xl font-black uppercase tracking-[0.15em] text-sm transition-all border ${activeTab === t ? 'bg-blue-600 border-blue-400 text-white shadow-xl' : 'bg-white/5 border-white/10 text-gray-300 hover:text-white'}`}>
                 {t === 'pathways' ? 'Skill Pathways' : t === 'nep' ? 'NEP 2020' : 'NSQF Framework'}
               </button>
             ))}
@@ -76,21 +76,21 @@ const LearningPathsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
         {activeTab === 'pathways' && (
           <div className="grid lg:grid-cols-4 gap-12">
             <div className="lg:col-span-1 space-y-4">
-              <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mb-6">Select Career Goal</h3>
+              <h3 className="text-xs font-black text-gray-300 uppercase tracking-[0.4em] mb-6">Select Career Goal</h3>
               {PATHWAYS_DB.map(p => (
                 <button key={p.id} onClick={() => setActivePathwayId(p.id)} className={`w-full p-6 rounded-2xl text-left border transition-all ${activePathwayId === p.id ? 'bg-blue-600/10 border-blue-500' : 'bg-white/5 border-white/10 hover:border-white/30'}`}>
-                  <span className="text-[8px] font-black text-blue-400 uppercase tracking-widest">{p.industry}</span>
+                  <span className="text-sm font-black text-blue-400 uppercase tracking-widest">{p.industry}</span>
                   <h4 className="text-sm font-black uppercase text-white mt-1">{p.title}</h4>
                 </button>
               ))}
             </div>
             <div className="lg:col-span-3">
               <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                <div><h2 className="text-3xl font-black uppercase tracking-tight">Active <span className="text-blue-500">Journey.</span></h2><p className="text-gray-500 text-[10px] font-black uppercase tracking-[0.4em] mt-1">{activePathway.title}</p></div>
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-center gap-6">
-                  <div><p className="text-[8px] font-black text-gray-600 uppercase">Salary</p><p className="text-xs font-black text-white">{activePathway.salaryRange}</p></div>
+                <div><h2 className="text-3xl font-black uppercase tracking-tight">Active <span className="text-blue-500">Journey.</span></h2><p className="text-gray-300 text-xs font-black uppercase tracking-[0.4em] mt-1">{activePathway.title}</p></div>
+                <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6">
+                  <div><p className="text-sm font-black text-gray-400 uppercase">Salary</p><p className="text-xs font-black text-white">{activePathway.salaryRange}</p></div>
                   <div className="w-px h-8 bg-white/10" />
-                  <div><p className="text-[8px] font-black text-gray-600 uppercase">Growth</p><p className="text-xs font-black text-blue-400">{activePathway.growth}</p></div>
+                  <div><p className="text-sm font-black text-gray-400 uppercase">Growth</p><p className="text-xs font-black text-blue-400">{activePathway.growth}</p></div>
                 </div>
               </div>
               <div className="relative">
@@ -99,16 +99,16 @@ const LearningPathsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
                   {activePathway.steps.map((step, idx) => (
                     <div key={idx} className={`relative flex flex-col md:flex-row items-start gap-12 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
                       <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl bg-black border-2 border-blue-500/50 flex flex-col items-center justify-center z-10 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
-                        <span className="text-[8px] font-black text-gray-500 uppercase">NSQF</span>
+                        <span className="text-sm font-black text-gray-300 uppercase">NSQF</span>
                         <span className="text-xl font-black text-white">{step.nsqf}</span>
                       </div>
-                      <div className="w-full md:w-[45%] p-10 rounded-[48px] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all">
+                      <div className="w-full md:w-[45%] p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-blue-500/30 transition-all">
                         <div className="flex items-center gap-4 mb-6">
-                          <span className="text-[9px] font-black text-blue-500 uppercase tracking-widest px-3 py-1 bg-blue-500/10 rounded-full">Phase 0{idx+1}</span>
+                          <span className="text-xs font-black text-blue-500 uppercase tracking-widest px-3 py-1 bg-blue-500/10 rounded-full">Phase 0{idx+1}</span>
                           <h3 className="text-xl font-black uppercase text-white tracking-tight">{step.title}</h3>
                         </div>
-                        <div className="flex flex-wrap gap-2 mb-4">{step.outcomes.map(o => <span key={o} className="px-3 py-1.5 rounded-xl bg-white/5 text-[10px] font-bold text-gray-300 uppercase">{o}</span>)}</div>
-                        <div className="flex justify-between"><div><p className="text-[8px] font-black text-gray-600 uppercase mb-1">Duration</p><p className="text-[11px] font-black text-white">{step.duration}</p></div><div><p className="text-[8px] font-black text-gray-600 uppercase mb-1">Credential</p><p className="text-[11px] font-black text-cyan-400">{step.certs[0]}</p></div></div>
+                        <div className="flex flex-wrap gap-2 mb-4">{step.outcomes.map(o => <span key={o} className="px-3 py-1.5 rounded-xl bg-white/5 text-xs font-bold text-gray-300 uppercase">{o}</span>)}</div>
+                        <div className="flex justify-between"><div><p className="text-sm font-black text-gray-400 uppercase mb-1">Duration</p><p className="text-sm font-black text-white">{step.duration}</p></div><div><p className="text-sm font-black text-gray-400 uppercase mb-1">Credential</p><p className="text-sm font-black text-cyan-400">{step.certs[0]}</p></div></div>
                       </div>
                     </div>
                   ))}
@@ -121,23 +121,23 @@ const LearningPathsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
         {activeTab === 'nep' && (
           <div>
             <h2 className="text-4xl font-black uppercase tracking-tight mb-6">National Education <span className="text-emerald-500">Policy 2020.</span></h2>
-            <p className="text-gray-400 text-lg font-medium leading-relaxed mb-16 max-w-3xl">India's transformative education framework: flexible, multi-disciplinary, and research-driven.</p>
+            <p className="text-gray-200 text-lg font-medium leading-relaxed mb-16 max-w-3xl">India's transformative education framework: flexible, multi-disciplinary, and research-driven.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {NEP_FEATURES.map((item, i) => (
-                <div key={i} className="p-10 rounded-[48px] bg-white/[0.02] border border-white/5 hover:border-emerald-500/30 transition-all group">
+                <div key={i} className="p-10 rounded-3xl bg-white/[0.04] border border-white/10 hover:border-emerald-500/30 transition-all group">
                   <div className="text-4xl mb-6">{item.icon}</div>
                   <h3 className="text-xl font-black uppercase text-white mb-4 group-hover:text-emerald-400 transition-colors tracking-tight">{item.title}</h3>
-                  <p className="text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
+                  <p className="text-gray-200 text-sm font-medium leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-20 p-16 rounded-[64px] bg-gradient-to-br from-emerald-900/15 via-[#080808] to-[#080808] border border-emerald-500/20">
+            <div className="mt-20 p-16 rounded-3xl bg-gradient-to-br from-emerald-900/15 via-[#080808] to-[#080808] border border-emerald-500/20">
               <h3 className="text-4xl font-black uppercase tracking-tighter mb-14">NEP <span className="text-emerald-500">Multi-Exit</span> Roadmap</h3>
               <div className="space-y-10">
                 {[{ l: 'Year 1', a: 'UG Certificate', t: '40 Credits' }, { l: 'Year 2', a: 'UG Diploma', t: '80 Credits' }, { l: 'Year 3', a: "Bachelor's Degree", t: '120 Credits' }, { l: 'Year 4', a: 'Honours / Research', t: '160 Credits' }].map((opt, i) => (
                   <div key={i} className="flex gap-10 items-start pl-4">
-                    <div className="w-10 h-10 rounded-2xl bg-black border border-emerald-500/40 flex items-center justify-center text-[10px] font-black text-emerald-400 shrink-0">E{i+1}</div>
-                    <div><p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{opt.l} — {opt.t}</p><h4 className="text-xl font-black uppercase text-white tracking-tight">{opt.a}</h4></div>
+                    <div className="w-10 h-10 rounded-2xl bg-black border border-emerald-500/40 flex items-center justify-center text-xs font-black text-emerald-400 shrink-0">E{i+1}</div>
+                    <div><p className="text-xs font-black text-gray-300 uppercase tracking-widest">{opt.l} — {opt.t}</p><h4 className="text-xl font-black uppercase text-white tracking-tight">{opt.a}</h4></div>
                   </div>
                 ))}
               </div>
@@ -148,17 +148,17 @@ const LearningPathsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNa
         {activeTab === 'nsqf' && (
           <div>
             <h2 className="text-4xl font-black uppercase tracking-tight mb-6">National Skills <span className="text-purple-500">Qualification Framework.</span></h2>
-            <p className="text-gray-400 text-lg font-medium leading-relaxed mb-16 max-w-3xl">A 10-level competency framework mapping every skill from basic awareness to thought leadership.</p>
+            <p className="text-gray-200 text-lg font-medium leading-relaxed mb-16 max-w-3xl">A 10-level competency framework mapping every skill from basic awareness to thought leadership.</p>
             <div className="space-y-4">
               {NSQF_LEVELS.map(item => (
                 <div key={item.level} className="flex items-stretch gap-6 group">
                   <div className="w-20 shrink-0 flex items-center justify-center">
                     <div className={`w-16 h-16 rounded-2xl ${item.color} flex items-center justify-center text-white font-black text-2xl shadow-2xl group-hover:scale-110 transition-transform`}>{item.level}</div>
                   </div>
-                  <div className="flex-grow p-8 rounded-[32px] bg-white/[0.02] border border-white/5 hover:border-purple-500/30 transition-all">
+                  <div className="flex-grow p-8 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-purple-500/30 transition-all">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div><h3 className="text-lg font-black uppercase text-white tracking-tight group-hover:text-purple-400 transition-colors">{item.title}</h3><p className="text-gray-400 text-sm mt-1">{item.desc}</p></div>
-                      <div className="shrink-0"><p className="text-[8px] font-black text-gray-600 uppercase tracking-widest mb-1">Education</p><p className="text-[10px] font-black text-purple-400 uppercase">{item.edu}</p></div>
+                      <div><h3 className="text-lg font-black uppercase text-white tracking-tight group-hover:text-purple-400 transition-colors">{item.title}</h3><p className="text-gray-200 text-sm mt-1">{item.desc}</p></div>
+                      <div className="shrink-0"><p className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Education</p><p className="text-xs font-black text-purple-400 uppercase">{item.edu}</p></div>
                     </div>
                     <div className="mt-4 h-1.5 w-full bg-white/5 rounded-full overflow-hidden"><div className={`h-full ${item.color}`} style={{ width: `${item.level * 10}%` }} /></div>
                   </div>

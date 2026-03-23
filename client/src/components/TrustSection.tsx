@@ -16,11 +16,11 @@ const TrustSection: React.FC = () => {
   const displayPartners = [...partners, ...partners, ...partners];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-[#050505] to-[#0a0a1a] overflow-hidden border-t border-white/5">
+    <section className="py-24 bg-gradient-to-b from-[#050505] to-[#0a0a1a] overflow-hidden border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 md:px-8 mb-20">
         <div className="flex items-center justify-center gap-10">
           <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent to-white/10"></div>
-          <h3 className="text-[10px] md:text-[11px] font-bold tracking-[0.5em] text-cyan-400/60 uppercase whitespace-nowrap">
+          <h3 className="text-xs md:text-sm font-bold tracking-[0.5em] text-cyan-400/60 uppercase whitespace-nowrap">
             AUTHORIZED & TRUSTED BY
           </h3>
           <div className="h-[1px] flex-grow bg-gradient-to-l from-transparent to-white/10"></div>
