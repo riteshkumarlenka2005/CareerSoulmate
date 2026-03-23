@@ -103,7 +103,7 @@ const InterestPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigat
 
   const sortedResults = useMemo(() => {
     return Object.entries(scores)
-      .sort(([, a], [, b]) => b - a)
+      .sort(([, a]: [string, number], [, b]: [string, number]) => b - a)
       .map(([id, score]) => ({
         ...INTEREST_DIMENSIONS.find(d => d.id === id)!,
         score

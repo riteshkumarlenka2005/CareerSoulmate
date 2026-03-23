@@ -9,13 +9,8 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ role, setRole }) => {
   const roles: UserRole[] = [
-    'public', 
-    'student', 
-    'college', 
-    'counselor', 
-    'institution_admin', 
-    'gov', 
-    'super_admin'
+    'guest', 
+    'user'
   ];
 
   return (

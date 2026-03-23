@@ -1,6 +1,3 @@
-// NEW code..........
-
-
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import LanguageSelector from './LanguageSelector';
 import AuthModal from './AuthModal';
@@ -9,14 +6,7 @@ import NotificationCenter from './NotificationCenter';
 import { useAuth } from '../context/AuthContext';
 import { useI18n } from '../context/I18nContext';
 
-export type UserRole =
-  | 'public'
-  | 'student'
-  | 'college'
-  | 'counselor'
-  | 'institution_admin'
-  | 'gov'
-  | 'super_admin';
+export type UserRole = 'guest' | 'user';
 
 interface MegaMenuChild {
   label: string;
@@ -42,7 +32,7 @@ interface HeaderProps {
   onNavigate?: (page: any) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
+const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -54,7 +44,6 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
   const { user, isAuthenticated, logout } = useAuth();
   const { t } = useI18n();
 
-  // Close user menu on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
@@ -71,318 +60,124 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const Icons = {
+    AI: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    Career: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+      </svg>
+    ),
+    Academic: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+      </svg>
+    ),
+    Tools: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 11-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+      </svg>
+    ),
+    Reports: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 2v-6m-8 13h10a2 2 0 002-2V9a2 2 0 00-2-2h-3l-1-1H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    )
+  };
+
   const getNavItems = (currentRole: UserRole): NavItem[] => {
     const aboutItem: NavItem = { label: 'About', action: () => onNavigate?.('about') };
 
-    // Common Icons
-    const Icons = {
-      AI: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-      Career: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-        </svg>
-      ),
-      Academic: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-        </svg>
-      ),
-      Tools: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 11-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-        </svg>
-      ),
-      Reports: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 2v-6m-8 13h10a2 2 0 002-2V9a2 2 0 00-2-2h-3l-1-1H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      )
-    };
-
-    // Shared "Resources" MegaMenu definition
-    const resourcesItem: NavItem = {
-      label: 'Resources',
-      megaMenu: [
+    if (currentRole === 'user') {
+      return [
         {
-          title: 'AI Tools',
-          items: [
-            { label: 'AI Web Scraper', description: 'Extract career data smartly.', icon: Icons.AI, action: () => onNavigate?.('ai-recs') },
-            { label: 'Timetable Generator', description: 'Optimize your learning schedule.', icon: Icons.Academic, action: () => onNavigate?.('admin-timetable-generate') },
-            { label: 'Career Advice', description: 'Personalized growth strategies.', icon: Icons.Career, action: () => onNavigate?.('ai-recs') },
-            { label: 'AskMe', description: 'Instant answers to your queries.', icon: Icons.Tools, action: () => onNavigate?.('ai-recs') },
-          ],
+          label: 'My Career',
+          children: [
+            { label: 'Roadmap', action: () => onNavigate?.('roadmap') },
+            { label: 'AI Recs', action: () => onNavigate?.('ai-recs') },
+            { label: 'Why This?', action: () => onNavigate?.('why-this') }
+          ]
         },
         {
-          title: 'Learning & Community',
-          items: [
-            { label: 'Motivation', description: 'Daily sparks for your journey.', icon: Icons.AI, action: () => onNavigate?.('motivation') },
-            { label: 'Blog', description: 'Latest insights & career trends.', icon: Icons.Reports, action: () => onNavigate?.('blog') },
-            { label: 'Community', description: 'Connect with fellow learners.', icon: Icons.Tools, action: () => onNavigate?.('community') },
-          ],
+          label: 'Explore',
+          children: [
+            { label: 'Careers · Degrees · Skills', action: () => onNavigate?.('explore') },
+            { label: 'Learning Paths', action: () => onNavigate?.('learning-paths') },
+            { label: 'Opportunities', action: () => onNavigate?.('opportunities') }
+          ]
         },
-      ],
-    };
-
-    switch (currentRole) {
-      case 'student':
-        return [
-          {
-            label: 'My Career',
-            children: [
-              { label: 'Roadmap', action: () => onNavigate?.('roadmap') },
-              { label: 'AI Recs', action: () => onNavigate?.('ai-recs') },
-              { label: 'Why This?', action: () => onNavigate?.('why-this') }
-            ]
-          },
-          {
-            label: 'Explore',
-            children: [
-              { label: 'Careers', action: () => onNavigate?.('explore-careers') },
-              { label: 'Degrees', action: () => onNavigate?.('explore-degrees') },
-              { label: 'Colleges', action: () => onNavigate?.('colleges') },
-              { label: 'Skills', action: () => onNavigate?.('explore-skills') }
-            ]
-          },
-          {
-            label: 'Assessments',
-            children: [
-              { label: 'Aptitude', action: () => onNavigate?.('aptitude') },
-              { label: 'Interest', action: () => onNavigate?.('interest') },
-              { label: 'Personality', action: () => onNavigate?.('personality') },
-              { label: 'Skills', action: () => onNavigate?.('skills-assessment') }
-            ]
-          },
-          {
-            label: 'My Skill Path',
-            children: [
-              { label: 'Certs', action: () => onNavigate?.('certs') },
-              { label: 'Apprenticeships', action: () => onNavigate?.('apprenticeships') }
-            ]
-          },
-          {
-            label: 'Deadlines',
-            children: [
-              { label: 'Admissions', action: () => onNavigate?.('admissions') },
-              { label: 'Exams', action: () => onNavigate?.('exams') },
-              { label: 'Scholarships', action: () => onNavigate?.('scholarships') }
-            ]
-          },
-          aboutItem
-        ];
-
-      case 'college':
-        return [
-          {
-            label: 'My Path',
-            children: [
-              { label: 'Mapping', action: () => onNavigate?.('mapping') },
-              { label: 'Add-ons', action: () => onNavigate?.('add-ons') }
-            ]
-          },
-          {
-            label: 'Skills & Jobs',
-            children: [
-              { label: 'Gaps', action: () => onNavigate?.('gaps') },
-              { label: 'Readiness', action: () => onNavigate?.('readiness') },
-              { label: 'Internships', action: () => onNavigate?.('internships') }
-            ]
-          },
-          {
-            label: 'Institutions',
-            children: [
-              { label: 'Programs', action: () => onNavigate?.('programs') },
-              { label: 'Transfers', action: () => onNavigate?.('transfers') },
-              { label: 'NEP Flexibility', action: () => onNavigate?.('nep-flexibility') }
-            ]
-          },
-          { label: 'Assessments', action: () => onNavigate?.('assessments') },
-          {
-            label: 'Opportunities',
-            children: [
-              { label: 'Exams', action: () => onNavigate?.('college-exams') },
-              { label: 'Jobs', action: () => onNavigate?.('college-jobs') },
-              { label: 'Fellowships', action: () => onNavigate?.('college-fellowships') }
-            ]
-          },
-          aboutItem
-        ];
-
-      case 'counselor':
-        return [
-          {
-            label: 'Learners',
-            children: [
-              { label: 'Student List', action: () => onNavigate?.('student-list') },
-              { label: 'Profiles', action: () => onNavigate?.('counselor-profiles') },
-              { label: 'Progress', action: () => onNavigate?.('counselor-progress') }
-            ]
-          },
-          {
-            label: 'Insights',
-            children: [
-              { label: 'Skill Gaps', action: () => onNavigate?.('counselor-skill-gaps') },
-              { label: 'Risk Flags', action: () => onNavigate?.('risk-flags') },
-              { label: 'Recommendations', action: () => onNavigate?.('counselor-recs') }
-            ]
-          },
-          {
-            label: 'Career Tools',
-            children: [
-              { label: 'Trees', action: () => onNavigate?.('tree') },
-              { label: 'Comparisons', action: () => onNavigate?.('comparison') }
-            ]
-          },
-          {
-            label: 'Reports',
-            children: [
-              { label: 'Progress Reports', action: () => onNavigate?.('counselor-report') },
-              { label: 'Export', action: () => onNavigate?.('counselor-export') }
-            ]
-          },
-          aboutItem
-        ];
-
-      case 'institution_admin':
-        return [
-          { label: 'Dashboard', action: () => onNavigate?.('admin-dashboard') },
-          {
-            label: 'Timetable AI',
-            children: [
-              { label: 'Generate', action: () => onNavigate?.('admin-timetable-generate') },
-              { label: 'Scenarios', action: () => onNavigate?.('admin-timetable-scenarios') },
-              { label: 'Conflicts', action: () => onNavigate?.('admin-timetable-conflicts') }
-            ]
-          },
-          {
-            label: 'Academics',
-            children: [
-              { label: 'Courses', action: () => onNavigate?.('admin-academics-courses') },
-              { label: 'Credits', action: () => onNavigate?.('admin-academics-credits') },
-              { label: 'Electives', action: () => onNavigate?.('admin-academics-electives') },
-              { label: 'Faculty', action: () => onNavigate?.('admin-academics-faculty') }
-            ]
-          },
-          {
-            label: 'Infrastructure',
-            children: [
-              { label: 'Rooms', action: () => onNavigate?.('admin-infra-rooms') },
-              { label: 'Labs', action: () => onNavigate?.('admin-infra-labs') },
-              { label: 'Capacity', action: () => onNavigate?.('admin-infra-capacity') }
-            ]
-          },
-          { label: 'Reports', action: () => onNavigate?.('admin-reports') },
-          aboutItem
-        ];
-
-      case 'gov':
-        return [
-          {
-            label: 'Analytics',
-            children: [
-              { label: 'Enrollment', action: () => onNavigate?.('gov-analytics-enrollment') },
-              { label: 'Regional', action: () => onNavigate?.('gov-analytics-regional') }
-            ]
-          },
-          {
-            label: 'Skills Intel',
-            children: [
-              { label: 'Demand vs Supply', action: () => onNavigate?.('gov-skills-demand-supply') },
-              { label: 'NSQF Adoption', action: () => onNavigate?.('gov-skills-nsqf-adoption') }
-            ]
-          },
-          {
-            label: 'Institutions',
-            children: [
-              { label: 'Performance', action: () => onNavigate?.('gov-inst-performance') },
-              { label: 'Capacity', action: () => onNavigate?.('gov-inst-capacity') }
-            ]
-          },
-          { label: 'Reports', action: () => onNavigate?.('gov-reports') },
-          aboutItem
-        ];
-
-      case 'super_admin':
-        return [
-          { label: 'Users & Roles', action: () => onNavigate?.('super-admin-users-roles') },
-          { label: 'Institutions', action: () => onNavigate?.('super-admin-institutions') },
-          {
-            label: 'Models',
-            children: [
-              { label: 'AI Versions', action: () => { } },
-              { label: 'Retraining', action: () => { } }
-            ]
-          },
-          { label: 'Data & Logs', action: () => { } },
-          { label: 'System Health', action: () => { } },
-          { label: 'Settings', action: () => { } },
-          aboutItem
-        ];
-
-      default: // public
-        return [
-          {
-            label: 'Discover Careers',
-            megaMenu: [
-              {
-                title: 'Career Discovery Tools',
-                items: [
-                  { label: 'Explorer', description: 'Guided discovery through filters.', icon: Icons.Tools, action: () => onNavigate?.('explorer') },
-                  { label: 'Career Tree', description: 'Visualize progression paths.', icon: Icons.Career, action: () => onNavigate?.('tree') },
-                  { label: 'Comparison', description: 'Evaluate salary and growth.', icon: Icons.Reports, action: () => onNavigate?.('comparison') },
-                ],
-              },
-            ],
-          },
-          {
-            label: 'Courses & Degrees',
-            megaMenu: [
-              {
-                title: 'Academic Pathways',
-                items: [
-                  { label: 'Mapping', description: 'Align choices with outcomes.', icon: Icons.Academic, action: () => onNavigate?.('mapping') },
-                  { label: 'NEP Pathways', description: 'Modular education routes.', icon: Icons.Academic, action: () => onNavigate?.('nep') },
-                ],
-              },
-            ],
-          },
-          {
-            label: 'Exams & Outcomes',
-            megaMenu: [
-              {
-                title: 'From Exams to Careers',
-                items: [
-                  { label: 'Colleges', description: 'Rankings and cut-offs.', icon: Icons.Career, action: () => onNavigate?.('colleges') },
-                  { label: 'Scholarships', description: 'Surface financial aid.', icon: Icons.Academic, action: () => onNavigate?.('scholarships') },
-                  { label: 'Admissions', description: 'Guided application process.', icon: Icons.Academic, action: () => onNavigate?.('admissions') },
-                ],
-              },
-            ],
-          },
-          {
-            label: 'Skills & Vocational',
-            megaMenu: [
-              {
-                title: 'Practical Growth Paths',
-                items: [
-                  { label: 'Skill Pathways', description: 'Connect learning to roles.', icon: Icons.Tools, action: () => onNavigate?.('pathways') },
-                  { label: 'NSQF Levels', description: 'Competency classifications.', icon: Icons.Reports, action: () => onNavigate?.('nsqf') },
-                  { label: 'Apprenticeships', description: 'Hands-on training.', icon: Icons.Career, action: () => onNavigate?.('apprenticeships') },
-                ],
-              },
-            ],
-          },
-          resourcesItem,
-          aboutItem,
-        ];
+        {
+          label: 'Assessments',
+          children: [
+            { label: 'Aptitude', action: () => onNavigate?.('aptitude') },
+            { label: 'Interest', action: () => onNavigate?.('interest') },
+            { label: 'Personality', action: () => onNavigate?.('personality') },
+            { label: 'Skills', action: () => onNavigate?.('skills-assessment') }
+          ]
+        },
+        {
+          label: 'Career Tools',
+          children: [
+            { label: 'Career Explorer', action: () => onNavigate?.('explorer') },
+            { label: 'Career Tree', action: () => onNavigate?.('tree') },
+            { label: 'Compare Careers', action: () => onNavigate?.('comparison') }
+          ]
+        },
+        aboutItem
+      ];
     }
+
+    // guest (public) navigation
+    return [
+      {
+        label: 'Discover Careers',
+        megaMenu: [
+          {
+            title: 'Career Discovery Tools',
+            items: [
+              { label: 'Explorer', description: 'Guided discovery through filters.', icon: Icons.Tools, action: () => onNavigate?.('explorer') },
+              { label: 'Career Tree', description: 'Visualize progression paths.', icon: Icons.Career, action: () => onNavigate?.('tree') },
+              { label: 'Comparison', description: 'Evaluate salary and growth.', icon: Icons.Reports, action: () => onNavigate?.('comparison') },
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Explore All',
+        megaMenu: [
+          {
+            title: 'Discovery Hub',
+            items: [
+              { label: 'Careers · Degrees · Skills', description: 'All-in-one exploration.', icon: Icons.Academic, action: () => onNavigate?.('explore') },
+              { label: 'Learning Paths', description: 'Skill pathways, NEP & NSQF.', icon: Icons.Tools, action: () => onNavigate?.('learning-paths') },
+              { label: 'Opportunities', description: 'Scholarships, exams & more.', icon: Icons.Career, action: () => onNavigate?.('opportunities') },
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Assessments',
+        megaMenu: [
+          {
+            title: 'Know Yourself',
+            items: [
+              { label: 'Aptitude Test', description: 'Measure your analytical skills.', icon: Icons.AI, action: () => onNavigate?.('aptitude') },
+              { label: 'Interest Finder', description: 'Discover your passions.', icon: Icons.Career, action: () => onNavigate?.('interest') },
+              { label: 'Personality Type', description: 'Uncover work style fit.', icon: Icons.Tools, action: () => onNavigate?.('personality') },
+              { label: 'Skills Assessment', description: 'Evaluate your toolkit.', icon: Icons.Reports, action: () => onNavigate?.('skills-assessment') },
+            ],
+          },
+        ],
+      },
+      aboutItem,
+    ];
   };
 
-  const navItems = useMemo(() => getNavItems(role), [role, onNavigate]);
+  const navItems = useMemo(() => getNavItems(role as UserRole), [role, onNavigate]);
 
   return (
     <header
@@ -432,11 +227,6 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
         {/* DESKTOP NAV */}
         <nav className="hidden xl:flex items-center gap-8">
           {navItems.map((item, idx) => {
-            const isResources = item.label === 'Resources';
-            const isDiscover = item.label === 'Discover Careers';
-            const isCourses = item.label === 'Courses & Degrees';
-            const isExams = item.label === 'Exams & Outcomes';
-            const isSkills = item.label === 'Skills & Vocational';
             const hasDropdown = Boolean(item.children || item.megaMenu);
 
             return (
@@ -473,12 +263,9 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
                   </div>
                 )}
 
-                {/* Mega Menu Logic */}
+                {/* Mega Menu */}
                 {item.megaMenu && activeDropdown === item.label && (
-                  <div
-                    className={`absolute top-full w-[680px] bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] animate-in fade-in slide-in-from-top-2 duration-200 border-white/5 ${isResources ? 'right-[-140px]' : (isCourses || isExams || isSkills) ? 'right-[-280px]' : 'left-0'
-                      }`}
-                  >
+                  <div className="absolute top-full w-[680px] bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] animate-in fade-in slide-in-from-top-2 duration-200 border-white/5 left-0">
                     <div className={`grid ${item.megaMenu.length > 1 ? 'grid-cols-2 gap-x-12' : 'grid-cols-1'} gap-y-10`}>
                       {item.megaMenu.map((section, sIdx) => (
                         <div key={sIdx} className="space-y-6">
@@ -509,19 +296,6 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
                         </div>
                       ))}
                     </div>
-
-                    {/* Bottom Highlight/Callout restored from previous version */}
-                    <div className="mt-10 pt-8 border-t border-white/5 flex items-center justify-between px-2">
-                      <p className="text-[11px] text-[#475569] font-medium italic">
-                        {isDiscover ? 'Empowering informed decisions.' : isCourses ? 'Academic excellence meets career clarity.' : isExams ? 'Navigating your route from exams to real results.' : isSkills ? 'Skill-driven development for the modern workforce.' : 'Empowering 100k+ learners across the globe.'}
-                      </p>
-                      <button className="text-[11px] font-black text-[#4285f4] hover:text-cyan-400 uppercase tracking-widest transition-colors flex items-center gap-2">
-                        {isDiscover ? 'GO TO EXPLORER' : isCourses ? 'VIEW PATHWAYS' : isExams ? 'VIEW ADMISSIONS' : isSkills ? 'EXPLORE SKILLS' : 'VIEW ALL RESOURCES'}
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                      </button>
-                    </div>
                   </div>
                 )}
               </div>
@@ -531,13 +305,11 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
 
         {/* RIGHT ACTIONS */}
         <div className="flex items-center gap-5">
-          {/* Language Selector & Notifications */}
           <div className="hidden lg:flex items-center gap-5 ml-6">
             <LanguageSelector />
             <NotificationCenter />
           </div>
 
-          {/* Auth Buttons or User Menu */}
           {isAuthenticated && user ? (
             <div className="relative" ref={userMenuRef}>
               <button
@@ -556,7 +328,6 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
                 </svg>
               </button>
 
-              {/* User Dropdown Menu */}
               {showUserMenu && (
                 <div className="absolute right-0 top-full mt-2 w-64 bg-[#0a0a0a] border border-white/10 rounded-xl py-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2">
                   <div className="px-4 py-3 border-b border-white/10">
@@ -650,31 +421,26 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
               {item.megaMenu && (
                 <div className="space-y-6">
                   {item.megaMenu.map((section, sIdx) => (
-                    <div key={sIdx} className="space-y-4">
-                      <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest pl-2">
-                        {section.title}
-                      </div>
-                      <div className="space-y-2">
-                        {section.items.map((subItem, iIdx) => (
-                          <button
-                            key={iIdx}
-                            onClick={() => {
-                              subItem.action();
-                              setIsMobileMenuOpen(false);
-                            }}
-                            className="w-full flex items-center gap-4 p-3 rounded-lg bg-white/5"
-                          >
-                            <div className="text-blue-400 shrink-0">
-                              {subItem.icon}
-                            </div>
-                            <div className="flex flex-col text-left">
-                              <span className="text-xs font-bold text-gray-300 uppercase">
-                                {subItem.label}
-                              </span>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
+                    <div key={sIdx} className="space-y-2">
+                      {section.items.map((subItem, iIdx) => (
+                        <button
+                          key={iIdx}
+                          onClick={() => {
+                            subItem.action();
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className="w-full flex items-center gap-4 p-3 rounded-lg bg-white/5"
+                        >
+                          <div className="text-blue-400 shrink-0">
+                            {subItem.icon}
+                          </div>
+                          <div className="flex flex-col text-left">
+                            <span className="text-xs font-bold text-gray-300 uppercase">
+                              {subItem.label}
+                            </span>
+                          </div>
+                        </button>
+                      ))}
                     </div>
                   ))}
                 </div>
@@ -716,10 +482,3 @@ const Header: React.FC<HeaderProps> = ({ role = 'public', onNavigate }) => {
 };
 
 export default Header;
-
-
-
-
-
-
-

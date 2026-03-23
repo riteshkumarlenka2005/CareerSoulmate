@@ -18,73 +18,22 @@ import AboutPage from './features/AboutPage';
 import CareerExplorer from './features/CareerExplorer';
 import CareerComparison from './features/CareerComparison';
 import CareerTreePage from './features/CareerTreePage';
-import CollegeMappingPage from './features/CollegeMappingPage';
-import CollegeAddOnsPage from './features/CollegeAddOnsPage';
-import CollegeGapsPage from './features/CollegeGapsPage';
-import CollegeReadinessPage from './features/CollegeReadinessPage';
-import CollegeInternshipsPage from './features/CollegeInternshipsPage';
-import CollegeProgramsPage from './features/CollegeProgramsPage';
-import CollegeTransfersPage from './features/CollegeTransfersPage';
-import CollegeNepFlexibilityPage from './features/CollegeNepFlexibilityPage';
-import CollegeAssessmentsPage from './features/CollegeAssessmentsPage';
-import CollegeExamsPage from './features/CollegeExamsPage';
-import CollegeJobsPage from './features/CollegeJobsPage';
-import CollegeFellowshipsPage from './features/CollegeFellowshipsPage';
-import CounselorStudentListPage from './features/CounselorStudentListPage';
-import CounselorProfilesPage from './features/CounselorProfilesPage';
-import CounselorProgressPage from './features/CounselorProgressPage';
-import CounselorSkillGapsPage from './features/CounselorSkillGapsPage';
-import CounselorRiskFlagsPage from './features/CounselorRiskFlagsPage';
-import CounselorRecommendationsPage from './features/CounselorRecommendationsPage';
-import CounselorProgressReportPage from './features/CounselorProgressReportPage';
-import CounselorExportPage from './features/CounselorExportPage';
-import AdminDashboardPage from './features/AdminDashboardPage';
-import AdminTimetableGeneratePage from './features/AdminTimetableGeneratePage';
-import AdminTimetableScenariosPage from './features/AdminTimetableScenariosPage';
-import AdminTimetableConflictsPage from './features/AdminTimetableConflictsPage';
-import AdminAcademicsCoursesPage from './features/AdminAcademicsCoursesPage';
-import AdminAcademicsCreditsPage from './features/AdminAcademicsCreditsPage';
-import AdminAcademicsElectivesPage from './features/AdminAcademicsElectivesPage';
-import AdminAcademicsFacultyPage from './features/AdminAcademicsFacultyPage';
-import AdminInfraRoomsPage from './features/AdminInfraRoomsPage';
-import AdminInfraLabsPage from './features/AdminInfraLabsPage';
-import AdminInfraCapacityPage from './features/AdminInfraCapacityPage';
-import AdminReportsPage from './features/AdminReportsPage';
-import AdminUsersRolesPage from './features/AdminUsersRolesPage';
-import AdminInstitutionsPage from './features/AdminInstitutionsPage';
-import GovAnalyticsEnrollmentPage from './features/GovAnalyticsEnrollmentPage';
-import GovAnalyticsRegionalPage from './features/GovAnalyticsRegionalPage';
-import GovSkillsDemandSupplyPage from './features/GovSkillsDemandSupplyPage';
-import GovSkillsNsqfAdoptionPage from './features/GovSkillsNsqfAdoptionPage';
-import GovInstPerformancePage from './features/GovInstPerformancePage';
-import GovInstCapacityPage from './features/GovInstCapacityPage';
-import GovReportsPage from './features/GovReportsPage';
-import NepPathwaysPage from './features/NepPathwaysPage';
-import CollegesPage from './features/CollegesPage';
-import ScholarshipsPage from './features/ScholarshipsPage';
-import AdmissionsPage from './features/AdmissionsPage';
-import PathwaysPage from './features/PathwaysPage';
-import NSQFPage from './features/NSQFPage';
-import ApprenticeshipsPage from './features/ApprenticeshipsPage';
 import RoadmapPage from './features/RoadmapPage';
 import AIRecsPage from './features/AIRecsPage';
 import WhyThisPage from './features/WhyThisPage';
-import ExploreCareersPage from './features/ExploreCareersPage';
-import ExploreDegreesPage from './features/ExploreDegreesPage';
-import ExploreSkillsPage from './features/ExploreSkillsPage';
 import AptitudePage from './features/AptitudePage';
 import InterestPage from './features/InterestPage';
 import PersonalityPage from './features/PersonalityPage';
 import SkillsAssessmentPage from './features/SkillsAssessmentPage';
-import CertsPage from './features/CertsPage';
-import ExamsPage from './features/ExamsPage';
-import CommunityPage from './features/CommunityPage';
 import ProfilePage from './features/ProfilePage';
+import ExplorePage from './features/ExplorePage';
+import LearningPathsPage from './features/LearningPathsPage';
+import OpportunitiesPage from './features/OpportunitiesPage';
 
-type Page = 'home' | 'about' | 'explorer' | 'comparison' | 'tree' | 'mapping' | 'add-ons' | 'gaps' | 'readiness' | 'internships' | 'programs' | 'transfers' | 'nep-flexibility' | 'assessments' | 'college-exams' | 'college-jobs' | 'college-fellowships' | 'student-list' | 'counselor-profiles' | 'counselor-progress' | 'counselor-skill-gaps' | 'risk-flags' | 'counselor-recs' | 'counselor-report' | 'counselor-export' | 'admin-dashboard' | 'admin-timetable-generate' | 'admin-timetable-scenarios' | 'admin-timetable-conflicts' | 'admin-academics-courses' | 'admin-academics-credits' | 'admin-academics-electives' | 'admin-academics-faculty' | 'admin-infra-rooms' | 'admin-infra-labs' | 'admin-infra-capacity' | 'admin-reports' | 'super-admin-users-roles' | 'super-admin-institutions' | 'gov-analytics-enrollment' | 'gov-analytics-regional' | 'gov-skills-demand-supply' | 'gov-skills-nsqf-adoption' | 'gov-inst-performance' | 'gov-inst-capacity' | 'gov-reports' | 'nep' | 'colleges' | 'scholarships' | 'admissions' | 'pathways' | 'nsqf' | 'apprenticeships' | 'roadmap' | 'ai-recs' | 'why-this' | 'explore-careers' | 'explore-degrees' | 'explore-skills' | 'aptitude' | 'interest' | 'personality' | 'skills-assessment' | 'certs' | 'exams' | 'community' | 'profile';
+type Page = 'home' | 'about' | 'explorer' | 'comparison' | 'tree' | 'roadmap' | 'ai-recs' | 'why-this' | 'aptitude' | 'interest' | 'personality' | 'skills-assessment' | 'profile' | 'explore' | 'learning-paths' | 'opportunities';
 
 const App: React.FC = () => {
-  const [role, setRole] = useState<UserRole>('public');
+  const [role, setRole] = useState<UserRole>('guest');
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
   const handleNavigate = (page: Page) => {
@@ -102,114 +51,12 @@ const App: React.FC = () => {
         return <CareerComparison onNavigate={handleNavigate} />;
       case 'tree':
         return <CareerTreePage onNavigate={handleNavigate} />;
-      case 'mapping':
-        return <CollegeMappingPage onNavigate={handleNavigate} />;
-      case 'add-ons':
-        return <CollegeAddOnsPage onNavigate={handleNavigate} />;
-      case 'gaps':
-        return <CollegeGapsPage onNavigate={handleNavigate} />;
-      case 'readiness':
-        return <CollegeReadinessPage onNavigate={handleNavigate} />;
-      case 'internships':
-        return <CollegeInternshipsPage onNavigate={handleNavigate} />;
-      case 'programs':
-        return <CollegeProgramsPage onNavigate={handleNavigate} />;
-      case 'transfers':
-        return <CollegeTransfersPage onNavigate={handleNavigate} />;
-      case 'nep-flexibility':
-        return <CollegeNepFlexibilityPage onNavigate={handleNavigate} />;
-      case 'assessments':
-        return <CollegeAssessmentsPage onNavigate={handleNavigate} />;
-      case 'college-exams':
-        return <CollegeExamsPage onNavigate={handleNavigate} />;
-      case 'college-jobs':
-        return <CollegeJobsPage onNavigate={handleNavigate} />;
-      case 'college-fellowships':
-        return <CollegeFellowshipsPage onNavigate={handleNavigate} />;
-      case 'student-list':
-        return <CounselorStudentListPage onNavigate={handleNavigate} />;
-      case 'counselor-profiles':
-        return <CounselorProfilesPage onNavigate={handleNavigate} />;
-      case 'counselor-progress':
-        return <CounselorProgressPage onNavigate={handleNavigate} />;
-      case 'counselor-skill-gaps':
-        return <CounselorSkillGapsPage onNavigate={handleNavigate} />;
-      case 'risk-flags':
-        return <CounselorRiskFlagsPage onNavigate={handleNavigate} />;
-      case 'counselor-recs':
-        return <CounselorRecommendationsPage onNavigate={handleNavigate} />;
-      case 'counselor-report':
-        return <CounselorProgressReportPage onNavigate={handleNavigate} />;
-      case 'counselor-export':
-        return <CounselorExportPage onNavigate={handleNavigate} />;
-      case 'admin-dashboard':
-        return <AdminDashboardPage onNavigate={handleNavigate} />;
-      case 'admin-timetable-generate':
-        return <AdminTimetableGeneratePage onNavigate={handleNavigate} />;
-      case 'admin-timetable-scenarios':
-        return <AdminTimetableScenariosPage onNavigate={handleNavigate} />;
-      case 'admin-timetable-conflicts':
-        return <AdminTimetableConflictsPage onNavigate={handleNavigate} />;
-      case 'admin-academics-courses':
-        return <AdminAcademicsCoursesPage onNavigate={handleNavigate} />;
-      case 'admin-academics-credits':
-        return <AdminAcademicsCreditsPage onNavigate={handleNavigate} />;
-      case 'admin-academics-electives':
-        return <AdminAcademicsElectivesPage onNavigate={handleNavigate} />;
-      case 'admin-academics-faculty':
-        return <AdminAcademicsFacultyPage onNavigate={handleNavigate} />;
-      case 'admin-infra-rooms':
-        return <AdminInfraRoomsPage onNavigate={handleNavigate} />;
-      case 'admin-infra-labs':
-        return <AdminInfraLabsPage onNavigate={handleNavigate} />;
-      case 'admin-infra-capacity':
-        return <AdminInfraCapacityPage onNavigate={handleNavigate} />;
-      case 'admin-reports':
-        return <AdminReportsPage onNavigate={handleNavigate} />;
-      case 'super-admin-users-roles':
-        return <AdminUsersRolesPage onNavigate={handleNavigate} />;
-      case 'super-admin-institutions':
-        return <AdminInstitutionsPage onNavigate={handleNavigate} />;
-      case 'gov-analytics-enrollment':
-        return <GovAnalyticsEnrollmentPage onNavigate={handleNavigate} />;
-      case 'gov-analytics-regional':
-        return <GovAnalyticsRegionalPage onNavigate={handleNavigate} />;
-      case 'gov-skills-demand-supply':
-        return <GovSkillsDemandSupplyPage onNavigate={handleNavigate} />;
-      case 'gov-skills-nsqf-adoption':
-        return <GovSkillsNsqfAdoptionPage onNavigate={handleNavigate} />;
-      case 'gov-inst-performance':
-        return <GovInstPerformancePage onNavigate={handleNavigate} />;
-      case 'gov-inst-capacity':
-        return <GovInstCapacityPage onNavigate={handleNavigate} />;
-      case 'gov-reports':
-        return <GovReportsPage onNavigate={handleNavigate} />;
-      case 'nep':
-        return <NepPathwaysPage onNavigate={handleNavigate} />;
-      case 'colleges':
-        return <CollegesPage onNavigate={handleNavigate} />;
-      case 'scholarships':
-        return <ScholarshipsPage onNavigate={handleNavigate} />;
-      case 'admissions':
-        return <AdmissionsPage onNavigate={handleNavigate} />;
-      case 'pathways':
-        return <PathwaysPage onNavigate={handleNavigate} />;
-      case 'nsqf':
-        return <NSQFPage onNavigate={handleNavigate} />;
-      case 'apprenticeships':
-        return <ApprenticeshipsPage onNavigate={handleNavigate} />;
       case 'roadmap':
         return <RoadmapPage onNavigate={handleNavigate} />;
       case 'ai-recs':
         return <AIRecsPage onNavigate={handleNavigate} />;
       case 'why-this':
         return <WhyThisPage onNavigate={handleNavigate} />;
-      case 'explore-careers':
-        return <ExploreCareersPage onNavigate={handleNavigate} />;
-      case 'explore-degrees':
-        return <ExploreDegreesPage onNavigate={handleNavigate} />;
-      case 'explore-skills':
-        return <ExploreSkillsPage onNavigate={handleNavigate} />;
       case 'aptitude':
         return <AptitudePage onNavigate={handleNavigate} />;
       case 'interest':
@@ -218,14 +65,14 @@ const App: React.FC = () => {
         return <PersonalityPage onNavigate={handleNavigate} />;
       case 'skills-assessment':
         return <SkillsAssessmentPage onNavigate={handleNavigate} />;
-      case 'certs':
-        return <CertsPage onNavigate={handleNavigate} />;
-      case 'exams':
-        return <ExamsPage onNavigate={handleNavigate} />;
-      case 'community':
-        return <CommunityPage onNavigate={handleNavigate} />;
       case 'profile':
         return <ProfilePage onNavigate={handleNavigate} />;
+      case 'explore':
+        return <ExplorePage onNavigate={handleNavigate} />;
+      case 'learning-paths':
+        return <LearningPathsPage onNavigate={handleNavigate} />;
+      case 'opportunities':
+        return <OpportunitiesPage onNavigate={handleNavigate} />;
       default:
         return (
           <>
@@ -280,7 +127,7 @@ const App: React.FC = () => {
     }
   };
 
-  const footerVisiblePages: Page[] = ['home', 'about', 'explorer', 'mapping', 'add-ons', 'gaps', 'readiness', 'internships', 'programs', 'transfers', 'nep-flexibility', 'assessments', 'college-exams', 'college-jobs', 'college-fellowships', 'student-list', 'counselor-profiles', 'counselor-progress', 'counselor-skill-gaps', 'risk-flags', 'counselor-recs', 'counselor-report', 'counselor-export', 'admin-dashboard', 'admin-timetable-generate', 'admin-timetable-scenarios', 'admin-timetable-conflicts', 'admin-academics-courses', 'admin-academics-credits', 'admin-academics-electives', 'admin-academics-faculty', 'admin-infra-rooms', 'admin-infra-labs', 'admin-infra-capacity', 'admin-reports', 'super-admin-users-roles', 'super-admin-institutions', 'gov-analytics-enrollment', 'gov-analytics-regional', 'gov-skills-demand-supply', 'gov-skills-nsqf-adoption', 'gov-inst-performance', 'gov-inst-capacity', 'gov-reports', 'nep', 'colleges', 'scholarships', 'admissions', 'pathways', 'nsqf', 'apprenticeships', 'roadmap', 'ai-recs', 'why-this', 'explore-careers', 'explore-degrees', 'explore-skills', 'aptitude', 'interest', 'personality', 'skills-assessment', 'certs', 'exams'];
+  const footerVisiblePages: Page[] = ['home', 'about', 'explorer', 'comparison', 'tree', 'roadmap', 'ai-recs', 'why-this', 'aptitude', 'interest', 'personality', 'skills-assessment', 'profile', 'explore', 'learning-paths', 'opportunities'];
 
   return (
     <NotificationProvider>
