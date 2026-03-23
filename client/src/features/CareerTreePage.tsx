@@ -579,6 +579,63 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
     setDraggingNodeId(null);
   };
 
+  const currentPinchDistance = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    const nodeEl = target.closest('.node-element');
+    
+    if (e.touches.length === 1) {
+      if (nodeEl && !isLocked) {
+        const id = nodeEl.getAttribute('data-node-id');
+        if (id) {
+          setDraggingNodeId(id);
+          return;
+        }
+      }
+      setIsPanning(true);
+      panStart.current = { x: e.touches[0].clientX - offset.x, y: e.touches[0].clientY - offset.y };
+    } else if (e.touches.length === 2) {
+      setIsPanning(false);
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      currentPinchDistance.current = dist;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      if (draggingNodeId) {
+        const rect = containerRef.current?.getBoundingClientRect();
+        if (!rect) return;
+        const x = (e.touches[0].clientX - rect.left - offset.x) / zoom;
+        const y = (e.touches[0].clientY - rect.top - offset.y) / zoom;
+        setNodeOverrides(prev => ({ ...prev, [draggingNodeId]: { x, y } }));
+      } else if (isPanning) {
+        setOffset({
+          x: e.touches[0].clientX - panStart.current.x,
+          y: e.touches[0].clientY - panStart.current.y,
+        });
+      }
+    } else if (e.touches.length === 2 && currentPinchDistance.current !== null) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const delta = (dist - currentPinchDistance.current) * 0.005;
+      setZoom(prev => Math.min(Math.max(prev + delta, 0.1), 3));
+      currentPinchDistance.current = dist;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsPanning(false);
+    setDraggingNodeId(null);
+    currentPinchDistance.current = null;
+  };
+
   const handleWheel = (e: React.WheelEvent) => {
     const delta = e.deltaY * -0.001;
     setZoom(prev => Math.min(Math.max(prev + delta, 0.1), 3));
@@ -663,12 +720,15 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
 
   return (
     <div 
-      className="relative w-full h-[calc(100vh-80px)] bg-[#000] text-white flex flex-col select-none overflow-hidden font-sans"
+      className="relative w-full h-[calc(100vh-80px)] bg-[#000] text-white flex flex-col select-none overflow-hidden font-sans touch-none"
       onWheel={handleWheel}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <div className="absolute top-20 md:top-28 left-4 md:left-12 z-20 pointer-events-none">
         <div className="space-y-1">
