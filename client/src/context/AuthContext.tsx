@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 // User interface
 export interface User {
     id: string;
@@ -26,6 +28,7 @@ interface AuthContextType {
     isLoading: boolean;
     login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
     signup: (data: SignupData) => Promise<{ success: boolean; error?: string }>;
+    loginWithGoogle: () => void;
     logout: () => void;
     updateProfile: (data: Partial<User>) => void;
     addBadge: (badge: string) => void;
@@ -46,41 +49,82 @@ interface AuthProviderProps {
     children: ReactNode;
 }
 
-// Mock user database (in real app, this would be a backend)
-const mockUsers: Record<string, { password: string; user: User }> = {
-    'demo@careersoulmate.com': {
-        password: 'demo123',
-        user: {
-            id: 'user-1',
-            email: 'demo@careersoulmate.com',
-            fullName: 'Demo User',
-            role: 'student',
-            education: { level: 'class12', stream: 'Science' },
-            interests: ['Technology', 'Engineering'],
-            completedAssessments: [],
-            badges: ['early-adopter'],
-            points: 100,
-            createdAt: new Date().toISOString(),
-        },
-    },
-};
-
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Load user from localStorage on mount
-    useEffect(() => {
-        const savedUser = localStorage.getItem('careersoulmate-user');
-        if (savedUser) {
-            try {
-                setUser(JSON.parse(savedUser));
-            } catch (e) {
+    // Fetch current user from the server using stored JWT
+    const fetchCurrentUser = useCallback(async (token: string) => {
+        try {
+            const response = await fetch(`${API_URL}/auth/me`, {
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setUser(data.user);
+                localStorage.setItem('careersoulmate-user', JSON.stringify(data.user));
+                return true;
+            } else {
+                // Token invalid/expired — clean up
+                localStorage.removeItem('careersoulmate-token');
                 localStorage.removeItem('careersoulmate-user');
+                return false;
             }
+        } catch (error) {
+            console.error('Failed to fetch user:', error);
+            return false;
         }
-        setIsLoading(false);
     }, []);
+
+    // On mount: check for OAuth redirect token in URL, or existing token in storage
+    useEffect(() => {
+        const init = async () => {
+            // 1. Check if this is an OAuth redirect with token in the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const tokenFromUrl = urlParams.get('token');
+            const authError = urlParams.get('auth');
+
+            if (authError === 'error') {
+                console.error('Google authentication failed.');
+                // Clean the URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+                setIsLoading(false);
+                return;
+            }
+
+            if (tokenFromUrl) {
+                // Store the token and fetch user
+                localStorage.setItem('careersoulmate-token', tokenFromUrl);
+                await fetchCurrentUser(tokenFromUrl);
+                // Clean the URL (remove ?token=... from address bar)
+                window.history.replaceState({}, document.title, window.location.pathname);
+                setIsLoading(false);
+                return;
+            }
+
+            // 2. Check for existing token in localStorage
+            const existingToken = localStorage.getItem('careersoulmate-token');
+            if (existingToken) {
+                await fetchCurrentUser(existingToken);
+                setIsLoading(false);
+                return;
+            }
+
+            // 3. Fallback: check for locally stored user (from mock login)
+            const savedUser = localStorage.getItem('careersoulmate-user');
+            if (savedUser) {
+                try {
+                    setUser(JSON.parse(savedUser));
+                } catch (e) {
+                    localStorage.removeItem('careersoulmate-user');
+                }
+            }
+            setIsLoading(false);
+        };
+
+        init();
+    }, [fetchCurrentUser]);
 
     // Save user to localStorage when it changes
     useEffect(() => {
@@ -89,39 +133,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     }, [user]);
 
-    const login = useCallback(async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
-        setIsLoading(true);
+    // ─── Google OAuth ───────────────────────────────────
+    const loginWithGoogle = useCallback(() => {
+        // Redirect the whole page to the Google OAuth endpoint on the server
+        window.location.href = `${API_URL}/auth/google`;
+    }, []);
 
-        // Simulate API delay
+    // ─── Email/Password (mock — can be upgraded to real API later) ───
+    const login = useCallback(async (email: string, _password: string): Promise<{ success: boolean; error?: string }> => {
+        setIsLoading(true);
         await new Promise(resolve => setTimeout(resolve, 800));
 
-        const userRecord = mockUsers[email.toLowerCase()];
-
-        if (!userRecord) {
+        // For now, mock login still works as a fallback
+        if (email.toLowerCase() === 'demo@careersoulmate.com' && _password === 'demo123') {
+            const demoUser: User = {
+                id: 'user-demo',
+                email: 'demo@careersoulmate.com',
+                fullName: 'Demo User',
+                role: 'student',
+                education: { level: 'class12', stream: 'Science' },
+                interests: ['Technology', 'Engineering'],
+                completedAssessments: [],
+                badges: ['early-adopter'],
+                points: 100,
+                createdAt: new Date().toISOString(),
+            };
+            setUser(demoUser);
             setIsLoading(false);
-            return { success: false, error: 'User not found. Please sign up first.' };
+            return { success: true };
         }
 
-        if (userRecord.password !== password) {
-            setIsLoading(false);
-            return { success: false, error: 'Invalid password.' };
-        }
-
-        setUser(userRecord.user);
         setIsLoading(false);
-        return { success: true };
+        return { success: false, error: 'Invalid credentials. Use Google Sign-In or demo credentials.' };
     }, []);
 
     const signup = useCallback(async (data: SignupData): Promise<{ success: boolean; error?: string }> => {
         setIsLoading(true);
-
-        // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 800));
-
-        if (mockUsers[data.email.toLowerCase()]) {
-            setIsLoading(false);
-            return { success: false, error: 'User already exists. Please login.' };
-        }
 
         const newUser: User = {
             id: `user-${Date.now()}`,
@@ -136,12 +184,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             createdAt: new Date().toISOString(),
         };
 
-        // Add to mock database
-        mockUsers[data.email.toLowerCase()] = {
-            password: data.password,
-            user: newUser,
-        };
-
         setUser(newUser);
         setIsLoading(false);
         return { success: true };
@@ -149,7 +191,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const logout = useCallback(() => {
         setUser(null);
+        localStorage.removeItem('careersoulmate-token');
         localStorage.removeItem('careersoulmate-user');
+
+        // Optionally call server logout
+        const token = localStorage.getItem('careersoulmate-token');
+        if (token) {
+            fetch(`${API_URL}/auth/logout`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` },
+            }).catch(() => { /* silently fail */ });
+        }
     }, []);
 
     const updateProfile = useCallback((data: Partial<User>) => {
@@ -166,7 +218,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             return {
                 ...prev,
                 badges: [...(prev.badges || []), badge],
-                points: (prev.points || 0) + 25, // Bonus points for badges
+                points: (prev.points || 0) + 25,
             };
         });
     }, []);
@@ -189,6 +241,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 isLoading,
                 login,
                 signup,
+                loginWithGoogle,
                 logout,
                 updateProfile,
                 addBadge,

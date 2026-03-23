@@ -9,13 +9,23 @@
     "start": "node src/app.js",
     "test": "node --test tests/**/*.test.js"
   },
-  "keywords": ["career", "guidance", "api", "education"],
+  "keywords": [
+    "career",
+    "guidance",
+    "api",
+    "education"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.0"
