@@ -127,7 +127,7 @@ const App: React.FC = () => {
     }
   };
 
-  const footerVisiblePages: Page[] = ['home', 'about', 'explorer', 'comparison', 'tree', 'roadmap', 'ai-recs', 'why-this', 'aptitude', 'interest', 'personality', 'skills-assessment', 'profile', 'explore', 'learning-paths', 'opportunities'];
+  const footerVisiblePages: Page[] = ['home', 'about', 'explorer', 'comparison', 'roadmap', 'ai-recs', 'why-this', 'aptitude', 'interest', 'personality', 'skills-assessment', 'profile', 'explore', 'learning-paths', 'opportunities'];
 
   return (
     <NotificationProvider>

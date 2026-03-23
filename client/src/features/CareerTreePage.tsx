@@ -663,7 +663,7 @@ const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
 
   return (
     <div 
-      className="fixed inset-0 bg-[#000] text-white flex flex-col pt-20 select-none overflow-hidden font-sans"
+      className="relative w-full h-[calc(100vh-80px)] bg-[#000] text-white flex flex-col select-none overflow-hidden font-sans"
       onWheel={handleWheel}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
