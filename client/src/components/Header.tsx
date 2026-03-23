@@ -464,10 +464,14 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
 
           <div className="pt-4 md:pt-6 border-t border-white/10 flex flex-col gap-4">
             <div className="flex items-center justify-between gap-4 pb-2">
-              <LanguageSelector />
-              <NotificationCenter />
+              <div className="flex-1 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center p-2">
+                <LanguageSelector />
+              </div>
+              <div className="flex-1 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center p-2">
+                <NotificationCenter />
+              </div>
             </div>
-            <InstallAppButton className="w-full justify-center py-4" />
+            <InstallAppButton alwaysShow={true} className="w-full justify-center py-4" />
             <button className="w-full py-4 text-sm font-bold text-center text-white uppercase tracking-widest bg-blue-600 rounded-xl">
               Get Started
             </button>

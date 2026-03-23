@@ -3,23 +3,27 @@ import { useInstallPrompt } from '../hooks/useInstallPrompt';
 
 interface InstallAppButtonProps {
   className?: string;
+  alwaysShow?: boolean;
 }
 
-const InstallAppButton: React.FC<InstallAppButtonProps> = ({ className = '' }) => {
+const InstallAppButton: React.FC<InstallAppButtonProps> = ({ className = '', alwaysShow = false }) => {
   const { isInstallable, isInstalled, promptInstall } = useInstallPrompt();
   const [showSuccess, setShowSuccess] = useState(false);
 
   const handleClick = async () => {
-    await promptInstall();
-    // Brief success flash if install was accepted
-    if (!isInstallable) {
+    if (isInstallable) {
+      await promptInstall();
+      // Brief success flash if install was accepted
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 2500);
+    } else {
+      // Fallback: If prompt is not available but button is clicked, tell them how
+      alert('To install the app, tap the Share icon (iOS) or Menu (Android) and select "Add to Home Screen".');
     }
   };
 
-  // Hide the button entirely when installation is not available
-  if (!isInstallable && !showSuccess) return null;
+  // Skip the hide logic if alwaysShow is true
+  if (!alwaysShow && !isInstallable && !showSuccess) return null;
 
   // Briefly show a success badge after install
   if (isInstalled || showSuccess) {

@@ -56,7 +56,7 @@ const NotificationCenter: React.FC = () => {
             {/* Bell Icon Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="relative p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all"
+                className="relative w-full justify-center flex items-center p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all"
                 aria-label="Notifications"
             >
                 <svg className="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
