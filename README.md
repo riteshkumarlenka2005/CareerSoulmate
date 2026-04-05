@@ -101,7 +101,7 @@ python dropout_predictor/service.py  # Port 8002
 
 ## 📋 Problem Statement
 
-This project addresses **two critical challenges** from Smart India Hackathran 2025:
+This project addresses **two critical challenges** from Smart India Hackathon 2025:
 
 ### 🎓 Problem 1: Digital Career & Education Guidance Platform
 A comprehensive web/mobile career guidance platform for students (especially Class 10 and 12) to make informed choices about streams, degrees, and careers.
