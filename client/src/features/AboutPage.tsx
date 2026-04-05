@@ -10,21 +10,21 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     {
       name: "Ritesh Kumar Lenka",
       role: "ML Developer",
-      photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop",
+      photo: "/RiteshKumarLenka.png",
       desc: "Responsible for designing and implementing AI/ML models including career recommendation systems, skill-job matching, psychometric scoring, and data-driven intelligence pipelines.",
       skills: ["Machine Learning", "Recommendation Systems", "Python", "Data Analysis"]
     },
     {
       name: "Mayank Mishra",
       role: "Backend Developer",
-      photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&h=200&auto=format&fit=crop",
+      photo: "/MayankMishra.png",
       desc: "Leads backend architecture, API development, authentication systems, and scalable server-side logic ensuring secure and high-performance platform operations.",
       skills: ["FastAPI", "Node.js", "REST APIs", "System Architecture"]
     },
     {
       name: "Lipsita Mishra",
       role: "UI Designer & Database Designer",
-      photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop",
+      photo: "/LipsitaMishra.png",
       desc: "Designs intuitive user interfaces and structured databases, ensuring seamless user experience, data integrity, and scalable schema design.",
       skills: ["UI/UX Design", "Database Design", "PostgreSQL", "User Research"]
     }
