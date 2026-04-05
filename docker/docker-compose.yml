@@ -26,7 +26,8 @@ services:
     environment:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/career_db
-      - MONGODB_URL=mongodb://mongo:27017/career_db
+      - MONGODB_URI=mongodb+srv://lenkariteshkumar2005:B6NkQkTGJ1exEE4i@clustercareersoulmate.jqxh8yt.mongodb.net/careersoulmate?appName=ClusterCareerSoulmate
+      - MONGODB_URL=mongodb+srv://lenkariteshkumar2005:B6NkQkTGJ1exEE4i@clustercareersoulmate.jqxh8yt.mongodb.net/careersoulmate?appName=ClusterCareerSoulmate
     volumes:
       - ./server:/app
       - /app/node_modules
