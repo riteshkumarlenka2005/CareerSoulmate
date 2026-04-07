@@ -10,6 +10,7 @@ import morgan from 'morgan';
 import connectDB from './config/db.js';
 import configurePassport from './config/passport.js';
 import { ApiError } from './utils/ApiError.js';
+import { initCronJobs } from './services/cronJobs.js';
 
 // Routes
 import authRoutes from './routes/auth.js';
