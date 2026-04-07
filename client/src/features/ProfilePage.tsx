@@ -1,20 +1,94 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useI18n } from '../context/I18nContext';
 import UserProgress, { BADGES } from '../components/UserProgress';
+import ApiClient from '../services/api';
 
-const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+interface ProfileData {
+    education_level: string;
+    stream: string;
+    occupation_status: string;
+    city: string;
+    state: string;
+    date_of_birth: string;
+    gender: string;
+    interests_text: string;
+    known_skills: string[];
+    known_skills_ratings: Record<string, number>;
+    work_preference: string;
+    preferred_industries: string[];
+    preferred_work_style: string;
+    career_preference: string;
+    bio: string;
+    profile_completion: number;
+    target_career: string;
+}
+
+const ProfilePage: React.FC = () => {
+    const navigate = useNavigate();
     const { user, isAuthenticated, updateProfile, logout } = useAuth();
     const { t } = useI18n();
+
     const [isEditing, setIsEditing] = useState(false);
+    const [saving, setSaving] = useState(false);
+    const [loadingProfile, setLoadingProfile] = useState(true);
+    const [saveMessage, setSaveMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+    const [profile, setProfile] = useState<ProfileData | null>(null);
+
     const [editForm, setEditForm] = useState({
         fullName: user?.fullName || '',
         phone: user?.phone || '',
-        educationLevel: user?.education?.level || 'class12',
+        educationLevel: (user?.education?.level || 'class12') as string,
         stream: user?.education?.stream || '',
         institution: user?.education?.institution || '',
+        bio: '',
+        city: '',
+        state: '',
+        gender: '',
+        occupation_status: '',
+        work_preference: '',
     });
+
+    // Load profile on mount
+    useEffect(() => {
+        if (isAuthenticated) {
+            loadProfile();
+        } else {
+            setLoadingProfile(false);
+        }
+    }, [isAuthenticated]);
+
+    const loadProfile = async () => {
+        try {
+            setLoadingProfile(true);
+            const res = await ApiClient.get('/api/profile');
+            const data = res.data;
+            if (data?.profile) {
+                setProfile(data.profile);
+                // Pre-fill edit form with API data
+                setEditForm(prev => ({
+                    ...prev,
+                    fullName: data.user?.fullName || prev.fullName,
+                    phone: data.user?.phone || prev.phone,
+                    educationLevel: data.profile.education_level || data.user?.education?.level || prev.educationLevel,
+                    stream: data.profile.stream || data.user?.education?.stream || prev.stream,
+                    institution: data.user?.education?.institution || prev.institution,
+                    bio: data.profile.bio || '',
+                    city: data.profile.city || '',
+                    state: data.profile.state || '',
+                    gender: data.profile.gender || '',
+                    occupation_status: data.profile.occupation_status || '',
+                    work_preference: data.profile.work_preference || '',
+                }));
+            }
+        } catch (err: any) {
+            console.error('Failed to load profile:', err.message);
+        } finally {
+            setLoadingProfile(false);
+        }
+    };
 
     if (!isAuthenticated || !user) {
         return (
@@ -22,7 +96,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">Please login to view your profile</h2>
                     <button
-                        onClick={() => onNavigate('home')}
+                        onClick={() => navigate('/')}
                         className="text-blue-400 hover:text-blue-300"
                     >
                         Go to Home →
@@ -32,18 +106,59 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
         );
     }
 
-    const handleSave = () => {
-        updateProfile({
-            fullName: editForm.fullName,
-            phone: editForm.phone,
-            education: {
-                level: editForm.educationLevel as any,
+    const handleSave = async () => {
+        try {
+            setSaving(true);
+            setSaveMessage(null);
+
+            const payload: any = {
+                fullName: editForm.fullName,
+                phone: editForm.phone,
+                education: {
+                    level: editForm.educationLevel,
+                    stream: editForm.stream,
+                    institution: editForm.institution,
+                },
+                // Extended profile fields
+                education_level: editForm.educationLevel,
                 stream: editForm.stream,
-                institution: editForm.institution,
-            },
-        });
-        setIsEditing(false);
+                bio: editForm.bio,
+                city: editForm.city,
+                state: editForm.state,
+                gender: editForm.gender,
+                occupation_status: editForm.occupation_status,
+                work_preference: editForm.work_preference,
+            };
+
+            const res = await ApiClient.put('/api/profile', payload);
+
+            // Update local auth state with the returned user data
+            if (res.data?.user) {
+                updateProfile({
+                    fullName: res.data.user.fullName,
+                    phone: res.data.user.phone,
+                    education: res.data.user.education,
+                });
+            }
+
+            // Update profile data
+            if (res.data?.profile) {
+                setProfile(res.data.profile);
+            }
+
+            setSaveMessage({ type: 'success', text: 'Profile updated successfully!' });
+            setIsEditing(false);
+
+            // Auto-hide success message
+            setTimeout(() => setSaveMessage(null), 3000);
+        } catch (err: any) {
+            setSaveMessage({ type: 'error', text: err.message || 'Failed to save profile' });
+        } finally {
+            setSaving(false);
+        }
     };
+
+    const profileCompletion = profile?.profile_completion || 0;
 
     return (
         <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700">
@@ -54,17 +169,31 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                 </div>
 
                 <div className="max-w-full px-2 md:max-w-4xl md:px-0 mx-auto relative z-10">
+                    {/* Save message toast */}
+                    {saveMessage && (
+                        <div className={`mb-6 p-4 rounded-xl text-sm font-medium flex items-center justify-between animate-in slide-in-from-top-2 ${
+                            saveMessage.type === 'success'
+                                ? 'bg-green-500/10 border border-green-500/20 text-green-400'
+                                : 'bg-red-500/10 border border-red-500/20 text-red-400'
+                        }`}>
+                            <span>{saveMessage.text}</span>
+                            <button onClick={() => setSaveMessage(null)} className="text-xs opacity-60 hover:opacity-100">✕</button>
+                        </div>
+                    )}
+
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         {/* Avatar */}
                         <div className="relative">
                             <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-5xl font-bold shadow-2xl shadow-blue-500/30">
                                 {user.fullName.charAt(0).toUpperCase()}
                             </div>
-                            <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center border-4 border-[#050505]">
-                                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                            </div>
+                            {profileCompletion >= 80 && (
+                                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center border-4 border-[#050505]">
+                                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                            )}
                         </div>
 
                         {/* Info */}
@@ -79,7 +208,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                                     Level {Math.floor((user.points || 0) / 100) + 1}
                                 </span>
                                 <span className="px-4 py-1.5 bg-emerald-500/20 border border-emerald-500/30 rounded-full text-sm text-emerald-400">
-                                    {user.points || 0} Points
+                                    {profileCompletion}% Complete
                                 </span>
                             </div>
                         </div>
@@ -115,7 +244,16 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                     <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
                         <h3 className="text-lg font-bold text-white mb-6">Profile Details</h3>
 
-                        {isEditing ? (
+                        {loadingProfile ? (
+                            <div className="space-y-4">
+                                {[1,2,3,4,5].map(i => (
+                                    <div key={i} className="flex justify-between py-3 border-b border-white/10 animate-pulse">
+                                        <div className="h-4 bg-white/5 rounded w-20" />
+                                        <div className="h-4 bg-white/5 rounded w-32" />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : isEditing ? (
                             <div className="space-y-4">
                                 <div>
                                     <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Full Name</label>
@@ -163,12 +301,62 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                                         placeholder="e.g., Science, Commerce, Arts"
                                     />
                                 </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-200 uppercase mb-2">City</label>
+                                    <input
+                                        type="text"
+                                        value={editForm.city}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, city: e.target.value }))}
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
+                                        placeholder="e.g., Mumbai, Delhi"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Gender</label>
+                                    <select
+                                        value={editForm.gender}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, gender: e.target.value }))}
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
+                                    >
+                                        <option value="" className="bg-gray-900">Select</option>
+                                        <option value="male" className="bg-gray-900">Male</option>
+                                        <option value="female" className="bg-gray-900">Female</option>
+                                        <option value="other" className="bg-gray-900">Other</option>
+                                        <option value="prefer_not_to_say" className="bg-gray-900">Prefer not to say</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Work Preference</label>
+                                    <select
+                                        value={editForm.work_preference}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, work_preference: e.target.value }))}
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
+                                    >
+                                        <option value="" className="bg-gray-900">Select</option>
+                                        <option value="remote" className="bg-gray-900">Remote</option>
+                                        <option value="office" className="bg-gray-900">Office</option>
+                                        <option value="hybrid" className="bg-gray-900">Hybrid</option>
+                                        <option value="field" className="bg-gray-900">Field Work</option>
+                                        <option value="freelance" className="bg-gray-900">Freelance</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Bio</label>
+                                    <textarea
+                                        value={editForm.bio}
+                                        onChange={(e) => setEditForm(prev => ({ ...prev, bio: e.target.value }))}
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 h-24 resize-none"
+                                        placeholder="Tell us about yourself..."
+                                    />
+                                </div>
                                 <div className="flex gap-4 pt-4">
                                     <button
                                         onClick={handleSave}
-                                        className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-bold transition-all"
+                                        disabled={saving}
+                                        className="flex-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                                     >
-                                        Save Changes
+                                        {saving && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
+                                        {saving ? 'Saving…' : 'Save Changes'}
                                     </button>
                                     <button
                                         onClick={() => setIsEditing(false)}
@@ -190,12 +378,30 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                                 </div>
                                 <div className="flex justify-between py-3 border-b border-white/10">
                                     <span className="text-gray-200">Education Level</span>
-                                    <span className="text-white capitalize">{user.education?.level?.replace('class', 'Class ') || 'Not set'}</span>
+                                    <span className="text-white capitalize">{(profile?.education_level || user.education?.level || '')?.replace('class', 'Class ') || 'Not set'}</span>
                                 </div>
                                 <div className="flex justify-between py-3 border-b border-white/10">
                                     <span className="text-gray-200">Stream</span>
-                                    <span className="text-white">{user.education?.stream || 'Not set'}</span>
+                                    <span className="text-white">{profile?.stream || user.education?.stream || 'Not set'}</span>
                                 </div>
+                                <div className="flex justify-between py-3 border-b border-white/10">
+                                    <span className="text-gray-200">City</span>
+                                    <span className="text-white">{profile?.city || 'Not set'}</span>
+                                </div>
+                                <div className="flex justify-between py-3 border-b border-white/10">
+                                    <span className="text-gray-200">Gender</span>
+                                    <span className="text-white capitalize">{profile?.gender?.replace('_', ' ') || 'Not set'}</span>
+                                </div>
+                                <div className="flex justify-between py-3 border-b border-white/10">
+                                    <span className="text-gray-200">Work Preference</span>
+                                    <span className="text-white capitalize">{profile?.work_preference || 'Not set'}</span>
+                                </div>
+                                {profile?.bio && (
+                                    <div className="flex justify-between py-3 border-b border-white/10">
+                                        <span className="text-gray-200">Bio</span>
+                                        <span className="text-white text-right max-w-[200px] truncate">{profile.bio}</span>
+                                    </div>
+                                )}
                                 <div className="flex justify-between py-3">
                                     <span className="text-gray-200">Member Since</span>
                                     <span className="text-white">{new Date(user.createdAt).toLocaleDateString('en-IN', { year: 'numeric', month: 'long' })}</span>
@@ -205,7 +411,7 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                     </div>
                 </div>
 
-                {/* Completed Assessments */}
+                {/* Activity */}
                 <div className="mt-8 bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
                     <h3 className="text-lg font-bold text-white mb-6">Your Activity</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -218,12 +424,12 @@ const ProfilePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
                             <p className="text-xs text-gray-300 uppercase mt-1">Badges</p>
                         </div>
                         <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
-                            <p className="text-3xl font-bold text-emerald-400">3</p>
-                            <p className="text-xs text-gray-300 uppercase mt-1">Bookmarked Colleges</p>
+                            <p className="text-3xl font-bold text-emerald-400">{profileCompletion}%</p>
+                            <p className="text-xs text-gray-300 uppercase mt-1">Profile Complete</p>
                         </div>
                         <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
-                            <p className="text-3xl font-bold text-orange-400">7</p>
-                            <p className="text-xs text-gray-300 uppercase mt-1">Day Streak</p>
+                            <p className="text-3xl font-bold text-orange-400">{user.points || 0}</p>
+                            <p className="text-xs text-gray-300 uppercase mt-1">Points</p>
                         </div>
                     </div>
                 </div>

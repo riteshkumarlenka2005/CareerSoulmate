@@ -1,5 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type PageView = 'intro' | 'assessment' | 'results';
 
@@ -95,7 +96,9 @@ const QUESTIONS = [
   }
 ];
 
-const PersonalityPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+const PersonalityPage: React.FC = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'ai-recs' ? '/recommendations' : `/${page}`);
   const [view, setView] = useState<PageView>('intro');
   const [currentIdx, setCurrentIdx] = useState(0);
   const [scores, setScores] = useState<Record<string, number>>({ social: 0, operational: 0, decision: 0, collaboration: 0, risk: 0 });

@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type PageView = 'intro' | 'categories' | 'assessment' | 'results';
 
@@ -21,7 +22,9 @@ const APTITUDE_CATEGORIES: AptitudeCategory[] = [
   { id: 'analytical', name: 'Analytical Thinking', description: 'Deconstructing complex scenarios to find root causes and outcomes.', timeLimit: '15 Mins', difficulty: 'Adaptive', icon: '🧪', color: 'emerald' },
 ];
 
-const AptitudePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+const AptitudePage: React.FC = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'ai-recs' ? '/recommendations' : `/${page}`);
   const [view, setView] = useState<PageView>('intro');
   const [activeCategory, setActiveCategory] = useState<AptitudeCategory | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState(1);

@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Factor {
   label: string;
@@ -47,7 +48,9 @@ const WHY_THIS_FACTORS: Factor[] = [
   }
 ];
 
-const WhyThisPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+const WhyThisPage: React.FC = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'ai-recs' ? '/recommendations' : `/${page}`);
   const [selectedFactor, setSelectedFactor] = useState<Factor | null>(WHY_THIS_FACTORS[0]);
 
   return (

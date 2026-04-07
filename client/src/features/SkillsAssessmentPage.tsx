@@ -1,5 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Proficiency = 'None' | 'Beginner' | 'Intermediate' | 'Advanced';
 
@@ -39,7 +40,9 @@ const TARGET_ROLE_NEEDS = {
   ]
 };
 
-const SkillsAssessmentPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+const SkillsAssessmentPage: React.FC = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'ai-recs' ? '/recommendations' : `/${page}`);
   const [activeCategory, setActiveCategory] = useState<SkillItem['category']>('Technical');
   const [userRatings, setUserRatings] = useState<Record<string, Proficiency>>({});
   const [view, setView] = useState<'assess' | 'results'>('assess');

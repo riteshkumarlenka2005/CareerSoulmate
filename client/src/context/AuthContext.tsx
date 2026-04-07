@@ -53,57 +53,83 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Helper to make API requests
+    const apiRequest = useCallback(async (endpoint: string, options: RequestInit = {}) => {
+        const token = localStorage.getItem('careersoulmate-token');
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const response = await fetch(`${API_URL}${endpoint}`, {
+            ...options,
+            headers: { ...headers, ...options.headers as Record<string, string> },
+        });
+
+        const data = await response.json();
+        return { ok: response.ok, status: response.status, data };
+    }, []);
+
     // Fetch current user from the server using stored JWT
     const fetchCurrentUser = useCallback(async (token: string) => {
         try {
-            const response = await fetch(`${API_URL}/auth/me`, {
+            const { ok, data } = await apiRequest('/api/auth/me', {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                setUser(data.user);
-                localStorage.setItem('careersoulmate-user', JSON.stringify(data.user));
+            if (ok && data.data?.user) {
+                const u = data.data.user;
+                setUser(u);
+                localStorage.setItem('careersoulmate-user', JSON.stringify(u));
                 return true;
             } else {
-                // Token invalid/expired — clean up
                 localStorage.removeItem('careersoulmate-token');
                 localStorage.removeItem('careersoulmate-user');
                 return false;
             }
         } catch (error) {
             console.error('Failed to fetch user:', error);
+            // Try fallback path for legacy routes
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    const u = data.data?.user || data.user;
+                    if (u) {
+                        setUser(u);
+                        localStorage.setItem('careersoulmate-user', JSON.stringify(u));
+                        return true;
+                    }
+                }
+            } catch { /* fallback failed too */ }
             return false;
         }
-    }, []);
+    }, [apiRequest]);
 
     // On mount: check for OAuth redirect token in URL, or existing token in storage
     useEffect(() => {
         const init = async () => {
-            // 1. Check if this is an OAuth redirect with token in the URL
             const urlParams = new URLSearchParams(window.location.search);
             const tokenFromUrl = urlParams.get('token');
             const authError = urlParams.get('auth');
 
             if (authError === 'error') {
                 console.error('Google authentication failed.');
-                // Clean the URL
                 window.history.replaceState({}, document.title, window.location.pathname);
                 setIsLoading(false);
                 return;
             }
 
             if (tokenFromUrl) {
-                // Store the token and fetch user
                 localStorage.setItem('careersoulmate-token', tokenFromUrl);
                 await fetchCurrentUser(tokenFromUrl);
-                // Clean the URL (remove ?token=... from address bar)
                 window.history.replaceState({}, document.title, window.location.pathname);
                 setIsLoading(false);
                 return;
             }
 
-            // 2. Check for existing token in localStorage
             const existingToken = localStorage.getItem('careersoulmate-token');
             if (existingToken) {
                 await fetchCurrentUser(existingToken);
@@ -111,12 +137,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 return;
             }
 
-            // 3. Fallback: check for locally stored user (from mock login)
             const savedUser = localStorage.getItem('careersoulmate-user');
             if (savedUser) {
                 try {
                     setUser(JSON.parse(savedUser));
-                } catch (e) {
+                } catch {
                     localStorage.removeItem('careersoulmate-user');
                 }
             }
@@ -126,7 +151,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         init();
     }, [fetchCurrentUser]);
 
-    // Save user to localStorage when it changes
     useEffect(() => {
         if (user) {
             localStorage.setItem('careersoulmate-user', JSON.stringify(user));
@@ -135,69 +159,72 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     // ─── Google OAuth ───────────────────────────────────
     const loginWithGoogle = useCallback(() => {
-        // Redirect the whole page to the Google OAuth endpoint on the server
-        window.location.href = `${API_URL}/auth/google`;
+        window.location.href = `${API_URL}/api/auth/google`;
     }, []);
 
-    // ─── Email/Password (mock — can be upgraded to real API later) ───
-    const login = useCallback(async (email: string, _password: string): Promise<{ success: boolean; error?: string }> => {
+    // ─── Email/Password Login (Real API) ────────────────
+    const login = useCallback(async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
         setIsLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 800));
+        try {
+            const { ok, data } = await apiRequest('/api/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+            });
 
-        // For now, mock login still works as a fallback
-        if (email.toLowerCase() === 'demo@careersoulmate.com' && _password === 'demo123') {
-            const demoUser: User = {
-                id: 'user-demo',
-                email: 'demo@careersoulmate.com',
-                fullName: 'Demo User',
-                role: 'student',
-                education: { level: 'class12', stream: 'Science' },
-                interests: ['Technology', 'Engineering'],
-                completedAssessments: [],
-                badges: ['early-adopter'],
-                points: 100,
-                createdAt: new Date().toISOString(),
-            };
-            setUser(demoUser);
+            if (ok && data.data) {
+                const { user: u, token } = data.data;
+                localStorage.setItem('careersoulmate-token', token);
+                setUser(u);
+                setIsLoading(false);
+                return { success: true };
+            }
+
             setIsLoading(false);
-            return { success: true };
+            return { success: false, error: data.message || 'Invalid credentials.' };
+        } catch (error: any) {
+            setIsLoading(false);
+            return { success: false, error: 'Network error. Please check your connection.' };
         }
+    }, [apiRequest]);
 
-        setIsLoading(false);
-        return { success: false, error: 'Invalid credentials. Use Google Sign-In or demo credentials.' };
-    }, []);
-
+    // ─── Email/Password Signup (Real API) ───────────────
     const signup = useCallback(async (data: SignupData): Promise<{ success: boolean; error?: string }> => {
         setIsLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 800));
+        try {
+            const { ok, data: responseData } = await apiRequest('/api/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({
+                    fullName: data.fullName,
+                    email: data.email,
+                    password: data.password,
+                    role: data.role || 'student',
+                }),
+            });
 
-        const newUser: User = {
-            id: `user-${Date.now()}`,
-            email: data.email,
-            fullName: data.fullName,
-            role: data.role || 'student',
-            education: data.education,
-            interests: [],
-            completedAssessments: [],
-            badges: ['welcome'],
-            points: 50,
-            createdAt: new Date().toISOString(),
-        };
+            if (ok && responseData.data) {
+                const { user: u, token } = responseData.data;
+                localStorage.setItem('careersoulmate-token', token);
+                setUser(u);
+                setIsLoading(false);
+                return { success: true };
+            }
 
-        setUser(newUser);
-        setIsLoading(false);
-        return { success: true };
-    }, []);
+            setIsLoading(false);
+            return { success: false, error: responseData.message || 'Registration failed.' };
+        } catch (error: any) {
+            setIsLoading(false);
+            return { success: false, error: 'Network error. Please check your connection.' };
+        }
+    }, [apiRequest]);
 
     const logout = useCallback(() => {
+        const token = localStorage.getItem('careersoulmate-token');
         setUser(null);
         localStorage.removeItem('careersoulmate-token');
         localStorage.removeItem('careersoulmate-user');
 
-        // Optionally call server logout
-        const token = localStorage.getItem('careersoulmate-token');
         if (token) {
-            fetch(`${API_URL}/auth/logout`, {
+            fetch(`${API_URL}/api/auth/logout`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
             }).catch(() => { /* silently fail */ });

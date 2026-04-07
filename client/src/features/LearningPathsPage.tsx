@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Tab = 'pathways' | 'nep' | 'nsqf';
 
@@ -48,7 +49,9 @@ const NSQF_LEVELS = [
   { level: 10, title: 'Thought Leader', desc: 'Pioneer global discoveries.', edu: 'Post-Doctoral', color: 'bg-red-400' },
 ];
 
-const LearningPathsPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+const LearningPathsPage: React.FC = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'ai-recs' ? '/recommendations' : `/${page}`);
   const [activeTab, setActiveTab] = useState<Tab>('pathways');
   const [activePathwayId, setActivePathwayId] = useState(PATHWAYS_DB[0].id);
   const activePathway = useMemo(() => PATHWAYS_DB.find(p => p.id === activePathwayId) || PATHWAYS_DB[0], [activePathwayId]);

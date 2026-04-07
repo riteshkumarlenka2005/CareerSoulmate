@@ -1,5 +1,6 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /* ─── DATA: CAREERS ─── */
 interface Career {
@@ -49,7 +50,9 @@ const SKILLS_DB: Skill[] = [
 /* ─── TABS ─── */
 type Tab = 'careers' | 'degrees' | 'skills';
 
-const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+const ExplorePage: React.FC = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'ai-recs' ? '/recommendations' : `/${page}`);
   const [activeTab, setActiveTab] = useState<Tab>('careers');
   const [search, setSearch] = useState('');
 
@@ -117,20 +120,22 @@ const ExplorePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate
       <section className="py-10 px-4 md:py-20 md:px-6 max-w-7xl mx-auto">
         
         {/* CAREERS TAB */}
-        {activeTab === 'careers' && <CareersTab search={search} onNavigate={onNavigate} />}
+        {activeTab === 'careers' && <CareersTab search={search} />}
         
         {/* DEGREES TAB */}
-        {activeTab === 'degrees' && <DegreesTab search={search} onNavigate={onNavigate} />}
+        {activeTab === 'degrees' && <DegreesTab search={search} />}
         
         {/* SKILLS TAB */}
-        {activeTab === 'skills' && <SkillsTab search={search} onNavigate={onNavigate} />}
+        {activeTab === 'skills' && <SkillsTab search={search} />}
       </section>
     </div>
   );
 };
 
 /* ─── CAREERS TAB ─── */
-const CareersTab: React.FC<{ search: string; onNavigate: (page: any) => void }> = ({ search, onNavigate }) => {
+const CareersTab: React.FC<{ search: string }> = ({ search }) => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'comparison' ? '/explore' : `/${page}`);
   const filtered = useMemo(() => 
     CAREERS_DB.filter(c => c.name.toLowerCase().includes(search.toLowerCase()) || c.industry.toLowerCase().includes(search.toLowerCase())),
     [search]
@@ -189,7 +194,9 @@ const CareersTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
 };
 
 /* ─── DEGREES TAB ─── */
-const DegreesTab: React.FC<{ search: string; onNavigate: (page: any) => void }> = ({ search, onNavigate }) => {
+const DegreesTab: React.FC<{ search: string }> = ({ search }) => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'comparison' ? '/explore' : `/${page}`);
   const filtered = useMemo(() =>
     DEGREES_DB.filter(d => d.name.toLowerCase().includes(search.toLowerCase()) || d.subjects.some(s => s.toLowerCase().includes(search.toLowerCase()))),
     [search]
@@ -242,7 +249,9 @@ const DegreesTab: React.FC<{ search: string; onNavigate: (page: any) => void }> 
 };
 
 /* ─── SKILLS TAB ─── */
-const SkillsTab: React.FC<{ search: string; onNavigate: (page: any) => void }> = ({ search, onNavigate }) => {
+const SkillsTab: React.FC<{ search: string }> = ({ search }) => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'comparison' ? '/explore' : `/${page}`);
   const filtered = useMemo(() =>
     SKILLS_DB.filter(s => s.name.toLowerCase().includes(search.toLowerCase()) || s.description.toLowerCase().includes(search.toLowerCase())),
     [search]

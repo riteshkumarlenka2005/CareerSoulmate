@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Tab = 'apprenticeships' | 'scholarships' | 'certifications' | 'exams' | 'admissions';
 
@@ -46,7 +47,9 @@ const ALL_DATA: Record<Tab, { data: Opportunity[]; color: string; label: string 
   admissions: { data: ADMISSIONS, color: 'purple', label: 'Admissions' },
 };
 
-const OpportunitiesPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }) => {
+const OpportunitiesPage: React.FC = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'ai-recs' ? '/recommendations' : `/${page}`);
   const [activeTab, setActiveTab] = useState<Tab>('apprenticeships');
   const [search, setSearch] = useState('');
   const current = ALL_DATA[activeTab];

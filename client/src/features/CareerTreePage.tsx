@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface CareerNode {
   id: string;
@@ -441,10 +442,12 @@ interface NodePosition {
 }
 
 interface CareerTreePageProps {
-  onNavigate: (page: 'home' | 'about' | 'explorer' | 'comparison' | 'tree') => void;
+  onNavigate?: (page: string) => void;
 }
 
-const CareerTreePage: React.FC<CareerTreePageProps> = ({ onNavigate }) => {
+const CareerTreePage: React.FC<CareerTreePageProps> = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'comparison' ? '/explore' : page === 'home' ? '/' : `/${page}`);
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set(['root', 'vocational_careers', 'education_teaching', 'engineering_technology', 'medical_healthcare']));
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);

@@ -1,11 +1,14 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface AboutPageProps {
-  onNavigate: (page: 'home' | 'about') => void;
+  onNavigate?: (page: string) => void;
 }
 
-const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
+const AboutPage: React.FC<AboutPageProps> = ({ onNavigate: onNavigateProp }) => {
+  const nav = useNavigate();
+  const onNavigate = onNavigateProp || ((page: string) => nav(page === 'home' ? '/' : `/${page}`));
   const team = [
     {
       name: "Ritesh Kumar Lenka",

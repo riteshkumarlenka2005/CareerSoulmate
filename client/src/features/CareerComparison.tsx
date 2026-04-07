@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface CareerStats {
   id: string;
@@ -114,10 +115,12 @@ const CAREER_DATA: CareerStats[] = [
 ];
 
 interface CareerComparisonProps {
-  onNavigate: (page: 'home' | 'about' | 'explorer' | 'comparison') => void;
+  onNavigate?: (page: string) => void;
 }
 
-const CareerComparison: React.FC<CareerComparisonProps> = ({ onNavigate }) => {
+const CareerComparison: React.FC<CareerComparisonProps> = () => {
+  const navigate = useNavigate();
+  const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'home' ? '/' : `/${page}`);
   const [selectedIds, setSelectedIds] = useState<string[]>(['neural', 'data']);
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
 
