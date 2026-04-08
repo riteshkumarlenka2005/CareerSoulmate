@@ -90,6 +90,41 @@ router.get('/', async (req, res) => {
             }
         }
 
+        if (source === 'coresignal' || source === 'all') {
+            try {
+                // Using Coresignal APIs
+                const coresignalResponse = await axios.post('https://api.coresignal.com/v2/job/search', {
+                    title: `.*${q}.*`,
+                    limit: parseInt(limit, 10)
+                }, {
+                    headers: {
+                        'Authorization': `Bearer Z8M75qeehREojk6tkZwD6S7joYCZGdTD`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (coresignalResponse.data && Array.isArray(coresignalResponse.data)) {
+                    jobs = [...jobs, ...coresignalResponse.data.map(job => ({
+                        id: job.id,
+                        job_title: job.title,
+                        company: job.company_name,
+                        location: job.location,
+                        date_posted: job.created_at,
+                        description: job.description,
+                        url: job.url,
+                        salary_string: job.salary ? `${job.salary}` : null,
+                        employment_statuses: [job.employment_type || 'Full-time'],
+                        remote: job.is_remote ? true : false,
+                        hybrid: false,
+                        keyword_slugs: [job.seniority].filter(Boolean),
+                        source: 'Coresignal'
+                    }))];
+                }
+            } catch (err) {
+                console.error("Coresignal fetch failed:", err.message);
+            }
+        }
+
         res.json({ data: jobs });
     } catch (error) {
         console.error('Error fetching jobs:', error.message);

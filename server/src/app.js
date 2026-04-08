@@ -25,6 +25,8 @@ import notificationRoutes from './routes/notifications.js';
 import chatbotRoutes from './routes/chatbot.js';
 import reportRoutes from './routes/report.js';
 import jobsRoutes from './routes/jobs.js';
+import employeesRoutes from './routes/employees.js';
+import companiesRoutes from './routes/companies.js';
 
 // Admin routes
 import adminIndexRoutes from './routes/admin/index.js';
@@ -101,6 +103,8 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/report', reportRoutes);
 app.use('/api/jobs', jobsRoutes);
+app.use('/api/employees', employeesRoutes);
+app.use('/api/companies', companiesRoutes);
 app.use('/api/faqs', adminFaqRoutes);  // public + admin FAQ
 
 // ─── Admin Routes ───────────────────────────────────────
