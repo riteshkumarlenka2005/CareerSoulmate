@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-type Tab = 'apprenticeships' | 'scholarships' | 'certifications' | 'exams' | 'admissions' | 'jobs';
+type Tab = 'apprenticeships' | 'scholarships' | 'certifications' | 'exams' | 'admissions' | 'jobs' | 'companies' | 'employees';
 
 interface Opportunity {
   id: string; title: string; provider: string; type: string;
@@ -47,6 +47,8 @@ const ALL_DATA: Record<Tab, { data: Opportunity[]; color: string; label: string 
   exams: { data: EXAMS, color: 'orange', label: 'Competitive Exams' },
   admissions: { data: ADMISSIONS, color: 'purple', label: 'Admissions' },
   jobs: { data: [], color: 'pink', label: 'Real-Time Jobs' },
+  companies: { data: [], color: 'yellow', label: 'Companies' },
+  employees: { data: [], color: 'green', label: 'Professionals' },
 };
 
 const OpportunitiesPage: React.FC = () => {
@@ -56,50 +58,89 @@ const OpportunitiesPage: React.FC = () => {
   const [search, setSearch] = useState('');
   
   const [realTimeJobs, setRealTimeJobs] = useState<Opportunity[]>([]);
-  const [loadingJobs, setLoadingJobs] = useState(false);
+  const [realTimeCompanies, setRealTimeCompanies] = useState<Opportunity[]>([]);
+  const [realTimeEmployees, setRealTimeEmployees] = useState<Opportunity[]>([]);
+  const [loadingRealTime, setLoadingRealTime] = useState(false);
 
-  const current = activeTab === 'jobs' 
-    ? { data: realTimeJobs, color: 'pink', label: 'Real-Time Jobs' } 
+  const current = activeTab === 'jobs'
+    ? { data: realTimeJobs, color: 'pink', label: 'Real-Time Jobs' }
+    : activeTab === 'companies'
+    ? { data: realTimeCompanies, color: 'yellow', label: 'Companies' }
+    : activeTab === 'employees'
+    ? { data: realTimeEmployees, color: 'green', label: 'Professionals' }
     : ALL_DATA[activeTab];
 
-  // Fetch real-time jobs
+  // Fetch real-time tabs
   React.useEffect(() => {
-    if (activeTab === 'jobs') {
-      const fetchJobs = async () => {
-        setLoadingJobs(true);
+    if (activeTab === 'jobs' || activeTab === 'companies' || activeTab === 'employees') {
+      const fetchData = async () => {
+        setLoadingRealTime(true);
         try {
           const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-          const res = await fetch(`${API_URL}/api/jobs?limit=21&q=${encodeURIComponent(search || 'software')}`);
-          if (res.ok) {
-            const data = await res.json();
-            const fetched = (data.data || []).map((job: any) => ({
-              id: `job-${job.id}`,
-              title: job.job_title || 'Unknown Role',
-              provider: job.company || 'Unknown Company',
-              type: job.remote ? 'Remote' : (job.hybrid ? 'Hybrid' : 'On-site'),
-              deadline: job.date_posted,
-              amount: job.salary_string || (job.min_annual_salary_usd ? `$${job.min_annual_salary_usd}` : undefined),
-              duration: job.employment_statuses?.[0] || 'Full-time',
-              eligibility: job.seniority || 'Any',
-              description: job.description ? job.description.substring(0, 150) + '...' : 'No Description',
-              tags: [...(job.keyword_slugs || []).slice(0, 2), job.country].filter(Boolean),
-              url: job.url
-            }));
-            setRealTimeJobs(fetched);
+          const queryParam = encodeURIComponent(search || (activeTab === 'jobs' ? 'software' : activeTab === 'companies' ? 'tech' : 'engineer'));
+          
+          if (activeTab === 'jobs') {
+              const res = await fetch(`${API_URL}/api/jobs?limit=21&q=${queryParam}`);
+              if (res.ok) {
+                const data = await res.json();
+                const fetched = (data.data || []).map((job: any) => ({
+                  id: `job-${job.id}`,
+                  title: job.job_title || 'Unknown Role',
+                  provider: job.company || 'Unknown Company',
+                  type: job.remote ? 'Remote' : (job.hybrid ? 'Hybrid' : 'On-site'),
+                  deadline: job.date_posted,
+                  amount: job.salary_string || (job.min_annual_salary_usd ? `$${job.min_annual_salary_usd}` : undefined),
+                  duration: job.employment_statuses?.[0] || 'Full-time',
+                  eligibility: job.seniority || 'Any',
+                  description: job.description ? job.description.substring(0, 150) + '...' : 'No Description',
+                  tags: [...(job.keyword_slugs || []).slice(0, 2), job.country].filter(Boolean),
+                  url: job.url
+                }));
+                setRealTimeJobs(fetched);
+              }
+          } else if (activeTab === 'companies') {
+              const res = await fetch(`${API_URL}/api/companies/search?limit=21&q=${queryParam}`);
+              if (res.ok) {
+                const data = await res.json();
+                const fetched = (data.data || []).map((comp: any) => ({
+                  id: `comp-${comp.id}`,
+                  title: comp.name || 'Unknown Company',
+                  provider: comp.industry || 'Various',
+                  type: comp.type || 'Company',
+                  eligibility: comp.size || 'Any size',
+                  description: comp.description ? comp.description.substring(0, 150) + '...' : 'No Description',
+                  tags: [comp.country, comp.founded_year].filter(Boolean).map(String),
+                  url: comp.website
+                }));
+                setRealTimeCompanies(fetched);
+              }
+          } else if (activeTab === 'employees') {
+              const res = await fetch(`${API_URL}/api/employees/search?limit=21&q=${queryParam}`);
+              if (res.ok) {
+                const data = await res.json();
+                const fetched = (data.data || []).map((emp: any) => ({
+                  id: `emp-${emp.id}`,
+                  title: emp.title || 'Professional',
+                  provider: emp.company || 'Independent',
+                  type: emp.seniority || 'Professional',
+                  duration: emp.experience_years ? `${emp.experience_years} years` : 'N/A',
+                  eligibility: emp.location || 'Global',
+                  description: emp.summary ? emp.summary.substring(0, 150) + '...' : 'No summary provided',
+                  tags: [...(emp.skills || [])].slice(0, 3).filter(Boolean),
+                  url: emp.linkedin_url
+                }));
+                setRealTimeEmployees(fetched);
+              }
           }
         } catch (err) {
-          console.error("Failed to fetch jobs", err);
+          console.error(`Failed to fetch ${activeTab}`, err);
         } finally {
-          setLoadingJobs(false);
+          setLoadingRealTime(false);
         }
       };
-      
+
       const timeoutId = setTimeout(() => {
-        fetchJobs();
-      }, 500); // debounce
-      return () => clearTimeout(timeoutId);
-    }
-  }, [activeTab, search]);
+        fetchData();
 
   const filtered = useMemo(() =>
     current.data.filter(item =>
@@ -129,7 +170,15 @@ const OpportunitiesPage: React.FC = () => {
                 className={`px-6 py-3 rounded-2xl font-black uppercase tracking-[0.12em] text-xs transition-all border ${
                   activeTab === key ? 'bg-blue-600 border-blue-400 text-white shadow-xl' : 'bg-white/5 border-white/10 text-gray-300 hover:text-white'
                 }`}
-              >{ALL_DATA[key].label}<span className="ml-2 text-xs opacity-60">{key === 'jobs' ? (loadingJobs ? '...' : realTimeJobs.length) : ALL_DATA[key].data.length}</span></button>
+              >{ALL_DATA[key].label}<span className="ml-2 text-xs opacity-60">
+                 {key === 'jobs' 
+                   ? (loadingRealTime && activeTab === key ? '...' : realTimeJobs.length) 
+                   : key === 'companies'
+                   ? (loadingRealTime && activeTab === key ? '...' : realTimeCompanies.length)
+                   : key === 'employees'
+                   ? (loadingRealTime && activeTab === key ? '...' : realTimeEmployees.length)
+                   : ALL_DATA[key].data.length}
+               </span></button>
             ))}
           </div>
 
