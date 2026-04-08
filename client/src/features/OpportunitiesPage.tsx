@@ -1,12 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-type Tab = 'apprenticeships' | 'scholarships' | 'certifications' | 'exams' | 'admissions';
+type Tab = 'apprenticeships' | 'scholarships' | 'certifications' | 'exams' | 'admissions' | 'jobs';
 
 interface Opportunity {
   id: string; title: string; provider: string; type: string;
   deadline?: string; amount?: string; duration?: string;
   eligibility: string; description: string; tags: string[];
+  url?: string;
 }
 
 const APPRENTICESHIPS: Opportunity[] = [
@@ -45,6 +46,7 @@ const ALL_DATA: Record<Tab, { data: Opportunity[]; color: string; label: string 
   certifications: { data: CERTIFICATIONS, color: 'cyan', label: 'Certifications' },
   exams: { data: EXAMS, color: 'orange', label: 'Competitive Exams' },
   admissions: { data: ADMISSIONS, color: 'purple', label: 'Admissions' },
+  jobs: { data: [], color: 'pink', label: 'Real-Time Jobs' },
 };
 
 const OpportunitiesPage: React.FC = () => {
@@ -52,14 +54,59 @@ const OpportunitiesPage: React.FC = () => {
   const onNavigate = (page: string) => navigate(page === 'explorer' ? '/career-explorer' : page === 'ai-recs' ? '/recommendations' : `/${page}`);
   const [activeTab, setActiveTab] = useState<Tab>('apprenticeships');
   const [search, setSearch] = useState('');
-  const current = ALL_DATA[activeTab];
+  
+  const [realTimeJobs, setRealTimeJobs] = useState<Opportunity[]>([]);
+  const [loadingJobs, setLoadingJobs] = useState(false);
+
+  const current = activeTab === 'jobs' 
+    ? { data: realTimeJobs, color: 'pink', label: 'Real-Time Jobs' } 
+    : ALL_DATA[activeTab];
+
+  // Fetch real-time jobs
+  React.useEffect(() => {
+    if (activeTab === 'jobs') {
+      const fetchJobs = async () => {
+        setLoadingJobs(true);
+        try {
+          const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+          const res = await fetch(`${API_URL}/api/jobs?limit=21&q=${encodeURIComponent(search || 'software')}`);
+          if (res.ok) {
+            const data = await res.json();
+            const fetched = (data.data || []).map((job: any) => ({
+              id: `job-${job.id}`,
+              title: job.job_title || 'Unknown Role',
+              provider: job.company || 'Unknown Company',
+              type: job.remote ? 'Remote' : (job.hybrid ? 'Hybrid' : 'On-site'),
+              deadline: job.date_posted,
+              amount: job.salary_string || (job.min_annual_salary_usd ? `$${job.min_annual_salary_usd}` : undefined),
+              duration: job.employment_statuses?.[0] || 'Full-time',
+              eligibility: job.seniority || 'Any',
+              description: job.description ? job.description.substring(0, 150) + '...' : 'No Description',
+              tags: [...(job.keyword_slugs || []).slice(0, 2), job.country].filter(Boolean),
+              url: job.url
+            }));
+            setRealTimeJobs(fetched);
+          }
+        } catch (err) {
+          console.error("Failed to fetch jobs", err);
+        } finally {
+          setLoadingJobs(false);
+        }
+      };
+      
+      const timeoutId = setTimeout(() => {
+        fetchJobs();
+      }, 500); // debounce
+      return () => clearTimeout(timeoutId);
+    }
+  }, [activeTab, search]);
 
   const filtered = useMemo(() =>
     current.data.filter(item =>
       item.title.toLowerCase().includes(search.toLowerCase()) ||
       item.provider.toLowerCase().includes(search.toLowerCase()) ||
       item.tags.some(t => t.toLowerCase().includes(search.toLowerCase()))
-    ), [search, activeTab]);
+    ), [search, activeTab, current.data]);
 
   return (
     <div className="bg-[#050505] text-white min-h-screen pb-20 md:pb-32 lg:pb-40 animate-in fade-in duration-700 font-sans">
@@ -82,7 +129,7 @@ const OpportunitiesPage: React.FC = () => {
                 className={`px-6 py-3 rounded-2xl font-black uppercase tracking-[0.12em] text-xs transition-all border ${
                   activeTab === key ? 'bg-blue-600 border-blue-400 text-white shadow-xl' : 'bg-white/5 border-white/10 text-gray-300 hover:text-white'
                 }`}
-              >{ALL_DATA[key].label}<span className="ml-2 text-xs opacity-60">{ALL_DATA[key].data.length}</span></button>
+              >{ALL_DATA[key].label}<span className="ml-2 text-xs opacity-60">{key === 'jobs' ? (loadingJobs ? '...' : realTimeJobs.length) : ALL_DATA[key].data.length}</span></button>
             ))}
           </div>
 
@@ -127,8 +174,13 @@ const OpportunitiesPage: React.FC = () => {
                   <p className="text-xs font-black text-gray-200 uppercase">{item.eligibility}</p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {item.tags.map(t => <span key={t} className="px-3 py-1 bg-white/5 rounded-lg text-sm font-black text-gray-300 uppercase tracking-widest">#{t}</span>)}
+                  {item.tags.map(t => <span key={t} className="px-3 py-1 bg-white/5 rounded-lg text-sm font-black text-gray-300 uppercase tracking-widest leading-none truncate">#{t}</span>)}
                 </div>
+                {item.url && (
+                  <div className="pt-4">
+                    <a href={item.url} target="_blank" rel="noreferrer" className="inline-block w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-black uppercase tracking-widest transition-colors">Apply Now</a>
+                  </div>
+                )}
               </div>
             </div>
           ))}
