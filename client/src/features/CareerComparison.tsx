@@ -255,9 +255,9 @@ const CareerComparison: React.FC<CareerComparisonProps> = () => {
       </section>
 
       {/* B. SIDE-BY-SIDE COMPARISON TABLE */}
-      <section className="px-6 py-12">
+      <section className="px-4 sm:px-6 py-12">
         <div className="max-w-7xl mx-auto overflow-x-auto custom-scrollbar">
-          <div className="min-w-[900px] bg-[#080808] border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+          <div className="min-w-[700px] sm:min-w-[900px] bg-[#080808] border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-white/10 bg-white/[0.04]">

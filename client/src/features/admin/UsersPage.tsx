@@ -44,8 +44,8 @@ const UsersPage: React.FC = () => {
       {loading ? (
         <div className="flex justify-center py-20"><div className="w-8 h-8 border-2 border-red-500 border-t-transparent rounded-full animate-spin" /></div>
       ) : (
-        <div className="bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="bg-[#0a0a0a] border border-white/5 rounded-xl overflow-x-auto">
+          <table className="w-full text-sm min-w-[700px]">
             <thead><tr className="border-b border-white/5">
               <th className="text-left text-gray-500 text-xs uppercase tracking-wider font-bold p-4">User</th>
               <th className="text-left text-gray-500 text-xs uppercase tracking-wider font-bold p-4">Role</th>
