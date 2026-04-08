@@ -472,10 +472,16 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
               </div>
             </div>
             <InstallAppButton alwaysShow={true} className="w-full justify-center py-4" />
-            <button className="w-full py-4 text-sm font-bold text-center text-white uppercase tracking-widest bg-blue-600 rounded-xl">
+            <button 
+              className="w-full py-4 text-sm font-bold text-center text-white uppercase tracking-widest bg-blue-600 rounded-xl"
+              onClick={() => { setAuthMode('signup'); setShowAuthModal(true); }}
+            >
               Get Started
             </button>
-            <button className="w-full py-4 text-sm font-bold text-center text-gray-200 uppercase tracking-widest">
+            <button 
+              className="w-full py-4 text-sm font-bold text-center text-gray-200 uppercase tracking-widest"
+              onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}
+            >
               Login to Account
             </button>
           </div>
