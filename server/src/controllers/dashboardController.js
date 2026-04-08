@@ -40,11 +40,17 @@ export const getDashboard = catchAsync(async (req, res) => {
   }
 
   // Fetch Global Trending Careers
-  const trendingInsights = await MarketInsight.find()
+  const trendingInsightsRaw = await MarketInsight.find()
       .sort({ demand_score: -1 })
       .limit(3)
-      .populate('career', 'title slug category short_description')
+      .populate('career_id', 'title slug category short_description')
       .lean();
+
+  const trendingInsights = trendingInsightsRaw.map(insight => {
+    insight.career = insight.career_id;
+    delete insight.career_id;
+    return insight;
+  });
 
   // Assessment status
   const completedTypes = [...new Set(
