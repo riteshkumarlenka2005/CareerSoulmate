@@ -318,8 +318,7 @@ const ProfilePage: React.FC = () => {
                                     <label className="block text-xs font-bold text-gray-200 uppercase mb-2">City</label>
                                     <input
                                         type="text"
-                                        value={editForm.city}
-                                        onChange={(e) => setEditForm(prev => ({ ...prev, city: e.target.value }))}
+                                        value={editForm.city}                                        maxLength={100}                                        onChange={(e) => setEditForm(prev => ({ ...prev, city: e.target.value }))}
                                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                                         placeholder="e.g., Mumbai, Delhi"
                                     />
@@ -357,10 +356,14 @@ const ProfilePage: React.FC = () => {
                                     <label className="block text-xs font-bold text-gray-200 uppercase mb-2">Bio</label>
                                     <textarea
                                         value={editForm.bio}
+                                        maxLength={500}
                                         onChange={(e) => setEditForm(prev => ({ ...prev, bio: e.target.value }))}
                                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 h-24 resize-none"
                                         placeholder="Tell us about yourself..."
                                     />
+                                    <div className="text-right text-xs text-gray-400 mt-1">
+                                        {(editForm.bio || '').length} / 500
+                                    </div>
                                 </div>
                                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                     <button
