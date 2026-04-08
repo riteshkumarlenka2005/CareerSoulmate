@@ -19,6 +19,9 @@ const validate = (schema, source = 'body') => {
         field: detail.path.join('.'),
         message: detail.message.replace(/"/g, ''),
       }));
+      
+      console.error(`🔍 Validation Failed [${req.method} ${req.originalUrl}]:`, JSON.stringify(errors, null, 2));
+      
       return next(new ValidationError('Validation failed', errors));
     }
 

@@ -111,8 +111,15 @@ const ProfilePage: React.FC = () => {
             setSaving(true);
             setSaveMessage(null);
 
+            // Client-side validation
+            if (!editForm.fullName || editForm.fullName.trim().length < 2) {
+                setSaveMessage({ type: 'error', text: 'Full Name must be at least 2 characters' });
+                setSaving(false);
+                return;
+            }
+
             const payload: any = {
-                fullName: editForm.fullName,
+                fullName: editForm.fullName.trim(),
                 phone: editForm.phone,
                 education: {
                     level: editForm.educationLevel,
@@ -131,6 +138,10 @@ const ProfilePage: React.FC = () => {
             };
 
             const res = await ApiClient.put('/api/profile', payload);
+
+            if (!res.success) {
+                throw new Error(res.message || 'Failed to save profile');
+            }
 
             // Update local auth state with the returned user data
             if (res.data?.user) {
@@ -152,7 +163,9 @@ const ProfilePage: React.FC = () => {
             // Auto-hide success message
             setTimeout(() => setSaveMessage(null), 3000);
         } catch (err: any) {
-            setSaveMessage({ type: 'error', text: err.message || 'Failed to save profile' });
+            console.error('Save error:', err);
+            const errorMsg = err.errors?.[0]?.message || err.message || 'Failed to save profile';
+            setSaveMessage({ type: 'error', text: errorMsg });
         } finally {
             setSaving(false);
         }

@@ -150,6 +150,9 @@ app.use((err, req, res, next) => {
       field: e.path,
       message: e.message,
     }));
+    
+    console.error('🔍 Mongoose Validation Failed:', JSON.stringify(errors, null, 2));
+    
     return res.status(400).json({
       success: false,
       message: 'Validation failed',
