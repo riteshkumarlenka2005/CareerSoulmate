@@ -241,7 +241,7 @@ const ProfilePage: React.FC = () => {
                     </div>
 
                     {/* Details Card */}
-                    <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
+                    <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-4 sm:p-6 w-full min-w-0 overflow-x-hidden">
                         <h3 className="text-lg font-bold text-white mb-6">Profile Details</h3>
 
                         {loadingProfile ? (
@@ -349,18 +349,18 @@ const ProfilePage: React.FC = () => {
                                         placeholder="Tell us about yourself..."
                                     />
                                 </div>
-                                <div className="flex gap-4 pt-4">
+                                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                     <button
                                         onClick={handleSave}
                                         disabled={saving}
-                                        className="flex-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                                        className="w-full sm:flex-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                                     >
                                         {saving && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
                                         {saving ? 'Saving…' : 'Save Changes'}
                                     </button>
                                     <button
                                         onClick={() => setIsEditing(false)}
-                                        className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl font-medium hover:bg-white/10 transition-all"
+                                        className="w-full sm:w-auto px-6 py-3 bg-white/5 border border-white/10 rounded-xl font-medium hover:bg-white/10 transition-all text-white"
                                     >
                                         Cancel
                                     </button>
@@ -368,43 +368,43 @@ const ProfilePage: React.FC = () => {
                             </div>
                         ) : (
                             <div className="space-y-4">
-                                <div className="flex justify-between py-3 border-b border-white/10">
-                                    <span className="text-gray-200">Email</span>
-                                    <span className="text-white">{user.email}</span>
+                                <div className="flex flex-col sm:flex-row justify-between py-3 border-b border-white/10 gap-1">
+                                    <span className="text-gray-200 text-sm sm:text-base">Email</span>
+                                    <span className="text-white text-sm sm:text-base break-all">{user.email}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/10">
-                                    <span className="text-gray-200">Phone</span>
-                                    <span className="text-white">{user.phone || 'Not set'}</span>
+                                <div className="flex flex-col sm:flex-row justify-between py-3 border-b border-white/10 gap-1">
+                                    <span className="text-gray-200 text-sm sm:text-base">Phone</span>
+                                    <span className="text-white text-sm sm:text-base">{user.phone || 'Not set'}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/10">
-                                    <span className="text-gray-200">Education Level</span>
-                                    <span className="text-white capitalize">{(profile?.education_level || user.education?.level || '')?.replace('class', 'Class ') || 'Not set'}</span>
+                                <div className="flex flex-col sm:flex-row justify-between py-3 border-b border-white/10 gap-1">
+                                    <span className="text-gray-200 text-sm sm:text-base">Education Level</span>
+                                    <span className="text-white text-sm sm:text-base capitalize">{(profile?.education_level || user.education?.level || '')?.replace('class', 'Class ') || 'Not set'}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/10">
-                                    <span className="text-gray-200">Stream</span>
-                                    <span className="text-white">{profile?.stream || user.education?.stream || 'Not set'}</span>
+                                <div className="flex flex-col sm:flex-row justify-between py-3 border-b border-white/10 gap-1">
+                                    <span className="text-gray-200 text-sm sm:text-base">Stream</span>
+                                    <span className="text-white text-sm sm:text-base">{profile?.stream || user.education?.stream || 'Not set'}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/10">
-                                    <span className="text-gray-200">City</span>
-                                    <span className="text-white">{profile?.city || 'Not set'}</span>
+                                <div className="flex flex-col sm:flex-row justify-between py-3 border-b border-white/10 gap-1">
+                                    <span className="text-gray-200 text-sm sm:text-base">City</span>
+                                    <span className="text-white text-sm sm:text-base">{profile?.city || 'Not set'}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/10">
-                                    <span className="text-gray-200">Gender</span>
-                                    <span className="text-white capitalize">{profile?.gender?.replace('_', ' ') || 'Not set'}</span>
+                                <div className="flex flex-col sm:flex-row justify-between py-3 border-b border-white/10 gap-1">
+                                    <span className="text-gray-200 text-sm sm:text-base">Gender</span>
+                                    <span className="text-white text-sm sm:text-base capitalize">{profile?.gender?.replace('_', ' ') || 'Not set'}</span>
                                 </div>
-                                <div className="flex justify-between py-3 border-b border-white/10">
-                                    <span className="text-gray-200">Work Preference</span>
-                                    <span className="text-white capitalize">{profile?.work_preference || 'Not set'}</span>
+                                <div className="flex flex-col sm:flex-row justify-between py-3 border-b border-white/10 gap-1">
+                                    <span className="text-gray-200 text-sm sm:text-base">Work Preference</span>
+                                    <span className="text-white text-sm sm:text-base capitalize">{profile?.work_preference || 'Not set'}</span>
                                 </div>
                                 {profile?.bio && (
-                                    <div className="flex justify-between py-3 border-b border-white/10">
-                                        <span className="text-gray-200">Bio</span>
-                                        <span className="text-white text-right max-w-[200px] truncate">{profile.bio}</span>
+                                    <div className="flex flex-col sm:flex-row justify-between py-3 border-b border-white/10 gap-1">
+                                        <span className="text-gray-200 text-sm sm:text-base">Bio</span>
+                                        <span className="text-white text-sm sm:text-base sm:text-right w-full sm:max-w-[200px] break-words">{profile.bio}</span>
                                     </div>
                                 )}
-                                <div className="flex justify-between py-3">
-                                    <span className="text-gray-200">Member Since</span>
-                                    <span className="text-white">{new Date(user.createdAt).toLocaleDateString('en-IN', { year: 'numeric', month: 'long' })}</span>
+                                <div className="flex flex-col sm:flex-row justify-between py-3 gap-1">
+                                    <span className="text-gray-200 text-sm sm:text-base">Member Since</span>
+                                    <span className="text-white text-sm sm:text-base">{new Date(user.createdAt).toLocaleDateString('en-IN', { year: 'numeric', month: 'long' })}</span>
                                 </div>
                             </div>
                         )}
@@ -412,9 +412,9 @@ const ProfilePage: React.FC = () => {
                 </div>
 
                 {/* Activity */}
-                <div className="mt-8 bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
+                <div className="mt-8 bg-[#0a0a0a] border border-white/10 rounded-2xl p-4 sm:p-6 w-full min-w-0">
                     <h3 className="text-lg font-bold text-white mb-6">Your Activity</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                         <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
                             <p className="text-3xl font-bold text-blue-400">{user.completedAssessments?.length || 0}</p>
                             <p className="text-xs text-gray-300 uppercase mt-1">Assessments</p>

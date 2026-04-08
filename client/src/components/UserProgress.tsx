@@ -100,11 +100,11 @@ const UserProgress: React.FC<UserProgressProps> = ({ compact = false }) => {
     }
 
     return (
-        <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
+        <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 w-full min-w-0 overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
                 <h3 className="text-lg font-bold text-white">Your Progress</h3>
-                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-xl">
+                <div className="flex items-center justify-center sm:justify-start gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-xl w-full sm:w-auto">
                     <span className="text-xl">⭐</span>
                     <span className="text-lg font-bold text-white">{points}</span>
                     <span className="text-xs text-gray-200">points</span>
@@ -130,7 +130,7 @@ const UserProgress: React.FC<UserProgressProps> = ({ compact = false }) => {
                 <h4 className="text-sm font-bold text-gray-200 uppercase tracking-wider mb-4">
                     Badges Earned ({userBadges.length})
                 </h4>
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 gap-3">
                     {userBadges.map((badgeId) => {
                         const badge = BADGES[badgeId];
                         if (!badge) return null;
