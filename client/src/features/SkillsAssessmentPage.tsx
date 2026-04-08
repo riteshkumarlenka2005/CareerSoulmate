@@ -138,14 +138,14 @@ const SkillsAssessmentPage: React.FC = () => {
                     
                     <div className="mt-auto space-y-4">
                        <p className="text-sm font-black text-gray-400 uppercase tracking-widest">Self-Rating</p>
-                       <div className="grid grid-cols-4 gap-1">
+                       <div className="grid border border-white/10 rounded-lg overflow-hidden divide-y md:divide-y-0 md:divide-x divide-white/10" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))' }}>
                           {(['None', 'Beginner', 'Intermediate', 'Advanced'] as Proficiency[]).map(level => (
                             <button
                               key={level}
                               onClick={() => handleRate(skill.id, level)}
-                              className={`py-2.5 rounded-lg text-sm font-black uppercase tracking-tighter border transition-all ${userRatings[skill.id] === level ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-white/5 border-white/10 text-gray-300 hover:text-gray-300'}`}
+                              className={`py-3 px-1 sm:px-2 text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all ${userRatings[skill.id] === level ? 'bg-emerald-600 text-white' : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'}`}
                             >
-                              {level}
+                              {level === 'Intermediate' ? 'Inter\u00A0Med' : level}
                             </button>
                           ))}
                        </div>

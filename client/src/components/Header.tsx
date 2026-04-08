@@ -316,16 +316,20 @@ const Header: React.FC<HeaderProps> = ({ role = 'guest', onNavigate }) => {
             <div className="relative" ref={userMenuRef}>
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center gap-3 px-3 py-2 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all"
+                className="flex items-center gap-1.5 md:gap-3 px-2 md:px-3 py-1.5 md:py-2 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all"
               >
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">
-                  {user.fullName.charAt(0).toUpperCase()}
+                  {user.avatar ? (
+                    <img src={user.avatar} alt="Avatar" className="w-full h-full rounded-lg object-cover" />
+                  ) : (
+                    user.fullName.charAt(0).toUpperCase()
+                  )}
                 </div>
                 <div className="hidden md:flex flex-col items-start">
                   <span className="text-xs font-semibold text-white">{user.fullName.split(' ')[0]}</span>
-                  <span className="text-xs text-gray-300">{user.points || 0} pts</span>
+                  <span className="text-[10px] text-gray-300">{user.points || 0} pts</span>
                 </div>
-                <svg className={`w-3 h-3 text-gray-200 transition-transform ${showUserMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className={`hidden md:block w-3 h-3 text-gray-200 transition-transform ${showUserMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
