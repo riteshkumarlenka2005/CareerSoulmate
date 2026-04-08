@@ -141,6 +141,11 @@ const OpportunitiesPage: React.FC = () => {
 
       const timeoutId = setTimeout(() => {
         fetchData();
+      }, 500);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [search, activeTab]);
 
   const filtered = useMemo(() =>
     current.data.filter(item =>
